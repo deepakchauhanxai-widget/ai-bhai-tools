@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Bhai – Interactive Storytelling Bot</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #ff512f;
+      --secondary: #dd2476;
+      --accent: #6c63ff;
+      --light: #f8f9fa;
+      --dark: #343a40;
+      --success: #28a745;
+      --text: #333333;
+      --text-light: #6c757d;
+      --card-bg: #ffffff;
+      --shadow: 0 6px 18px rgba(0,0,0,0.08);
+      --shadow-hover: 0 12px 24px rgba(0,0,0,0.12);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #fff;
+      padding: 30px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.1' d='M0,128L48,117.3C96,107,192,85,288,112C384,139,480,213,576,218.7C672,224,768,160,864,138.7C960,117,1056,139,1152,149.3C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .header-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    header h1 {
+      margin: 0;
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    header p {
+      font-size: 1.2rem;
+      margin-bottom: 25px;
+      opacity: 0.95;
+    }
+    
+    .lang-switch {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+    }
+    
+    .lang-switch button {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--primary);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      transition: all 0.3s ease;
+    }
+    
+    .lang-switch button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    }
+    
+    .cta-button {
+      display: inline-block;
+      padding: 12px 28px;
+      background: #ffffff;
+      color: var(--primary);
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+    
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+    
+    .section {
+      padding: 60px 0;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+      position: relative;
+    }
+    
+    .section-title h2 {
+      font-size: 2.2rem;
+      color: var(--secondary);
+      margin-bottom: 15px;
+      display: inline-block;
+    }
+    
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      border-radius: 2px;
+    }
+    
+    .demo-container {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin-bottom: 30px;
+    }
+    
+    .demo-container:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+    
+    .avatar-demo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .avatar-demo img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 5px solid #fff;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      transition: all 0.3s ease;
+    }
+    
+    .avatar-demo img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+    }
+    
+    .avatar-demo p {
+      margin-top: 20px;
+      font-size: 1.1rem;
+    }
+    
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+    
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+      text-align: center;
+      border-top: 5px solid var(--primary);
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+      border-top: 5px solid var(--secondary);
+    }
+    
+    .card i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+    
+    .card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      color: var(--dark);
+    }
+    
+    .card p {
+      color: var(--text-light);
+    }
+    
+    .growth-content {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: var(--shadow);
+      margin-top: 30px;
+    }
+    
+    .growth-points {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    
+    .point {
+      flex: 1 1 300px;
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+    }
+    
+    .point i {
+      font-size: 1.8rem;
+      color: var(--success);
+      margin-top: 5px;
+    }
+    
+    .testimonials {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 60px 0;
+    }
+    
+    .testimonial-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin-top: 40px;
+    }
+    
+    .testimonial-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    
+    .testimonial-card p {
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+    
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .testimonial-author img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 40px 0;
+      text-align: center;
+    }
+    
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      color: white;
+      transition: all 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      background: var(--primary);
+      transform: translateY(-3px);
+    }
+    
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.2rem;
+      }
+      
+      .lang-switch {
+        position: relative;
+        top: 0;
+        right: 0;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+      
+      .section-title h2 {
+        font-size: 1.8rem;
+      }
+      
+      .growth-content {
+        padding: 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="lang-switch">
+      <button onclick="setLang('hi')"><i class="fas fa-language"></i> हिंदी</button>
+      <button onclick="setLang('en')"><i class="fas fa-language"></i> English</button>
+    </div>
+    <div class="header-content">
+      <h1 id="title">🤖 AI Bhai – Storytelling Bot</h1>
+      <p id="subtitle">हर Visitor को Motivational Welcome + Kahani सुनाने वाला Bot</p>
+      <a href="#demo" class="cta-button">Live Demo <i class="fas fa-arrow-down"></i></a>
+    </div>
+  </header>
+
+  <section class="section" id="demo">
+    <div class="container">
+      <div class="section-title">
+        <h2 id="demo-title">🔹 Bot Demo Look</h2>
+      </div>
+      <div class="demo-container">
+        <div class="avatar-demo">
+          <img src="https://deepakchauhanxai.xyz/images/AI-bhai.png" alt="AI Bhai Avatar">
+          <p id="avatar-desc"><b>Avatar (AI Bhai)</b> – Screen पर दिखेगा, Click करने पर Story Box खुलेगा</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>🔹 Key Features</h2>
+      </div>
+      <div class="features" id="features">
+        <!-- Features will be populated by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>🔹 Why Important?</h2>
+      </div>
+      <div class="growth-content" id="growth">
+        <!-- Growth content will be populated by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <section class="section testimonials">
+    <div class="container testimonial-container">
+      <div class="section-title">
+        <h2>User Testimonials</h2>
+      </div>
+      <div class="testimonial-grid">
+        <div class="testimonial-card">
+          <p>"This bot increased engagement on my website by 40%. Visitors love the personalized stories!"</p>
+          <div class="testimonial-author">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User">
+            <div>
+              <h4>Rajesh Kumar</h4>
+              <p>Blog Owner</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p>"The setup was incredibly easy, and now my students look forward to visiting our educational portal."</p>
+          <div class="testimonial-author">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User">
+            <div>
+              <h4>Priya Sharma</h4>
+              <p>Teacher</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p>"Our customer satisfaction scores improved significantly after implementing AI Bhai on our support site."</p>
+          <div class="testimonial-author">
+            <img src="https://randomuser.me/api/portraits/men/62.jpg" alt="User">
+            <div>
+              <h4>Vikram Singh</h4>
+              <p>Business Owner</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <h3>AI Bhai Bot – Interactive Storytelling</h3>
+        <p>© 2025 AI Bhai Bot – Demo Presentation</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+<script>
+const content = {
+  hi: {
+    subtitle: "हर Visitor को Motivational Welcome + Kahani सुनाने वाला Bot",
+    demoTitle: "🔹 Bot Demo Look",
+    avatarDesc: "<b>Avatar (AI Bhai)</b> – Screen पर दिखेगा, Click करने पर Story Box खुलेगा",
+    features: `
+      <div class="card">
+        <i class="fas fa-handshake"></i>
+        <h3>व्यक्तिगत स्वागत</h3>
+        <p>👋 User Name के साथ Welcome Message</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-book-open"></i>
+        <h3>रोचक कहानियाँ</h3>
+        <p>📖 हर Visit पर नई Story</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-graduation-cap"></i>
+        <h3>सीख और नैतिकता</h3>
+        <p>✨ Moral और सीख</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-palette"></i>
+        <h3>अनुकूलन</h3>
+        <p>🎨 Color, Title, Avatar Customizable</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-globe"></i>
+        <h3>सार्वभौमिक उपयोग</h3>
+        <p>🌐 किसी भी Website पर Add कर सकते हैं</p>
+      </div>
+    `,
+    growth: `
+      <p>यह Bot किसी भी Website को <b>Engaging</b> और <b>Motivational</b> बनाता है।</p>
+      <div class="growth-points">
+        <div class="point">
+          <i class="fas fa-check-circle"></i>
+          <div>
+            <h3>Simple Setup</h3>
+            <p>हर Website Owner use कर सकता है।</p>
+          </div>
+        </div>
+        <div class="point">
+          <i class="fas fa-check-circle"></i>
+          <div>
+            <h3>Powerful Stories</h3>
+            <p>Audience को Attract करता है।</p>
+          </div>
+        </div>
+        <div class="point">
+          <i class="fas fa-check-circle"></i>
+          <div>
+            <h3>High Demand</h3>
+            <p>Market में Engagement Tools की ज़रूरत है।</p>
+          </div>
+        </div>
+      </div>
+    `
+  },
+  en: {
+    subtitle: "A Bot that welcomes every visitor and tells Motivational Stories",
+    demoTitle: "🔹 Bot Demo Look",
+    avatarDesc: "<b>Avatar (AI Bhai)</b> – Appears on screen, opens Story Box on click",
+    features: `
+      <div class="card">
+        <i class="fas fa-handshake"></i>
+        <h3>Personalized Welcome</h3>
+        <p>👋 Personalized Welcome with User Name</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-book-open"></i>
+        <h3>Random Stories</h3>
+        <p>📖 Random Story every visit</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-graduation-cap"></i>
+        <h3>Moral & Learning</h3>
+        <p>✨ Moral / Learning at the end</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-palette"></i>
+        <h3>Customization</h3>
+        <p>🎨 Fully customizable (colors, title, avatar)</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-globe"></i>
+        <h3>Universal Integration</h3>
+        <p>🌐 Easy to embed on any website</p>
+      </div>
+    `,
+    growth: `
+      <p>This Bot makes any Website more <b>Engaging</b> and <b>Motivational</b>.</p>
+      <div class="growth-points">
+        <div class="point">
+          <i class="fas fa-check-circle"></i>
+          <div>
+            <h3>Simple Setup</h3>
+            <p>Any website owner can use it.</p>
+          </div>
+        </div>
+        <div class="point">
+          <i class="fas fa-check-circle"></i>
+          <div>
+            <h3>Powerful Stories</h3>
+            <p>Attracts and motivates visitors.</p>
+          </div>
+        </div>
+        <div class="point">
+          <i class="fas fa-check-circle"></i>
+          <div>
+            <h3>High Demand</h3>
+            <p>Engagement tools are always in demand.</p>
+          </div>
+        </div>
+      </div>
+    `
+  }
+};
+
+function setLang(lang){
+  document.getElementById('subtitle').innerHTML = content[lang].subtitle;
+  document.getElementById('demo-title').innerHTML = content[lang].demoTitle;
+  document.getElementById('avatar-desc').innerHTML = content[lang].avatarDesc;
+  document.getElementById('features').innerHTML = content[lang].features;
+  document.getElementById('growth').innerHTML = content[lang].growth;
+}
+
+// default Hindi
+setLang('hi');
+</script>
+
+  <script>
+window.AIBhaiGiftBotConfig = {
+  avatar: "https://deepakchauhanxai.xyz/images/AI-bhai.png",
+  size: {w:120, h:120},
+  title: "AI Bhai x ♥️दिल से",
+  titleColor: "#ff512f",
+  boxBackground: "linear-gradient(135deg,#ffffff,#d4fc79,#96e6a1)", // ✅ अब change कर सकता है
+  borderRadius: "20px",
+  boxWidth: "360px",
+  textColor: "#2d3436",
+  position: "tl",  // tr,tl,bl,br
+  storyURL: "https://deepakchauhanxai.xyz/dk-community/welcome-stories-hi.json",
+  colors: ["#e74c3c","#8e44ad","#3498db","#16a085","#f39c12"]
+};
+</script>
+<script src="https://deepakchauhanxai.xyz/dk-bot/welcome-stories.json"></script>
+</body>
+</html>
