@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Bhai Bot - Documentation</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background: #f7f9fc; color: #2d3436; }
+    header { background: #6a11cb; color: white; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; }
+    header h1 { font-size: 20px; margin: 0; }
+    .lang-switch { display: flex; gap: 10px; }
+    .lang-switch button { padding: 6px 12px; border: none; border-radius: 6px; cursor: pointer; background: white; color: #6a11cb; font-weight: bold; }
+    .lang-switch button.active { background: #ffca28; color: #2d3436; }
+    .container { max-width: 900px; margin: 30px auto; background: white; padding: 25px; border-radius: 16px; box-shadow: 0 6px 20px rgba(0,0,0,.1); }
+    h2 { color: #6a11cb; margin-top: 25px; }
+    pre { background: #272822; color: #f8f8f2; padding: 15px; border-radius: 8px; overflow-x: auto; }
+    code { background: #f1f1f1; padding: 2px 5px; border-radius: 4px; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🤖 AI Bhai Bot - Documentation</h1>
+  <div class="lang-switch">
+    <button id="btnHindi" class="active">हिंदी</button>
+    <button id="btnEnglish">English</button>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- हिंदी सेक्शन -->
+  <div id="contentHindi">
+    <h2>✨ परिचय</h2>
+    <p>
+      <b>AI Bhai Bot</b> एक प्लग-एन-प्ले विजेट है।  
+      यह आपके विज़िटर से नाम पूछता है और उन्हें motivational shayari दिखाता है।  
+      आप इसे अपनी वेबसाइट पर आसानी से जोड़ सकते हैं।
+    </p>
+
+    <h2>⚙️ कस्टमाइज़ेशन विकल्प</h2>
+    <ul>
+      <li>👤 Avatar बदल सकते हैं</li>
+      <li>📐 Size (width/height) सेट कर सकते हैं</li>
+      <li>🎨 Border color और width बदल सकते हैं</li>
+      <li>🌈 Box background (color/gradient) चुन सकते हैं</li>
+      <li>📝 Title text और उसका color सेट कर सकते हैं</li>
+      <li>📍 Position: top-left / top-right / bottom-left / bottom-right</li>
+      <li>🌍 Multi-language support (Hindi / English JSON files)</li>
+      <li>💡 Auto greeting + motivational shayari with user’s name</li>
+    </ul>
+
+    <h2>📖 उदाहरण Config</h2>
+    <pre>
+&lt;script&gt;
+window.AIBhaiBotConfig = {
+  avatar: "your-avatar.png",
+  size: {w:80, h:80},
+  avatarBorder: {color:"#ff512f", width:"3px"},
+  title: "AI Bhai ❤️",
+  titleColor: "#ff512f",
+  boxBackground: "linear-gradient(135deg,#ffe259,#ffa751)",
+  position: "br", // tr, tl, bl, br
+  welcomeURL: "welcome.json",
+  motivationURL: "motivation.json"
+};
+&lt;/script&gt;
+&lt;script src="ai-bhai-bot.js"&gt;&lt;/script&gt;
+    </pre>
+
+    <h2>🔒 सुरक्षा नोट</h2>
+    <p>
+      यह पेज केवल <b>डेमो और डॉक्यूमेंटेशन</b> के लिए है।  
+      असली स्क्रिप्ट सुरक्षित रहेगी और सिर्फ प्रीमियम users को ही दी जाएगी।  
+      टेस्ट करने के लिए buyer को real script अलग से दी जाएगी।
+    </p>
+  </div>
+
+
+  <!-- English Section -->
+  <div id="contentEnglish" class="hidden">
+    <h2>✨ Overview</h2>
+    <p>
+      <b>AI Bhai Bot</b> is a plug-and-play widget.  
+      It asks the visitor’s name and shows motivational shayari/quotes.  
+      You can easily embed it on your website.
+    </p>
+
+    <h2>⚙️ Customization Options</h2>
+    <ul>
+      <li>👤 Change avatar image</li>
+      <li>📐 Control size (width/height)</li>
+      <li>🎨 Customize border color and width</li>
+      <li>🌈 Choose box background (color/gradient)</li>
+      <li>📝 Set title text and its color</li>
+      <li>📍 Position: top-left / top-right / bottom-left / bottom-right</li>
+      <li>🌍 Multi-language support (Hindi / English JSON files)</li>
+      <li>💡 Auto greeting + motivational shayari with user’s name</li>
+    </ul>
+
+    <h2>📖 Example Config</h2>
+    <pre>
+&lt;script&gt;
+window.AIBhaiBotConfig = {
+  avatar: "your-avatar.png",
+  size: {w:80, h:80},
+  avatarBorder: {color:"#ff512f", width:"3px"},
+  title: "AI Bhai ❤️",
+  titleColor: "#ff512f",
+  boxBackground: "linear-gradient(135deg,#ffe259,#ffa751)",
+  position: "br", // tr, tl, bl, br
+  welcomeURL: "welcome.json",
+  motivationURL: "motivation.json"
+};
+&lt;/script&gt;
+&lt;script src="ai-bhai-bot.js"&gt;&lt;/script&gt;
+    </pre>
+
+    <h2>🔒 Security Note</h2>
+    <p>
+      This page is only for <b>demo and documentation</b>.  
+      The actual script will remain secure and will be provided only to premium users.  
+      For testing, buyers will get the real script separately.
+    </p>
+  </div>
+
+</div>
+
+
+<script>
+  const btnHindi=document.getElementById("btnHindi");
+  const btnEnglish=document.getElementById("btnEnglish");
+  const contentHindi=document.getElementById("contentHindi");
+  const contentEnglish=document.getElementById("contentEnglish");
+
+  btnHindi.onclick=()=>{
+    btnHindi.classList.add("active");
+    btnEnglish.classList.remove("active");
+    contentHindi.classList.remove("hidden");
+    contentEnglish.classList.add("hidden");
+  };
+
+  btnEnglish.onclick=()=>{
+    btnEnglish.classList.add("active");
+    btnHindi.classList.remove("active");
+    contentEnglish.classList.remove("hidden");
+    contentHindi.classList.add("hidden");
+  };
+</script>
+<script>
+window.AIBhaiBotConfig = {
+  avatar: "https://deepakchauhanxai.xyz/images/AI-bhai.png",
+  size: {w:80, h:80},
+  avatarBorder: {color:"#ff512f", width:"3px"},
+  title: "AI Bhai ❤️",
+  titleColor: "#ff512f",
+  boxBackground: "linear-gradient(135deg, #ffffff, #d4fc79, #96e6a1)", // White + Light Green
+  borderRadius: "18px",
+  boxWidth: "350px",
+  textColor: "#2d3436",
+  position: "br",  // tr,tl,bl,br
+  welcomeURL: "https://deepakchauhanxai.xyz/dk-community/welcome.json",
+  motivationURL: "https://deepakchauhanxai.xyz/dk-community/welcome-motivation.json",
+  colors: ["#e74c3c","#8e44ad","#3498db","#16a085","#f39c12"]
+};
+</script>
+<script src="https://deepakchauhanxai.xyz/dk-bot/ai-bhai-bot-documentation.js"></script>
+  
+</body>
+</html>
