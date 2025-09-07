@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Bhai Feedback Bot - Demo</title>
+  <style>
+    body { font-family: Arial, sans-serif; background:#f4f6fb; margin:0; padding:0; color:#2d3436; }
+    header { background:#6c5ce7; color:white; padding:20px; text-align:center; }
+    header h1 { margin:0; font-size:28px; }
+    .container { max-width:900px; margin:30px auto; padding:20px; background:#fff; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
+    h2 { color:#6c5ce7; margin-top:30px; }
+    p { line-height:1.7; }
+    .highlight { color:#0984e3; font-weight:bold; }
+    .code-box { background:#f1f2f6; padding:15px; border-radius:8px; overflow-x:auto; margin:15px 0; font-size:14px; }
+    pre { margin:0; }
+    .switch-btn { position:absolute; top:20px; right:20px; background:#fff; border:1px solid #ccc; border-radius:8px; padding:6px 12px; cursor:pointer; font-size:14px; }
+    .benefits, .features, .registration { background:#f9fbfd; padding:20px; margin-top:20px; border-left:6px solid #6c5ce7; border-radius:12px; }
+    .registration h3 { color:#0984e3; margin-top:15px; }
+    .registration input, .registration button { padding:8px 12px; margin:6px 0; border-radius:6px; border:1px solid #ccc; font-size:14px; }
+    .registration button { background:#0984e3; color:#fff; border:none; cursor:pointer; }
+    .registration button:hover { background:#74b9ff; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 id="title">🤖 AI Bhai Feedback Bot - Demo Page</h1>
+    <button class="switch-btn" onclick="toggleLang()">🌐 English</button>
+  </header>
+
+  <div class="container">
+    <!-- Features Section -->
+    <section class="features">
+      <h2 id="featuresTitle">✨ मुख्य Features</h2>
+      <ul id="featuresList">
+        <li>Simple Integration – केवल Script add करनी है।</li>
+        <li>Feedback सीधे Owner के Gmail पर।</li>
+        <li>Custom Design Support (रंग, टेक्स्ट बदल सकते हैं)।</li>
+        <li>Secure System – हर Gmail पहले Registration से Verify।</li>
+      </ul>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits">
+      <h2 id="benefitsTitle">✅ इसके फायदे</h2>
+      <ul id="benefitsList">
+        <li>किसी भी Website Owner को अपनी Email में Direct Feedback मिलेगा।</li>
+        <li>No Spam – केवल Registered Gmail ही Feedback receive करेगा।</li>
+        <li>Multi-Language Support – Hindi + English।</li>
+        <li>Easy to Use – Copy-Paste Script और हो गया काम।</li>
+      </ul>
+    </section>
+
+    <!-- Registration Section -->
+    <section class="registration">
+      <h2 id="regTitle">⚡ Registration क्यों ज़रूरी है?</h2>
+      <p id="regDesc">
+        ताकि Feedback सही जगह पहुँचे, हर Website Owner को पहले <b>एक बार छोटा सा Registration</b> करना पड़ेगा।  
+        इसमें Owner अपनी <span class="highlight">Gmail ID</span> और <span class="highlight">Website Name</span> डालता है।  
+        उसी Gmail पर आगे से सभी Feedback भेजे जाएँगे।  
+      </p>
+
+      <p id="regDescEN" style="display:none;">
+        To make sure feedback reaches the correct owner, every website admin must complete a quick <b>one-time registration</b>.  
+        In this, the owner submits their <span class="highlight">Gmail ID</span> and <span class="highlight">Website Name</span>.  
+        From then onwards, all feedback will be delivered to that Gmail ID only.
+      </p>
+
+      <h3 id="demoReg">Demo Registration Form:</h3>
+      <div class="code-box">
+<pre><code>&lt;form action="register.php" method="POST"&gt;
+  &lt;label&gt;Website Name:&lt;/label&gt;
+  &lt;input type="text" name="website" required&gt;&lt;br&gt;&lt;br&gt;
+
+  &lt;label&gt;Gmail ID:&lt;/label&gt;
+  &lt;input type="email" name="email" required&gt;&lt;br&gt;&lt;br&gt;
+
+  &lt;button type="submit"&gt;Register&lt;/button&gt;
+&lt;/form&gt;
+</code></pre>
+      </div>
+
+      <p id="regNote"><b>Note:</b> यह सिर्फ Demo है। Real Registration System में Gmail verify होगी और Database में Save होगी।</p>
+    </section>
+
+    <!-- Demo Script Section -->
+    <section class="demo">
+      <h2 id="demoTitle">💻 Demo Script</h2>
+      <p id="demoText">इसे अपनी Website के <b>&lt;body&gt; tag के नीचे</b> paste कर दीजिए:</p>
+
+      <div class="code-box">
+<pre><code>&lt;script&gt;
+window.AIBhaiFeedbackBotConfig = {
+  avatar: "demo-avatar.png",
+  position: "bl",
+  title: "Feedback Bot 📝",
+  titleColor: "#2d3436",
+  boxBackground: "linear-gradient(135deg, #ffffff, #dfe6e9)",
+  borderRadius: "16px",
+  textColor: "#2d3436",
+  receiverEmail: "demo@gmail.com", // Registered Gmail ID
+  apiURL: "https://yourwebsite.com/feedback-bot/feedback-api.php",
+  fields: [
+    { name: "name", label: "Your Name", type: "text", required: true },
+    { name: "email", label: "Your Email", type: "email", required: true },
+    { name: "rating", label: "Rate Us", type: "select", options: ["⭐","⭐⭐","⭐⭐⭐","⭐⭐⭐⭐","⭐⭐⭐⭐⭐"], required: true },
+    { name: "feedback", label: "Your Feedback", type: "textarea", required: true }
+  ],
+  submitText: "Send Feedback"
+};
+&lt;/script&gt;
+&lt;script src="https://yourwebsite.com/feedback-bot/ai-feedback-bot.js"&gt;&lt;/script&gt;
+</code></pre>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    let lang = "hi";
+    function toggleLang() {
+      if (lang === "hi") {
+        lang = "en";
+        document.getElementById("title").innerText = "🤖 AI Bhai Feedback Bot - Demo Page";
+        document.getElementById("featuresTitle").innerText = "✨ Key Features";
+        document.getElementById("featuresList").innerHTML = `
+          <li>Simple Integration – Just add the script.</li>
+          <li>Feedback goes directly to owner's Gmail.</li>
+          <li>Custom Design Support (colors & text).</li>
+          <li>Secure System – Each Gmail verified via Registration.</li>`;
+        document.getElementById("benefitsTitle").innerText = "✅ Benefits";
+        document.getElementById("benefitsList").innerHTML = `
+          <li>Direct feedback delivery to owner's Gmail.</li>
+          <li>No Spam – Only registered Gmail will receive feedback.</li>
+          <li>Multi-Language Support – Hindi + English.</li>
+          <li>Easy to use – Just copy-paste the script.</li>`;
+        document.getElementById("regTitle").innerText = "⚡ Why Registration is Necessary?";
+        document.getElementById("regDesc").style.display = "none";
+        document.getElementById("regDescEN").style.display = "block";
+        document.getElementById("demoReg").innerText = "Demo Registration Form:";
+        document.getElementById("regNote").innerHTML = "<b>Note:</b> This is just a demo. In the real system Gmail will be verified and stored in the database.";
+        document.getElementById("demoTitle").innerText = "💻 Demo Script";
+        document.getElementById("demoText").innerText = "Paste this inside your website’s <body> tag:";
+        document.querySelector(".switch-btn").innerText = "🌐 हिंदी";
+      } else {
+        lang = "hi";
+        location.reload(); // reload to Hindi default
+      }
+    }
+  </script>
+  
+<script>
+window.AIBhaiFeedbackBotConfig = {
+  avatar: "https://deepakchauhanxai.xyz/images/AI-bhai.png",
+  position: "bl",  // tl = top left, tr = top right, bl = bottom left, br = bottom right
+  title: "Feedback Bot 📝",
+  titleColor: "#2d3436",
+  boxBackground: "linear-gradient(135deg, #ffffff, #a1c4fd, #c2e9fb)",
+borderRadius: "16px",
+  textColor: "#2d3436",
+  apiURL: "https://deepakchauhanxai.xyz/dk-bot/feedback-bot/feedback-api.php", // backend script का URL
+  fields: [
+    { name: "name", label: "Your Name / आपका नाम", type: "text", required: true },
+    { name: "email", label: "Your Email / आपकी ईमेल", type: "email", required: true },
+    { name: "rating", label: "Rate Us / रेटिंग दें", type: "select", options: ["⭐", "⭐⭐", "⭐⭐⭐", "⭐⭐⭐⭐", "⭐⭐⭐⭐⭐"], required: true },
+    { name: "feedback", label: "Your Feedback / अपना सुझाव", type: "textarea", required: true }
+  ],
+  submitText: "Send Feedback / सुझाव भेजें"
+};
+</script>
+<script src="https://deepakchauhanxai.xyz/dk-bot/ai-feedback-bot.js"></script>
+</body>
+</html>
