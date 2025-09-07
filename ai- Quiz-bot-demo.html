@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Bhai Quiz Bot - Demo</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #d63031;
+      --secondary: #3498db;
+      --dark: #2d3436;
+      --light: #f4f7f9;
+      --accent: #f39c12;
+      --success: #16a085;
+      --card-bg: #ffffff;
+      --gradient: linear-gradient(135deg, #ff6b6b, #d63031);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    /* Header */
+    header {
+      background: var(--gradient);
+      color: white;
+      padding: 20px 0;
+      border-radius: 0 0 20px 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .logo-icon {
+      font-size: 2.5rem;
+      background: white;
+      color: var(--primary);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .logo-text {
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+    
+    /* Language Toggle */
+    .lang-toggle {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .lang-toggle button {
+      padding: 8px 16px;
+      border: 2px solid white;
+      background: transparent;
+      color: white;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s;
+    }
+    
+    .lang-toggle button:hover,
+    .lang-toggle button.active {
+      background: white;
+      color: var(--primary);
+    }
+    
+    /* Hero Section */
+    .hero {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      margin: 40px 0;
+    }
+    
+    .hero-content {
+      flex: 1;
+    }
+    
+    .hero-demo {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 25px;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      padding: 12px 30px;
+      background: var(--gradient);
+      color: white;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(214, 48, 49, 0.3);
+      transition: all 0.3s;
+    }
+    
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(214, 48, 49, 0.4);
+    }
+    
+    /* Demo Chatbot */
+    .chatbot-demo {
+      width: 320px;
+      background: var(--card-bg);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    
+    .chat-header {
+      background: var(--gradient);
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-weight: bold;
+    }
+    
+    .chat-messages {
+      height: 300px;
+      padding: 15px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .message {
+      padding: 10px 15px;
+      border-radius: 18px;
+      max-width: 80%;
+    }
+    
+    .bot-message {
+      background: #f1f1f1;
+      align-self: flex-start;
+      border-bottom-left-radius: 5px;
+    }
+    
+    .user-message {
+      background: var(--secondary);
+      color: white;
+      align-self: flex-end;
+      border-bottom-right-radius: 5px;
+    }
+    
+    .chat-input {
+      display: flex;
+      padding: 10px;
+      border-top: 1px solid #eee;
+    }
+    
+    .chat-input input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      outline: none;
+    }
+    
+    .chat-input button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+    
+    /* Features Section */
+    .section-title {
+      text-align: center;
+      margin: 50px 0 30px;
+      color: var(--primary);
+      font-size: 2rem;
+    }
+    
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin-bottom: 50px;
+    }
+    
+    .feature-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .feature-icon {
+      font-size: 2.5rem;
+      color: var(--secondary);
+      margin-bottom: 15px;
+    }
+    
+    .feature-card h3 {
+      margin-bottom: 15px;
+      color: var(--dark);
+    }
+    
+    /* Benefits Section */
+    .benefits {
+      background: var(--gradient);
+      color: white;
+      padding: 50px 0;
+      border-radius: 20px;
+      margin: 50px 0;
+    }
+    
+    .benefits-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    .benefits-list {
+      list-style: none;
+      margin-top: 30px;
+    }
+    
+    .benefits-list li {
+      padding: 15px 0;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .benefits-list i {
+      color: var(--accent);
+      font-size: 1.5rem;
+    }
+    
+    /* Code Example */
+    .code-example {
+      background: var(--dark);
+      color: #f1f1f1;
+      padding: 25px;
+      border-radius: 15px;
+      margin: 40px 0;
+      overflow-x: auto;
+    }
+    
+    .code-example pre {
+      font-family: 'Courier New', monospace;
+      line-height: 1.5;
+    }
+    
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 30px 0;
+      margin-top: 50px;
+      border-top: 1px solid #ddd;
+      color: #777;
+    }
+    
+    /* Floating Chatbot Demo */
+    .floating-chatbot {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      background: var(--gradient);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+      box-shadow: 0 5px 20px rgba(214, 48, 49, 0.4);
+      cursor: pointer;
+      z-index: 1000;
+      transition: all 0.3s;
+    }
+    
+    .floating-chatbot:hover {
+      transform: scale(1.1);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+      }
+      
+      .header-content {
+        flex-direction: column;
+        gap: 20px;
+      }
+      
+      .features {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container header-content">
+      <div class="logo">
+        <div class="logo-icon">
+          <i class="fas fa-robot"></i>
+        </div>
+        <div class="logo-text">AI Bhai Quiz Bot</div>
+      </div>
+      
+      <div class="lang-toggle">
+        <button onclick="switchLang('hi')" class="active">हिंदी</button>
+        <button onclick="switchLang('en')">English</button>
+      </div>
+    </div>
+  </header>
+  
+  <div class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <div id="content-hi">
+          <h1>🔥 AI Bhai Quiz Bot क्या है?</h1>
+          <p>AI Bhai Quiz Bot एक interactive <b>quiz/fun game widget</b> है, जिसे आप अपनी website में जोड़ सकते हैं। यह visitors से छोटे-छोटे सवाल पूछकर उन्हें मज़ेदार जवाब देता है।</p>
+          <p>👉 इससे आपकी website पर <b>engagement बढ़ेगा</b>, users ज्यादा देर तक site पर रहेंगे और उन्हें मज़ा भी आएगा।</p>
+        </div>
+        
+        <div id="content-en" class="hidden">
+          <h1>🔥 What is AI Bhai Quiz Bot?</h1>
+          <p>The AI Bhai Quiz Bot is an interactive <b>quiz/fun game widget</b> you can embed on your website. It asks fun questions and shows interesting results based on the user's answers.</p>
+          <p>👉 This increases <b>user engagement</b>, keeps visitors longer on your site, and entertains them.</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Features Section -->
+    <h2 class="section-title" id="features">⚡ Features</h2>
+    <section class="features">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-smile"></i>
+        </div>
+        <h3>Floating Avatar</h3>
+        <p>हमेशा corner में दिखेगा, आसानी से एक्सेस किया जा सकता है।</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-gamepad"></i>
+        </div>
+        <h3>Interactive Quiz</h3>
+        <p>User click करे और quiz box खुले, engaging experience।</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-random"></i>
+        </div>
+        <h3>Random Questions</h3>
+        <p>हर बार अलग सवाल, users बोर नहीं होंगे।</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-palette"></i>
+        </div>
+        <h3>Fully Customizable</h3>
+        <p>Avatar, color, quiz data JSON से manage कर सकते हैं।</p>
+      </div>
+    </section>
+    
+    <!-- Benefits Section -->
+    <section class="benefits">
+      <div class="benefits-content">
+        <h2>🎯 Website Owner को फायदे</h2>
+        <ul class="benefits-list">
+          <li><i class="fas fa-chart-line"></i> Engagement और interaction बहुत बढ़ेगा</li>
+          <li><i class="fas fa-repeat"></i> Visitors बार-बार वापस आएंगे</li>
+          <li><i class="fas fa-heart"></i> Brand के साथ personal connection बनेगा</li>
+          <li><i class="fas fa-laugh"></i> Website fun और interesting लगेगी</li>
+        </ul>
+      </div>
+    </section>
+    
+    <!-- Code Example -->
+    <h2 class="section-title">🔧 Implementation</h2>
+    <section>
+      <div class="code-example">
+        <pre>&lt;script&gt;
+window.AIBhaiQuizBotConfig = {
+  avatar: "https://example.com/avatar.png",
+  size: {w: 80, h: 80},
+  title: "AI Bhai Quiz 🎉",
+  titleColor: "#d63031",
+  boxBackground: "linear-gradient(135deg, #ffffff, #ffeaa7)",
+  borderRadius: "18px",
+  boxWidth: "360px",
+  textColor: "#2d3436",
+  position: "br",   // tr, tl, bl, br
+  quizURL: "https://example.com/quiz.json",
+  colors: ["#e74c3c","#8e44ad","#3498db","#16a085","#f39c12"]
+};
+&lt;/script&gt;
+&lt;script src="https://example.com/ai-quiz-bot.js"&gt;&lt;/script&gt;</pre>
+      </div>
+    </section>
+  </div>
+  
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2025 AI Bhai Quiz Bot. All rights reserved.</p>
+    </div>
+  </footer>
+  
+  <script>
+    function switchLang(lang) {
+      document.getElementById("content-hi").classList.toggle("hidden", lang !== "hi");
+      document.getElementById("content-en").classList.toggle("hidden", lang !== "en");
+      
+      // Update active button state
+      document.querySelectorAll('.lang-toggle button').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+    }
+    
+    // Simple chatbot demo interaction
+    document.querySelector('.chat-input button').addEventListener('click', function() {
+      const input = document.querySelector('.chat-input input');
+      const message = input.value.trim();
+      
+      if (message) {
+        const messagesContainer = document.querySelector('.chat-messages');
+        
+        // Add user message
+        const userMsg = document.createElement('div');
+        userMsg.className = 'message user-message';
+        userMsg.textContent = message;
+        messagesContainer.appendChild(userMsg);
+        
+        // Clear input
+        input.value = '';
+        
+        // Auto response after delay
+        setTimeout(() => {
+          const botMsg = document.createElement('div');
+          botMsg.className = 'message bot-message';
+          botMsg.textContent = 'मजेदार जवाब! अगला सवाल तैयार है...';
+          messagesContainer.appendChild(botMsg);
+          
+          // Scroll to bottom
+          messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }, 1000);
+        
+        // Scroll to bottom
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      }
+    });
+    
+    // Allow pressing Enter to send message
+    document.querySelector('.chat-input input').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        document.querySelector('.chat-input button').click();
+      }
+    });
+  </script>
+  
+<script>
+window.AIBhaiQuizBotConfig = {
+  avatar: "https://deepakchauhanxai.xyz/images/AI-bhai.png",
+  size: {w: 80, h: 80},
+  title: "AI Bhai Quiz 🎉",
+  titleColor: "#d63031",
+  boxBackground: "linear-gradient(135deg, #ffffff, #ffeaa7)",
+  borderRadius: "18px",
+  boxWidth: "360px",
+  textColor: "#2d3436",
+  position: "tl",   // tr, tl, bl, br
+  quizURL: "https://deepakchauhanxai.xyz/dk-community/quiz.json",
+  colors: ["#e74c3c","#8e44ad","#3498db","#16a085","#f39c12"],
+};
+</script>
+<script src="https://deepakchauhanxai.xyz/dk-bot/ai-quiz-bot.js"></script>
+</body>
+</html>
