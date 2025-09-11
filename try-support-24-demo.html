@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Bhai – Support System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0; padding: 0;
+      background: #f4f6f9;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(135deg,#6a11cb,#2575fc);
+      color: #fff; text-align: center;
+      padding: 30px 15px;
+    }
+    header h1 { margin: 0; font-size: 28px; }
+    header p { margin-top: 8px; font-size: 16px; }
+
+    .lang-toggle {
+      margin-top: 15px;
+      padding: 8px 16px;
+      border: none; border-radius: 6px;
+      cursor: pointer; font-size: 14px;
+      background: #fff; color: #333;
+    }
+
+    .container { max-width: 960px; margin: auto; padding: 20px; }
+    .section {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .section h2 { margin-top: 0; color: #2575fc; }
+    .features { list-style: none; padding: 0; }
+    .features li {
+      margin: 10px 0;
+      padding-left: 24px;
+      position: relative;
+    }
+    .features li::before {
+      content: "✔"; color: #38ef7d;
+      position: absolute; left: 0;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1 id="title">AI Bhai Support System</h1>
+  <p id="subtitle">24/7 Smart Bot + Human Support</p>
+  <button class="lang-toggle" onclick="toggleLang()">हिंदी / English</button>
+</header>
+
+<div class="container">
+  <div class="section">
+    <h2 id="about-title">🤖 About Our System</h2>
+    <p id="about-text">
+      Our AI Bhai system combines the power of AI Bot and Human Support. 
+      It replies instantly to customers, and when needed, your support team can continue the chat.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2 id="features-title">✨ Key Features</h2>
+    <ul class="features" id="features-list">
+      <li>AI + Human Combo Support</li>
+      <li>Admin Panel to track chats (Pending / In Progress / Success)</li>
+      <li>24/7 availability increases customer trust</li>
+      <li>Improves engagement and repeat customers</li>
+      <li>Boosts sales with instant replies</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2 id="demo-title">💬 Live Demo</h2>
+    <p id="demo-text">Try the AI Bhai widget at the bottom-right corner.</p>
+  </div>
+</div>
+
+<!-- Chat Widget Script -->
+<script>
+window.AIBhaiChatBotConfig = {
+  ownerKey: "DEMO123",
+  commandsURL: "https://deepakchauhanxai.xyz/chat-data/owners/DEEPAK123/commands.json",
+  avatar: "https://deepakchauhanxai.xyz/images/AI-bhai.png",
+  title: "AI Bhai Support 💬",
+  subtitle: "24/7 Support",
+  titleColor: "#fff",
+  boxBackground: "linear-gradient(135deg,#11998e,#38ef7d)",  
+  borderRadius: "20px",
+  boxWidth: "380px",
+  chatBoxHeight: "520px",
+  position: "br",
+  language: "both",
+  showLangToggle: true,
+  fuzzy: { enabled: true, minPrefix: 3, threshold: 0.7 },
+
+  // ✅ Buttons container ka background control
+  buttonsContainerBackground: "linear-gradient(135deg,#6a11cb,#2575fc)",
+
+  // ✅ Har ek button ka alag color
+  buttons: [
+    { text: "📞 Call", url: "tel:+919999999999", color: "linear-gradient(135deg,#ff512f,#dd2476)" },
+    { text: "🌐 Website", url: "https://deepakchauhanxai.com", color: "linear-gradient(135deg,#00c6ff,#0072ff)" },
+    { text: "👨‍💻 Live Agent", url: "https://deepakchauhanxai.xyz/dk-support/support.php?owner=DEMO123", color: "linear-gradient(135deg,#f7971e,#ffd200)" }
+  ]
+};
+</script>
+
+<script src="https://deepakchauhanxai.xyz/dk-bot/ai-chat-widget.js"></script>
+<script>
+let currentLang = "en";
+const content = {
+  en: {
+    title: "AI Bhai Support System",
+    subtitle: "24/7 Smart Bot + Human Support",
+    aboutTitle: "🤖 About Our System",
+    aboutText: "Our AI Bhai system combines the power of AI Bot and Human Support. It replies instantly to customers, and when needed, your support team can continue the chat.",
+    featuresTitle: "✨ Key Features",
+    featuresList: [
+      "AI + Human Combo Support",
+      "Admin Panel to track chats (Pending / In Progress / Success)",
+      "24/7 availability increases customer trust",
+      "Improves engagement and repeat customers",
+      "Boosts sales with instant replies"
+    ],
+    demoTitle: "💬 Live Demo",
+    demoText: "Try the AI Bhai widget at the bottom-right corner."
+  },
+  hi: {
+    title: "AI भाई सपोर्ट सिस्टम",
+    subtitle: "24/7 स्मार्ट बॉट + मानव सपोर्ट",
+    aboutTitle: "🤖 हमारे सिस्टम के बारे में",
+    aboutText: "AI भाई सिस्टम में AI Bot और Human Support दोनों की ताकत है। यह तुरंत जवाब देता है और जब ज़रूरत हो आपकी सपोर्ट टीम चैट जारी रख सकती है।",
+    featuresTitle: "✨ मुख्य विशेषताएँ",
+    featuresList: [
+      "AI + मानव कॉम्बो सपोर्ट",
+      "एडमिन पैनल (Pending / In Progress / Success ट्रैक करें)",
+      "24/7 उपलब्धता से ग्राहक का भरोसा बढ़ता है",
+      "Customer Engagement और दोबारा आने की संभावना बढ़ती है",
+      "Instant reply से Sales में बढ़ोतरी होती है"
+    ],
+    demoTitle: "💬 लाइव डेमो",
+    demoText: "AI भाई विड्जेट नीचे दाईं तरफ़ देखें।"
+  }
+};
+
+function toggleLang() {
+  currentLang = currentLang === "en" ? "hi" : "en";
+  document.getElementById("title").innerText = content[currentLang].title;
+  document.getElementById("subtitle").innerText = content[currentLang].subtitle;
+  document.getElementById("about-title").innerText = content[currentLang].aboutTitle;
+  document.getElementById("about-text").innerText = content[currentLang].aboutText;
+  document.getElementById("features-title").innerText = content[currentLang].featuresTitle;
+  const list = document.getElementById("features-list");
+  list.innerHTML = "";
+  content[currentLang].featuresList.forEach(f => {
+    const li = document.createElement("li");
+    li.textContent = f;
+    list.appendChild(li);
+  });
+  document.getElementById("demo-title").innerText = content[currentLang].demoTitle;
+  document.getElementById("demo-text").innerText = content[currentLang].demoText;
+}
+</script>
+
+</body>
+</html>
