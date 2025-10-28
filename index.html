@@ -687,5 +687,56 @@
     <script src="https://deepakchauhanxai.xyz/dk-bot/config/welcome/window.AIBhaiBotConfig.php"></script>
     <script src="https://deepakchauhanxai.xyz/dk-bot/api/welcome/bot.php"></script>
  <!--<script   src="https://deepakchauhanxai.xyz/testing/scripts/Alternate-version.js"></script>-->
+    <!-- ✅ Update Button -->
+<button id="updateButton"
+  style="position: fixed; bottom: 20px; right: 20px; background: red; color: #fff;
+  padding: 10px 18px; border: none; border-radius: 8px; font-weight: bold;
+  cursor: pointer; z-index: 9999; display: none;">
+  🔄 Update Available
+</button>
+
+<script>
+(async function() {
+  const UPDATE_KEY = "site_version";
+  const LOCAL_VERSION = localStorage.getItem(UPDATE_KEY);
+
+  // 👇 यहां अपना version.json का URL डाल
+  const VERSION_URL = "https://deepakchauhanxai.xyz/testing/new-01/version.json?v=" + Date.now();
+
+  try {
+    const res = await fetch(VERSION_URL, { cache: "no-store" });
+    const data = await res.json();
+    const LATEST_VERSION = data.version;
+
+    // 🔍 अगर नई version मिली तो Update बटन दिखाओ
+    if (LOCAL_VERSION !== LATEST_VERSION) {
+      const btn = document.getElementById("updateButton");
+      btn.style.display = "block";
+      btn.onclick = async () => {
+        btn.innerText = "🔁 Updating...";
+        // 🧹 Cache + Storage clear
+        try {
+          localStorage.clear();
+          sessionStorage.clear();
+          if ('caches' in window) {
+            const keys = await caches.keys();
+            await Promise.all(keys.map(k => caches.delete(k)));
+          }
+        } catch (err) { console.warn(err); }
+
+        // ✅ नई version save करो
+        localStorage.setItem(UPDATE_KEY, LATEST_VERSION);
+
+        // 🎉 Animation / Feedback
+        btn.style.background = "green";
+        btn.innerText = "✅ Updated!";
+        setTimeout(() => location.reload(true), 1500);
+      };
+    }
+  } catch (err) {
+    console.error("Version check failed:", err);
+  }
+})();
+</script>
 </body>
 </html>
