@@ -8,212 +8,530 @@
     <!-- 🔥 Dynamic Meta for SEO -->
     <meta id="meta-title" name="title" content="">
     <meta id="meta-description" name="description" content="">
-    <meta id="meta-image" property="og:image" content="">
+    <meta id="meta-og-title" property="og:title" content="">
+    <meta id="meta-og-desc" property="og:description" content="">
+    <meta id="meta-og-image" property="og:image" content="">
+    <meta property="og:type" content="article">
 
+    <link rel="icon" href="https://deepakchauhanxai.xyz/images/dk-community.jpg">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
 
     <style>
+        * { box-sizing: border-box; }
+
         body {
             margin: 0;
             padding: 0;
             font-family: 'Poppins', sans-serif;
-            background: #f2f2f2;
+            background: radial-gradient(circle at top, #e0f2fe, #f9fafb);
         }
 
-        .post-container {
-            max-width: 680px;
-            margin: 25px auto;
-            padding: 15px;
+        .page-wrap {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 10px 15px 30px;
         }
 
-        .post-card {
-            background: #fff;
+        /* 🔹 Header – DK Community x AI Bhai */
+        .dk-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
             border-radius: 14px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+            background: rgba(255,255,255,0.9);
+            box-shadow: 0 8px 24px rgba(15,23,42,0.12);
+            margin-bottom: 18px;
+            backdrop-filter: blur(10px);
+        }
+
+        .dk-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dk-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 14px;
             overflow: hidden;
-            animation: fadeIn 0.4s ease-in-out;
+            border: 2px solid #3b82f6;
+        }
+
+        .dk-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .dk-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dk-text .title {
+            font-size: 17px;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .dk-text .subtitle {
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .lang-indicator {
+            font-size: 12px;
+            color: #4b5563;
+        }
+
+        /* 🔹 Card */
+        .post-card {
+            background: #ffffff;
+            border-radius: 18px;
+            box-shadow: 0 12px 32px rgba(15,23,42,0.18);
+            overflow: hidden;
+            animation: fadeIn 0.35s ease-in-out;
         }
 
         @keyframes fadeIn {
-            from {opacity:0; transform: translateY(20px);}
+            from {opacity:0; transform: translateY(18px);}
             to {opacity:1; transform: translateY(0);}
+        }
+
+        .post-img-wrap {
+            position: relative;
+            background: #020617;
         }
 
         .post-img {
             width: 100%;
-            display: block;
-            border-bottom: 1px solid #ddd;
+            max-height: 420px;
+            object-fit: contain;
+            background: #020617;
+        }
+
+        .post-chip {
+            position: absolute;
+            left: 12px;
+            bottom: 10px;
+            padding: 5px 10px;
+            background: rgba(15,23,42,0.82);
+            color: #e5e7eb;
+            border-radius: 999px;
+            font-size: 11px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .post-chip span {
+            font-size: 14px;
         }
 
         .post-content {
-            padding: 18px;
+            padding: 18px 18px 20px;
         }
 
         .post-title {
             font-size: 22px;
             font-weight: 600;
-            margin-bottom: 10px;
-            color: #222;
+            margin: 0 0 8px;
+            color: #111827;
         }
 
         .post-desc {
-            font-size: 16px;
-            line-height: 1.6;
-            color: #444;
-            margin-bottom: 20px;
+            font-size: 15px;
+            line-height: 1.7;
+            color: #374151;
+            white-space: pre-line;
+            margin-bottom: 18px;
         }
 
-        .share-box {
+        .meta-row {
             display: flex;
-            gap: 12px;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #9ca3af;
+            margin-bottom: 10px;
+        }
+
+        .control-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 6px;
         }
 
         .btn {
-            padding: 10px 18px;
+            padding: 8px 14px;
+            border-radius: 999px;
             border: none;
-            border-radius: 10px;
-            font-size: 15px;
             cursor: pointer;
-            background: #3B82F6;
-            color: #fff;
-            font-weight: 500;
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #e5e7eb;
+            color: #111827;
             transition: 0.2s ease;
         }
 
+        .btn.primary {
+            background: #3b82f6;
+            color: #ffffff;
+        }
+
+        .btn.danger {
+            background: #f97316;
+            color: #fff7ed;
+        }
+
         .btn:hover {
-            background: #2563eb;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 14px rgba(15,23,42,0.2);
         }
 
-        .back-btn {
-            background: #10b981;
+        .btn svg {
+            width: 16px;
+            height: 16px;
         }
 
-        .back-btn:hover {
-            background: #059669;
+        .bottom-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
         }
 
-        /* 🔥 Loading skeleton */
+        .back-link {
+            font-size: 13px;
+            color: #3b82f6;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 🔹 Skeleton Loader */
+        .skeleton-wrap {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 16px;
+            box-shadow: 0 10px 28px rgba(15,23,42,0.16);
+        }
+
         .skeleton {
-            background: linear-gradient(90deg, #e0e0e0, #f8f8f8, #e0e0e0);
-            background-size: 400% 400%;
+            background: linear-gradient(90deg, #e5e7eb, #f9fafb, #e5e7eb);
+            background-size: 300% 100%;
             animation: skeleton 1.2s ease infinite;
         }
 
         @keyframes skeleton {
-            0% { background-position: 0 0; }
-            100% { background-position: -135% 0; }
+            0% { background-position: 100% 0; }
+            100% { background-position: -100% 0; }
         }
 
         .skeleton-img {
             width: 100%;
-            height: 320px;
-            border-radius: 10px;
+            height: 240px;
+            border-radius: 14px;
+            margin-bottom: 14px;
         }
 
-        .skeleton-text {
-            height: 18px;
-            width: 90%;
-            margin: 12px 0;
-            border-radius: 6px;
+        .skeleton-line {
+            height: 14px;
+            border-radius: 999px;
+            margin-bottom: 10px;
+        }
+
+        .skeleton-line.short {
+            width: 40%;
+        }
+
+        .skeleton-line.mid {
+            width: 65%;
+        }
+
+        .skeleton-line.long {
+            width: 85%;
+        }
+
+        @media (max-width: 640px) {
+            .dk-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+            .post-title {
+                font-size: 19px;
+            }
+            .post-desc {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
 <body>
+<div class="page-wrap">
 
-<div class="post-container">
-
-    <!-- 🔥 Skeleton Loader (Auto hide later) -->
-    <div id="loader">
-        <div class="skeleton skeleton-img"></div>
-        <div class="skeleton skeleton-text"></div>
-        <div class="skeleton skeleton-text" style="width:70%"></div>
-    </div>
-
-    <!-- 🔥 Real Post -->
-    <div class="post-card" id="postCard" style="display:none;">
-        <img id="postImg" class="post-img" src="" alt="">
-        <div class="post-content">
-            <h2 id="postTitle" class="post-title"></h2>
-            <p id="postDesc" class="post-desc"></p>
-
-            <!-- ⭐ Share + Back -->
-            <div class="share-box">
-                <button class="btn back-btn" onclick="history.back()">⬅ Back</button>
-                <button class="btn" onclick="sharePost()">🔗 Share</button>
+    <!-- 🔹 DK Community Header -->
+    <header class="dk-header">
+        <div class="dk-brand">
+            <div class="dk-avatar">
+                <img src="https://deepakchauhanxai.xyz/images/dk-community.jpg" alt="DK Community">
+            </div>
+            <div class="dk-text">
+                <span class="title">DK Community × AI Bhai</span>
+                <span class="subtitle">Human + AI Real Stories & Suvichar</span>
             </div>
         </div>
+        <div class="lang-indicator">
+            <span id="langLabel">Language: EN</span>
+        </div>
+    </header>
+
+    <!-- 🔹 Skeleton while loading -->
+    <div id="loader" class="skeleton-wrap">
+        <div class="skeleton skeleton-img"></div>
+        <div class="skeleton skeleton-line long"></div>
+        <div class="skeleton skeleton-line mid"></div>
+        <div class="skeleton skeleton-line short"></div>
     </div>
 
-    <!-- 🔥 (SAFE FOR APPROVAL) Google Ads Placeholder -->
+    <!-- 🔹 Real Card -->
+    <article id="postCard" class="post-card" style="display:none;">
+        <div class="post-img-wrap">
+            <img id="postImg" class="post-img" src="" alt="">
+            <div class="post-chip">
+                <span>⚡</span>
+                <span id="postCategory">Motivation</span>
+            </div>
+        </div>
+        <div class="post-content">
+            <div class="meta-row">
+                <span id="metaCategory">#motivational</span>
+                <span id="metaId">ID: -</span>
+            </div>
+
+            <h1 id="postTitle" class="post-title"></h1>
+            <p id="postDesc" class="post-desc"></p>
+
+            <!-- 🔹 Controls: Favorite, Download, Share -->
+            <div class="control-row">
+                <button id="favBtn" class="btn">
+                    ❤️ <span>Add to Favorites</span>
+                </button>
+
+                <button id="downloadBtn" class="btn">
+                    ⬇️ <span>Download</span>
+                </button>
+
+                <button id="shareBtn" class="btn primary">
+                    🔗 <span>Share</span>
+                </button>
+            </div>
+
+            <div class="bottom-row">
+                <a href="index.html" class="back-link">
+                    ⬅ Back to DK Community
+                </a>
+                <span style="font-size: 11px; color:#9ca3af;">Deepak Chauhan × AI Bhai</span>
+            </div>
+        </div>
+    </article>
+
+    <!-- 🔹 SAFE FOR APPROVAL: Ad placeholder (commented) -->
     <!--
-    <div style="margin-top:20px;">
+    <div style="margin-top:18px;">
         <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-XXXXXXXXX"
-            data-ad-slot="YYYYYYYY"
-            data-ad-format="auto">
-        </ins>
+             style="display:block"
+             data-ad-client="ca-pub-XXXXXXXXXXXX"
+             data-ad-slot="YYYYYYYYYY"
+             data-ad-format="auto"></ins>
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
     -->
 </div>
 
-
 <script>
-// ⭐ Get ID from URL
-const params = new URLSearchParams(window.location.search);
-const postId = parseInt(params.get("id"));
+    let currentPost = null;
 
-// ⭐ Load selected language
-const lang = localStorage.getItem("selectedLanguage") || "en";
+    // ⭐ Current language from localStorage
+    function getCurrentLang() {
+        const saved = localStorage.getItem("selectedLanguage");
+        return saved || "en";
+    }
 
-// ⭐ Fetch JSON
-fetch("https://deepakchauhanxai.xyz/testing/data/images.json?v=" + Date.now())
-    .then(res => res.json())
-    .then(data => {
-        const post = data.images.find(img => img.id === postId);
+    function updateLangLabel() {
+        const lang = getCurrentLang().toUpperCase();
+        const el = document.getElementById("langLabel");
+        if (el) el.textContent = "Language: " + lang;
+        document.documentElement.lang = getCurrentLang();
+    }
 
-        if (!post) {
-            document.body.innerHTML = "<h2 style='text-align:center;margin-top:50px;'>Post Not Found</h2>";
+    // ⭐ Fill UI from currentPost + lang
+    function renderPost() {
+        if (!currentPost) return;
+
+        const lang = getCurrentLang();
+        updateLangLabel();
+
+        const title = currentPost.title[lang] || currentPost.title["en"] || "";
+        const desc  = currentPost.description[lang] || currentPost.description["en"] || "";
+        const imgUrl = currentPost.url;
+        const cat    = currentPost.category || "motivational";
+
+        document.getElementById("postImg").src = imgUrl;
+        document.getElementById("postImg").alt = title;
+        document.getElementById("postTitle").textContent = title;
+        document.getElementById("postDesc").textContent = desc;
+        document.getElementById("postCategory").textContent = cat.toUpperCase();
+        document.getElementById("metaCategory").textContent = "#" + cat;
+        document.getElementById("metaId").textContent = "ID: " + currentPost.id;
+
+        // ⭐ SEO meta update
+        document.getElementById("meta-title").content = title;
+        document.getElementById("meta-description").content = desc.slice(0, 150);
+        document.getElementById("meta-og-title").content = title;
+        document.getElementById("meta-og-desc").content = desc.slice(0, 150);
+        document.getElementById("meta-og-image").content = imgUrl;
+
+        // ⭐ Favorite button state sync
+        updateFavoriteButton();
+    }
+
+    // ⭐ Favorite system (same storage key: dkFavorites)
+    function getFavorites() {
+        try {
+            return JSON.parse(localStorage.getItem("dkFavorites") || "[]");
+        } catch {
+            return [];
+        }
+    }
+
+    function isFavorite(id) {
+        return getFavorites().some(f => f.id === id);
+    }
+
+    function updateFavoriteButton() {
+        const favBtn = document.getElementById("favBtn");
+        if (!favBtn || !currentPost) return;
+
+        const span = favBtn.querySelector("span");
+        if (isFavorite(currentPost.id)) {
+            favBtn.classList.add("danger");
+            span.textContent = "Remove Favorite";
+        } else {
+            favBtn.classList.remove("danger");
+            span.textContent = "Add to Favorites";
+        }
+    }
+
+    function toggleFavorite() {
+        if (!currentPost) return;
+
+        let favs = getFavorites();
+        const idx = favs.findIndex(f => f.id === currentPost.id);
+
+        if (idx > -1) {
+            favs.splice(idx, 1);
+        } else {
+            favs.push(currentPost);
+        }
+
+        localStorage.setItem("dkFavorites", JSON.stringify(favs));
+        updateFavoriteButton();
+    }
+
+    // ⭐ Download
+    function downloadImage(url) {
+        try {
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = url.split("/").pop() || "dk-community-image.jpg";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        } catch (e) {
+            alert("Download failed.");
+        }
+    }
+
+    // ⭐ Share
+    function sharePost() {
+        if (!currentPost) return;
+        const lang = getCurrentLang();
+        const title = currentPost.title[lang] || currentPost.title["en"] || "DK Community";
+        const text  = currentPost.description[lang] || currentPost.description["en"] || "";
+        const url   = window.location.href;
+
+        if (navigator.share) {
+            navigator.share({ title, text, url }).catch(() => {});
+        } else {
+            navigator.clipboard.writeText(url).then(() => {
+                alert("Link copied to clipboard!");
+            }).catch(() => {
+                prompt("Copy this link:", url);
+            });
+        }
+    }
+
+    // ⭐ MAIN LOAD
+    (function(){
+        const params = new URLSearchParams(window.location.search);
+        const idParam = params.get("id");
+        const postId = parseInt(idParam, 10);
+
+        if (!postId) {
+            document.body.innerHTML = "<h2 style='text-align:center;margin-top:40px;'>Invalid Post</h2>";
             return;
         }
 
-        // ⭐ Fill data
-        document.getElementById("postImg").src = post.url;
-        document.getElementById("postTitle").textContent = post.title[lang];
-        document.getElementById("postDesc").textContent = post.description[lang];
+        updateLangLabel();
 
-        // ⭐ SEO Meta Update
-        document.getElementById("meta-title").content = post.title[lang];
-        document.getElementById("meta-description").content = post.description[lang];
-        document.getElementById("meta-image").content = post.url;
+        fetch("https://deepakchauhanxai.xyz/testing/data/images.json?v=" + Date.now())
+            .then(res => res.json())
+            .then(data => {
+                const list = data.images || [];
+                const found = list.find(img => img.id === postId);
 
-        // ⭐ Show card after loading
-        setTimeout(() => {
-            document.getElementById("loader").style.display = "none";
-            document.getElementById("postCard").style.display = "block";
-        }, 500);
+                if (!found) {
+                    document.body.innerHTML = "<h2 style='text-align:center;margin-top:40px;'>Post Not Found</h2>";
+                    return;
+                }
 
-    })
+                currentPost = found;
+                renderPost();
 
-    .catch(() => {
-        document.body.innerHTML = "<h2 style='text-align:center;margin-top:50px;'>Error Loading Post</h2>";
+                // Show card, hide loader
+                setTimeout(() => {
+                    const loader = document.getElementById("loader");
+                    const card   = document.getElementById("postCard");
+                    if (loader) loader.style.display = "none";
+                    if (card)   card.style.display = "block";
+                }, 300);
+
+                // Buttons
+                document.getElementById("favBtn").onclick = toggleFavorite;
+                document.getElementById("downloadBtn").onclick = () => downloadImage(currentPost.url);
+                document.getElementById("shareBtn").onclick = sharePost;
+            })
+            .catch(() => {
+                document.body.innerHTML = "<h2 style='text-align:center;margin-top:40px;'>Error Loading Post</h2>";
+            });
+    })();
+
+    // ⭐ Language change support (if your language.js dispatches this event)
+    window.addEventListener("languageChanged", () => {
+        renderPost();
     });
-
-
-// ⭐ Share Function
-function sharePost() {
-    const title = document.getElementById("postTitle").textContent;
-    const text = document.getElementById("postDesc").textContent;
-    const url = window.location.href;
-
-    if (navigator.share) {
-        navigator.share({ title, text, url });
-    } else {
-        navigator.clipboard.writeText(url);
-        alert("Link Copied!");
-    }
-}
 </script>
 
 </body>
