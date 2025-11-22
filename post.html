@@ -359,40 +359,68 @@
     </div>
     -->
 </div>
-        
+
 <script>
     let currentPost = null;
     let currentLang = "en";
 
-    // ⭐ Get language from localStorage or browser
+    // ⭐ IMPROVED: Language detection with multiple sources
     function detectLang() {
+        // 1. Pehle URL parameter check karo
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlLang = urlParams.get('lang');
+        if (urlLang) return urlLang;
+
+        // 2. Phir localStorage check karo
         const saved = localStorage.getItem("selectedLanguage");
         if (saved) return saved;
 
+        // 3. Phir browser language
         const browserLang = (navigator.language || "en").slice(0, 2);
         const supported = ["en","hi","ur","mr","es","fr","de","ja","zh","ar","pt","ru","bn","ta","te","kn","gu","pa"];
         return supported.includes(browserLang) ? browserLang : "en";
     }
 
-    function getCurrentLang() {
-        return currentLang;
+    // ⭐ NEW: Language sync system
+    function syncLanguage() {
+        const newLang = detectLang();
+        if (newLang !== currentLang) {
+            currentLang = newLang;
+            updateLangLabel();
+            
+            // URL update karo taaki refresh pe bhi language maintain rahe
+            const url = new URL(window.location);
+            url.searchParams.set('lang', newLang);
+            window.history.replaceState({}, '', url);
+            
+            // Content refresh karo
+            if (currentPost) {
+                renderPost();
+            }
+        }
     }
 
     function updateLangLabel() {
         const el = document.getElementById("langLabel");
-        if (el) el.textContent = "Language: " + getCurrentLang().toUpperCase();
-        document.documentElement.lang = getCurrentLang();
+        if (el) {
+            const langNames = {
+                en: "ENGLISH", hi: "HINDI", ur: "URDU", mr: "MARATHI", 
+                es: "SPANISH", fr: "FRENCH", de: "GERMAN", ja: "JAPANESE",
+                zh: "CHINESE", ar: "ARABIC", pt: "PORTUGUESE", ru: "RUSSIAN",
+                bn: "BENGALI", ta: "TAMIL", te: "TELUGU", kn: "KANNADA",
+                gu: "GUJARATI", pa: "PUNJABI"
+            };
+            el.textContent = "Language: " + (langNames[currentLang] || currentLang.toUpperCase());
+        }
+        document.documentElement.lang = currentLang;
     }
 
     // ⭐ Fill UI from currentPost + lang
     function renderPost() {
         if (!currentPost) return;
 
-        const lang = getCurrentLang();
-        updateLangLabel();
-
-        const title = currentPost.title[lang] || currentPost.title["en"] || "";
-        const desc  = currentPost.description[lang] || currentPost.description["en"] || "";
+        const title = currentPost.title[currentLang] || currentPost.title["en"] || "";
+        const desc  = currentPost.description[currentLang] || currentPost.description["en"] || "";
         const imgUrl = currentPost.url;
         const cat    = currentPost.category || "motivational";
 
@@ -471,28 +499,33 @@
         }
     }
 
-    // ⭐ Share
+    // ⭐ Share - IMPROVED: Language include karega
     function sharePost() {
         if (!currentPost) return;
-        const lang = getCurrentLang();
-        const title = currentPost.title[lang] || currentPost.title["en"] || "DK Community";
-        const text  = currentPost.description[lang] || currentPost.description["en"] || "";
-        const url   = window.location.href;
+        const title = currentPost.title[currentLang] || currentPost.title["en"] || "DK Community";
+        const text  = currentPost.description[currentLang] || currentPost.description["en"] || "";
+        
+        // Current language ke saath share URL banaye
+        const url = new URL(window.location);
+        url.searchParams.set('lang', currentLang);
+        const shareUrl = url.toString();
 
         if (navigator.share) {
-            navigator.share({ title, text, url }).catch(() => {});
+            navigator.share({ title, text, url: shareUrl }).catch(() => {});
         } else {
-            navigator.clipboard.writeText(url).then(() => {
+            navigator.clipboard.writeText(shareUrl).then(() => {
                 alert("Link copied to clipboard!");
             }).catch(() => {
-                prompt("Copy this link:", url);
+                prompt("Copy this link:", shareUrl);
             });
         }
     }
 
-    // ⭐ MAIN LOAD
+    // ⭐ MAIN LOAD - IMPROVED
     (function(){
-        currentLang = detectLang();  // ← yahi se language fix hogi
+        // Pehle language set karo
+        currentLang = detectLang();
+        updateLangLabel();
 
         const params = new URLSearchParams(window.location.search);
         const idParam = params.get("id");
@@ -502,8 +535,6 @@
             document.body.innerHTML = "<h2 style='text-align:center;margin-top:40px;'>Invalid Post</h2>";
             return;
         }
-
-        updateLangLabel();
 
         fetch("https://deepakchauhanxai.xyz/testing/data/images.json?v=" + Date.now())
             .then(res => res.json())
@@ -537,17 +568,19 @@
             });
     })();
 
-    // ⭐ Optional: agar kisi aur script ne baad me selectedLanguage change ki
-    // to har 1s me check karke language update kar denge
-    let lastLang = detectLang();
-    setInterval(() => {
-        const now = detectLang();
-        if (now !== lastLang) {
-            lastLang = now;
-            currentLang = now;
-            renderPost();
+    // ⭐ NEW: Real-time language sync
+    window.addEventListener("languageChanged", syncLanguage);
+    
+    // Storage changes (dusre tab se) bhi suno
+    window.addEventListener("storage", (e) => {
+        if (e.key === "selectedLanguage") {
+            syncLanguage();
         }
-    }, 1000);
+    });
+
+    // Optional: Har 2 second pe check karo for language changes
+    setInterval(syncLanguage, 2000);
 </script>
+                        
 </body>
 </html>
