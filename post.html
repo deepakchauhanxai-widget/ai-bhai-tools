@@ -296,6 +296,30 @@
             transition: width 0.3s ease;
         }
 
+        /* Voice Selection */
+        .voice-selection {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .voice-option {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 20px;
+            background: white;
+            cursor: pointer;
+            font-size: 11px;
+            transition: all 0.3s ease;
+        }
+
+        .voice-option.active {
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+
         /* 🔹 Skeleton Loader */
         .skeleton-wrap {
             background: #ffffff;
@@ -356,6 +380,9 @@
                 flex-direction: column;
                 align-items: stretch;
             }
+            .voice-selection {
+                flex-wrap: wrap;
+            }
         }
     </style>
 </head>
@@ -406,6 +433,16 @@
 
             <!-- 🔥 Voice Controls -->
             <div id="voiceControls" class="voice-controls">
+                <!-- Voice Selection -->
+                <div class="voice-selection">
+                    <div class="voice-option active" data-voice="boy">
+                        👦 Boy Voice
+                    </div>
+                    <div class="voice-option" data-voice="girl">
+                        👧 Girl Voice
+                    </div>
+                </div>
+
                 <div class="voice-controls-row">
                     <button id="playBtn" class="voice-btn">
                         ▶️ Play
@@ -469,6 +506,7 @@
     let isPlaying = false;
     let speechRate = 1.0;
     let speechPitch = 1.0;
+    let selectedVoice = "boy"; // Default boy voice
 
     // ⭐ Language detection with multiple sources
     function detectLang() {
@@ -556,6 +594,25 @@
         document.getElementById('stopBtn').addEventListener('click', stopSpeech);
         document.getElementById('voiceBtn').addEventListener('click', toggleVoiceControls);
         
+        // Voice selection
+        document.querySelectorAll('.voice-option').forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove active class from all
+                document.querySelectorAll('.voice-option').forEach(opt => {
+                    opt.classList.remove('active');
+                });
+                // Add active class to clicked
+                this.classList.add('active');
+                selectedVoice = this.getAttribute('data-voice');
+                
+                // Restart speech if currently playing
+                if (isPlaying) {
+                    stopSpeech();
+                    setTimeout(playSpeech, 100);
+                }
+            });
+        });
+        
         // Slider events
         document.getElementById('speedSlider').addEventListener('input', function() {
             speechRate = parseFloat(this.value);
@@ -604,10 +661,24 @@
         stopSpeech();
         
         currentUtterance = new SpeechSynthesisUtterance(text);
-        currentUtterance.rate = speechRate;
-        currentUtterance.pitch = speechPitch;
-        currentUtterance.volume = 1;
+        
+        // 🔥 BOY VOICE SETTINGS
+        if (selectedVoice === "boy") {
+            // Boy voice ke liye settings
+            currentUtterance.rate = speechRate;
+            currentUtterance.pitch = 0.8; // Lower pitch for boy voice
+            currentUtterance.volume = 1;
+        } else {
+            // Girl voice ke liye settings
+            currentUtterance.rate = speechRate;
+            currentUtterance.pitch = 1.2; // Higher pitch for girl voice
+            currentUtterance.volume = 1;
+        }
+        
         currentUtterance.lang = getVoiceLanguageCode(currentLang);
+        
+        // Try to set specific voice
+        setVoicePreference(currentUtterance);
         
         currentUtterance.onstart = function() {
             isPlaying = true;
@@ -637,6 +708,48 @@
         };
         
         speechSynth.speak(currentUtterance);
+    }
+
+    function setVoicePreference(utterance) {
+        // Wait for voices to load
+        speechSynth.onvoiceschanged = function() {
+            const voices = speechSynth.getVoices();
+            
+            if (selectedVoice === "boy") {
+                // Boy voice preference - lower pitch voices
+                const maleVoices = voices.filter(voice => 
+                    voice.name.toLowerCase().includes('male') ||
+                    voice.name.toLowerCase().includes('man') ||
+                    voice.name.toLowerCase().includes('microsoft david') ||
+                    voice.name.toLowerCase().includes('google uk english male') ||
+                    voice.name.toLowerCase().includes('alex') ||
+                    voice.name.toLowerCase().includes('daniel')
+                );
+                
+                if (maleVoices.length > 0) {
+                    utterance.voice = maleVoices[0];
+                }
+            } else {
+                // Girl voice preference - higher pitch voices
+                const femaleVoices = voices.filter(voice => 
+                    voice.name.toLowerCase().includes('female') ||
+                    voice.name.toLowerCase().includes('woman') ||
+                    voice.name.toLowerCase().includes('microsoft zira') ||
+                    voice.name.toLowerCase().includes('google uk english female') ||
+                    voice.name.toLowerCase().includes('victoria') ||
+                    voice.name.toLowerCase().includes('samantha')
+                );
+                
+                if (femaleVoices.length > 0) {
+                    utterance.voice = femaleVoices[0];
+                }
+            }
+        };
+        
+        // If voices are already loaded
+        if (speechSynth.getVoices().length > 0) {
+            speechSynth.onvoiceschanged();
+        }
     }
 
     function pauseSpeech() {
