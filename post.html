@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DK Community – Post</title>
+    <title>DK Community – Premium Post</title>
 
     <!-- 🔥 Dynamic Meta for SEO -->
     <meta id="meta-title" name="title" content="">
@@ -14,62 +14,132 @@
     <meta property="og:type" content="article">
 
     <link rel="icon" href="https://deepakchauhanxai.xyz/images/dk-community.jpg">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         * { 
-            box-sizing: border-box; 
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --accent-gold: #f59e0b;
+            --accent-purple: #8b5cf6;
+            --accent-pink: #ec4899;
+            --accent-teal: #14b8a6;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-luxury: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-ai: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-rainbow: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3, #54a0ff);
+            --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --shadow-glow: 0 0 50px rgba(99, 102, 241, 0.3);
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
-            background: radial-gradient(circle at top, #667eea 0%, #764ba2 100%);
+            background: var(--dark);
+            color: var(--light);
             min-height: 100vh;
-            color: #333;
-            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* 🔥 AI Style Background with Particles */
+        .bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(245, 158, 11, 0.05) 0%, transparent 50%),
+                linear-gradient(135deg, var(--dark) 0%, #1e1b4b 100%);
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--gradient-rainbow);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
         }
 
         .page-wrap {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 20px 15px 40px;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
         }
 
-        /* 🔹 Header – DK Community x AI Bhai */
+        /* 🔥 VIP Luxury Header */
         .dk-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 15px 20px;
-            border-radius: 16px;
-            background: rgba(255,255,255,0.95);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            margin-bottom: 25px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
+            padding: 20px 30px;
+            border-radius: 24px;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dk-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-rainbow);
+            animation: rainbow-border 3s linear infinite;
+        }
+
+        @keyframes rainbow-border {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
 
         .dk-brand {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
         }
 
         .dk-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 14px;
+            width: 60px;
+            height: 60px;
+            border-radius: 18px;
             overflow: hidden;
-            border: 3px solid #764ba2;
-            box-shadow: 0 4px 10px rgba(118, 75, 162, 0.3);
+            border: 3px solid transparent;
+            background: var(--gradient-primary);
+            padding: 3px;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
         }
 
         .dk-avatar img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            border-radius: 15px;
         }
 
         .dk-text {
@@ -78,218 +148,294 @@
         }
 
         .dk-text .title {
-            font-size: 20px;
-            font-weight: 700;
-            color: #2d3748;
+            font-size: 24px;
+            font-weight: 800;
+            background: var(--gradient-rainbow);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             letter-spacing: -0.5px;
         }
 
         .dk-text .subtitle {
-            font-size: 13px;
-            color: #718096;
-            margin-top: 2px;
-        }
-
-        .lang-indicator {
-            font-size: 13px;
-            color: #4a5568;
-            background: #f7fafc;
-            padding: 6px 12px;
-            border-radius: 20px;
+            font-size: 14px;
+            color: #94a3b8;
             font-weight: 500;
         }
 
-        /* 🔹 Card */
+        .vip-badge {
+            background: var(--gradient-luxury);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
+        }
+
+        /* 🔥 Premium Card Design */
         .post-card {
-            background: #ffffff;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(20px);
+            border-radius: 28px;
             overflow: hidden;
-            animation: fadeIn 0.4s ease-out;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: cardEntrance 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
         }
 
-        .post-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        @keyframes cardEntrance {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
-        @keyframes fadeIn {
-            from {opacity:0; transform: translateY(20px);}
-            to {opacity:1; transform: translateY(0);}
+        .post-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-ai);
+            opacity: 0.05;
+            z-index: -1;
         }
 
         .post-img-wrap {
             position: relative;
-            background: #1a202c;
+            background: #020617;
+            overflow: hidden;
         }
 
         .post-img {
             width: 100%;
-            max-height: 450px;
+            max-height: 500px;
             object-fit: contain;
-            background: #1a202c;
-            display: block;
+            background: #020617;
+            transition: transform 0.5s ease;
+        }
+
+        .post-img:hover {
+            transform: scale(1.02);
         }
 
         .post-chip {
             position: absolute;
-            left: 15px;
-            bottom: 15px;
-            padding: 6px 14px;
-            background: rgba(15,23,42,0.85);
-            color: #fff;
-            border-radius: 20px;
+            left: 20px;
+            bottom: 20px;
+            padding: 10px 20px;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            color: white;
+            border-radius: 50px;
             font-size: 12px;
+            font-weight: 700;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            font-weight: 500;
-            backdrop-filter: blur(5px);
+            gap: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         .post-chip span {
-            font-size: 14px;
+            font-size: 16px;
         }
 
         .post-content {
-            padding: 25px 25px 30px;
-        }
-
-        .post-title {
-            font-size: 26px;
-            font-weight: 700;
-            margin: 0 0 12px;
-            color: #2d3748;
-            line-height: 1.3;
-        }
-
-        .post-desc {
-            font-size: 16px;
-            line-height: 1.7;
-            color: #4a5568;
-            white-space: pre-line;
-            margin-bottom: 22px;
+            padding: 30px;
         }
 
         .meta-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 13px;
-            color: #718096;
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 20px;
         }
 
+        .category-tag {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .post-id {
+            font-size: 12px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+
+        .post-title {
+            font-size: 32px;
+            font-weight: 800;
+            margin: 0 0 15px;
+            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+
+        .post-desc {
+            font-size: 17px;
+            line-height: 1.7;
+            color: #cbd5e1;
+            white-space: pre-line;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        /* 🔥 Premium Control Buttons */
         .control-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 10px;
+            gap: 12px;
+            margin-bottom: 20px;
         }
 
         .btn {
-            padding: 10px 18px;
-            border-radius: 50px;
+            padding: 14px 24px;
+            border-radius: 14px;
             border: none;
             cursor: pointer;
             font-size: 14px;
+            font-weight: 600;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            background: #f7fafc;
-            color: #4a5568;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            gap: 10px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn.primary {
-            background: #764ba2;
-            color: #ffffff;
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
         }
 
-        .btn.danger {
-            background: #e53e3e;
-            color: #fff;
+        .btn.gold {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.4);
+        }
+
+        .btn.premium {
+            background: var(--gradient-rainbow);
+            color: white;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
         }
 
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
         }
 
-        .btn:active {
-            transform: translateY(0);
-        }
-
-        .btn svg {
-            width: 16px;
-            height: 16px;
+        .btn i {
+            font-size: 16px;
         }
 
         .bottom-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 20px;
+            margin-top: 25px;
             padding-top: 20px;
-            border-top: 1px solid #e2e8f0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .back-link {
             font-size: 14px;
-            color: #764ba2;
+            color: #94a3b8;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            transition: color 0.3s ease;
             font-weight: 500;
-            transition: color 0.2s ease;
         }
 
         .back-link:hover {
-            color: #5a3790;
-            text-decoration: underline;
+            color: white;
         }
 
-        .credit {
+        .signature {
             font-size: 12px;
-            color: #a0aec0;
+            color: #64748b;
+            font-style: italic;
         }
 
-        /* 🔹 Skeleton Loader */
+        /* 🔥 Skeleton Loader - Premium Version */
         .skeleton-wrap {
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(20px);
+            border-radius: 28px;
+            padding: 30px;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .skeleton-wrap::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
 
         .skeleton {
-            background: linear-gradient(90deg, #f0f0f0, #f8f8f8, #f0f0f0);
-            background-size: 300% 100%;
-            animation: skeleton 1.5s ease infinite;
-            border-radius: 4px;
-        }
-
-        @keyframes skeleton {
-            0% { background-position: 100% 0; }
-            100% { background-position: -100% 0; }
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
         }
 
         .skeleton-img {
             width: 100%;
-            height: 280px;
-            border-radius: 12px;
+            height: 300px;
+            border-radius: 18px;
             margin-bottom: 20px;
         }
 
         .skeleton-line {
             height: 16px;
-            border-radius: 8px;
+            border-radius: 50px;
             margin-bottom: 12px;
         }
 
@@ -305,21 +451,21 @@
             width: 85%;
         }
 
-        /* 🔹 Responsive Design */
+        /* 🔥 Responsive Design */
         @media (max-width: 768px) {
-            .dk-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
+            .page-wrap {
                 padding: 15px;
             }
             
-            .post-title {
-                font-size: 22px;
+            .dk-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+                padding: 20px;
             }
             
-            .post-desc {
-                font-size: 15px;
+            .post-title {
+                font-size: 26px;
             }
             
             .post-content {
@@ -332,150 +478,223 @@
             
             .btn {
                 flex: 1;
-                justify-content: center;
                 min-width: 140px;
-            }
-            
-            .bottom-row {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
+                justify-content: center;
             }
         }
 
         @media (max-width: 480px) {
-            .page-wrap {
-                padding: 15px 10px 30px;
+            .post-title {
+                font-size: 22px;
             }
             
-            .post-title {
-                font-size: 20px;
+            .post-desc {
+                font-size: 15px;
+            }
+            
+            .btn span {
+                display: none;
             }
             
             .btn {
-                min-width: 100%;
+                padding: 16px;
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                justify-content: center;
             }
-            
-            .control-row {
-                flex-direction: column;
+        }
+
+        /* 🔥 Floating Elements for Luxury Feel */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: floatElement 15s infinite linear;
+        }
+
+        @keyframes floatElement {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
             }
         }
     </style>
 </head>
 <body>
-<div class="page-wrap">
+    <!-- 🔥 AI Style Background -->
+    <div class="bg-container" id="particles-container"></div>
+    
+    <!-- 🔥 Floating Luxury Elements -->
+    <div class="floating-elements" id="floating-elements"></div>
 
-    <!-- 🔹 DK Community Header -->
-    <header class="dk-header">
-        <div class="dk-brand">
-            <div class="dk-avatar">
-                <img src="https://deepakchauhanxai.xyz/images/dk-community.jpg" alt="DK Community">
+    <div class="page-wrap">
+        <!-- 🔥 VIP Luxury Header -->
+        <header class="dk-header">
+            <div class="dk-brand">
+                <div class="dk-avatar">
+                    <img src="https://deepakchauhanxai.xyz/images/dk-community.jpg" alt="DK Community">
+                </div>
+                <div class="dk-text">
+                    <span class="title">DK Community × AI Bhai</span>
+                    <span class="subtitle">Premium Human + AI Real Stories & Suvichar</span>
+                </div>
             </div>
-            <div class="dk-text">
-                <span class="title">DK Community × AI Bhai</span>
-                <span class="subtitle">Human + AI Real Stories & Suvichar</span>
+            <div class="vip-badge">
+                <i class="fas fa-crown"></i>
+                <span>PREMIUM CONTENT</span>
             </div>
-        </div>
-        <div class="lang-indicator">
-            <span id="langLabel">Language: ENGLISH</span>
-        </div>
-    </header>
+        </header>
 
-    <!-- 🔹 Skeleton while loading -->
-    <div id="loader" class="skeleton-wrap">
-        <div class="skeleton skeleton-img"></div>
-        <div class="skeleton skeleton-line long"></div>
-        <div class="skeleton skeleton-line mid"></div>
-        <div class="skeleton skeleton-line short"></div>
+        <!-- 🔥 Premium Skeleton Loader -->
+        <div id="loader" class="skeleton-wrap">
+            <div class="skeleton skeleton-img"></div>
+            <div class="skeleton skeleton-line long"></div>
+            <div class="skeleton skeleton-line mid"></div>
+            <div class="skeleton skeleton-line short"></div>
+        </div>
+
+        <!-- 🔥 Luxury Post Card -->
+        <article id="postCard" class="post-card" style="display:none;">
+            <div class="post-img-wrap">
+                <img id="postImg" class="post-img" src="" alt="">
+                <div class="post-chip">
+                    <span>⚡</span>
+                    <span id="postCategory">MOTIVATIONAL</span>
+                </div>
+            </div>
+            <div class="post-content">
+                <div class="meta-row">
+                    <span id="metaCategory" class="category-tag">#motivational</span>
+                    <span id="metaId" class="post-id">ID: -</span>
+                </div>
+
+                <h1 id="postTitle" class="post-title"></h1>
+                <p id="postDesc" class="post-desc"></p>
+
+                <!-- 🔥 Premium Control Buttons -->
+                <div class="control-row">
+                    <button id="favBtn" class="btn gold">
+                        <i class="fas fa-heart"></i>
+                        <span>Add to Favorites</span>
+                    </button>
+
+                    <button id="downloadBtn" class="btn premium">
+                        <i class="fas fa-download"></i>
+                        <span>Download</span>
+                    </button>
+
+                    <button id="shareBtn" class="btn primary">
+                        <i class="fas fa-share-alt"></i>
+                        <span>Share</span>
+                    </button>
+                </div>
+
+                <div class="bottom-row">
+                    <a href="index.html" class="back-link">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to DK Community
+                    </a>
+                    <span class="signature">Deepak Chauhan × AI Bhai Premium</span>
+                </div>
+            </div>
+        </article>
     </div>
 
-    <!-- 🔹 Real Card -->
-    <article id="postCard" class="post-card" style="display:none;">
-        <div class="post-img-wrap">
-            <img id="postImg" class="post-img" src="" alt="">
-            <div class="post-chip">
-                <span>⚡</span>
-                <span id="postCategory">Motivation</span>
-            </div>
-        </div>
-        <div class="post-content">
-            <div class="meta-row">
-                <span id="metaCategory">#motivational</span>
-                <span id="metaId">ID: -</span>
-            </div>
+    <script>
+        // 🔥 FINAL SCRIPT - Complete Working Code
+        
+        let currentPost = null;
+        let currentLang = "en";
 
-            <h1 id="postTitle" class="post-title"></h1>
-            <p id="postDesc" class="post-desc"></p>
-
-            <!-- 🔹 Controls: Favorite, Download, Share -->
-            <div class="control-row">
-                <button id="favBtn" class="btn">
-                    ❤️ <span>Add to Favorites</span>
-                </button>
-
-                <button id="downloadBtn" class="btn">
-                    ⬇️ <span>Download</span>
-                </button>
-
-                <button id="shareBtn" class="btn primary">
-                    🔗 <span>Share</span>
-                </button>
-            </div>
-
-            <div class="bottom-row">
-                <a href="index.html" class="back-link">
-                    ⬅ Back to DK Community
-                </a>
-                <span class="credit">Deepak Chauhan × AI Bhai</span>
-            </div>
-        </div>
-    </article>
-</div>
-
-<script>
-    // JavaScript code remains the same as in your original
-    let currentPost = null;
-    let currentLang = "en";
-
-    // ⭐ IMPROVED: Language detection with multiple sources
-    function detectLang() {
-        // 1. Pehle URL parameter check karo
-        const urlParams = new URLSearchParams(window.location.search);
-        const urlLang = urlParams.get('lang');
-        if (urlLang) return urlLang;
-
-        // 2. Phir localStorage check karo
-        const saved = localStorage.getItem("selectedLanguage");
-        if (saved) return saved;
-
-        // 3. Phir browser language
-        const browserLang = (navigator.language || "en").slice(0, 2);
-        const supported = ["en","hi","ur","mr","es","fr","de","ja","zh","ar","pt","ru","bn","ta","te","kn","gu","pa"];
-        return supported.includes(browserLang) ? browserLang : "en";
-    }
-
-    // ⭐ NEW: Language sync system
-    function syncLanguage() {
-        const newLang = detectLang();
-        if (newLang !== currentLang) {
-            currentLang = newLang;
-            updateLangLabel();
-            
-            // URL update karo taaki refresh pe bhi language maintain rahe
-            const url = new URL(window.location);
-            url.searchParams.set('lang', newLang);
-            window.history.replaceState({}, '', url);
-            
-            // Content refresh karo
-            if (currentPost) {
-                renderPost();
+        // Create background particles
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                const size = Math.random() * 100 + 10;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                particle.style.opacity = Math.random() * 0.1 + 0.05;
+                container.appendChild(particle);
             }
         }
-    }
 
-    function updateLangLabel() {
-        const el = document.getElementById("langLabel");
-        if (el) {
+        // Create floating luxury elements
+        function createFloatingElements() {
+            const container = document.getElementById('floating-elements');
+            const shapes = ['♦', '♠', '♥', '♣', '★', '☆', '✦', '✧'];
+            
+            for (let i = 0; i < 20; i++) {
+                const element = document.createElement('div');
+                element.className = 'floating-element';
+                element.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+                element.style.left = `${Math.random() * 100}%`;
+                element.style.fontSize = `${Math.random() * 24 + 12}px`;
+                element.style.color = `hsl(${Math.random() * 360}, 70%, 60%)`;
+                element.style.animationDuration = `${Math.random() * 20 + 10}s`;
+                element.style.animationDelay = `${Math.random() * 5}s`;
+                container.appendChild(element);
+            }
+        }
+
+        // Initialize background effects
+        createParticles();
+        createFloatingElements();
+
+        // ⭐ Language detection with multiple sources
+        function detectLang() {
+            // 1. Pehle URL parameter check karo
+            const urlParams = new URLSearchParams(window.location.search);
+            const urlLang = urlParams.get('lang');
+            if (urlLang) return urlLang;
+
+            // 2. Phir localStorage check karo
+            const saved = localStorage.getItem("selectedLanguage");
+            if (saved) return saved;
+
+            // 3. Phir browser language
+            const browserLang = (navigator.language || "en").slice(0, 2);
+            const supported = ["en","hi","ur","mr","es","fr","de","ja","zh","ar","pt","ru","bn","ta","te","kn","gu","pa"];
+            return supported.includes(browserLang) ? browserLang : "en";
+        }
+
+        // ⭐ Language sync system
+        function syncLanguage() {
+            const newLang = detectLang();
+            if (newLang !== currentLang) {
+                currentLang = newLang;
+                updateLangLabel();
+                
+                // URL update karo taaki refresh pe bhi language maintain rahe
+                const url = new URL(window.location);
+                url.searchParams.set('lang', newLang);
+                window.history.replaceState({}, '', url);
+                
+                // Content refresh karo
+                if (currentPost) {
+                    renderPost();
+                }
+            }
+        }
+
+        function updateLangLabel() {
             const langNames = {
                 en: "ENGLISH", hi: "HINDI", ur: "URDU", mr: "MARATHI", 
                 es: "SPANISH", fr: "FRENCH", de: "GERMAN", ja: "JAPANESE",
@@ -483,177 +702,257 @@
                 bn: "BENGALI", ta: "TAMIL", te: "TELUGU", kn: "KANNADA",
                 gu: "GUJARATI", pa: "PUNJABI"
             };
-            el.textContent = "Language: " + (langNames[currentLang] || currentLang.toUpperCase());
-        }
-        document.documentElement.lang = currentLang;
-    }
-
-    // ⭐ Fill UI from currentPost + lang
-    function renderPost() {
-        if (!currentPost) return;
-
-        const title = currentPost.title[currentLang] || currentPost.title["en"] || "";
-        const desc  = currentPost.description[currentLang] || currentPost.description["en"] || "";
-        const imgUrl = currentPost.url;
-        const cat    = currentPost.category || "motivational";
-
-        document.getElementById("postImg").src = imgUrl;
-        document.getElementById("postImg").alt = title;
-        document.getElementById("postTitle").textContent = title;
-        document.getElementById("postDesc").textContent = desc;
-        document.getElementById("postCategory").textContent = cat.toUpperCase();
-        document.getElementById("metaCategory").textContent = "#" + cat;
-        document.getElementById("metaId").textContent = "ID: " + currentPost.id;
-
-        // ⭐ SEO meta update
-        document.getElementById("meta-title").content = title;
-        document.getElementById("meta-description").content = desc.slice(0, 150);
-        document.getElementById("meta-og-title").content = title;
-        document.getElementById("meta-og-desc").content = desc.slice(0, 150);
-        document.getElementById("meta-og-image").content = imgUrl;
-
-        updateFavoriteButton();
-    }
-
-    // ⭐ Favorite system (same storage key: dkFavorites)
-    function getFavorites() {
-        try {
-            return JSON.parse(localStorage.getItem("dkFavorites") || "[]");
-        } catch {
-            return [];
-        }
-    }
-
-    function isFavorite(id) {
-        return getFavorites().some(f => f.id === id);
-    }
-
-    function updateFavoriteButton() {
-        const favBtn = document.getElementById("favBtn");
-        if (!favBtn || !currentPost) return;
-
-        const span = favBtn.querySelector("span");
-        if (isFavorite(currentPost.id)) {
-            favBtn.classList.add("danger");
-            span.textContent = "Remove Favorite";
-        } else {
-            favBtn.classList.remove("danger");
-            span.textContent = "Add to Favorites";
-        }
-    }
-
-    function toggleFavorite() {
-        if (!currentPost) return;
-
-        let favs = getFavorites();
-        const idx = favs.findIndex(f => f.id === currentPost.id);
-
-        if (idx > -1) {
-            favs.splice(idx, 1);
-        } else {
-            favs.push(currentPost);
+            document.documentElement.lang = currentLang;
         }
 
-        localStorage.setItem("dkFavorites", JSON.stringify(favs));
-        updateFavoriteButton();
-    }
+        // ⭐ Fill UI from currentPost + lang
+        function renderPost() {
+            if (!currentPost) return;
 
-    // ⭐ Download
-    function downloadImage(url) {
-        try {
-            const link = document.createElement("a");
-            link.href = url;
-            link.download = url.split("/").pop() || "dk-community-image.jpg";
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        } catch (e) {
-            alert("Download failed.");
-        }
-    }
+            const title = currentPost.title[currentLang] || currentPost.title["en"] || "";
+            const desc  = currentPost.description[currentLang] || currentPost.description["en"] || "";
+            const imgUrl = currentPost.url;
+            const cat    = currentPost.category || "motivational";
 
-    // ⭐ Share - IMPROVED: Language include karega
-    function sharePost() {
-        if (!currentPost) return;
-        const title = currentPost.title[currentLang] || currentPost.title["en"] || "DK Community";
-        const text  = currentPost.description[currentLang] || currentPost.description["en"] || "";
-        
-        // Current language ke saath share URL banaye
-        const url = new URL(window.location);
-        url.searchParams.set('lang', currentLang);
-        const shareUrl = url.toString();
+            document.getElementById("postImg").src = imgUrl;
+            document.getElementById("postImg").alt = title;
+            document.getElementById("postTitle").textContent = title;
+            document.getElementById("postDesc").textContent = desc;
+            document.getElementById("postCategory").textContent = cat.toUpperCase();
+            document.getElementById("metaCategory").textContent = "#" + cat;
+            document.getElementById("metaId").textContent = "ID: " + currentPost.id;
 
-        if (navigator.share) {
-            navigator.share({ title, text, url: shareUrl }).catch(() => {});
-        } else {
-            navigator.clipboard.writeText(shareUrl).then(() => {
-                alert("Link copied to clipboard!");
-            }).catch(() => {
-                prompt("Copy this link:", shareUrl);
-            });
-        }
-    }
+            // ⭐ SEO meta update
+            document.getElementById("meta-title").content = title;
+            document.getElementById("meta-description").content = desc.slice(0, 150);
+            document.getElementById("meta-og-title").content = title;
+            document.getElementById("meta-og-desc").content = desc.slice(0, 150);
+            document.getElementById("meta-og-image").content = imgUrl;
 
-    // ⭐ MAIN LOAD - IMPROVED
-    (function(){
-        // Pehle language set karo
-        currentLang = detectLang();
-        updateLangLabel();
-
-        const params = new URLSearchParams(window.location.search);
-        const idParam = params.get("id");
-        const postId = parseInt(idParam, 10);
-
-        if (!postId) {
-            document.body.innerHTML = "<h2 style='text-align:center;margin-top:40px;'>Invalid Post</h2>";
-            return;
+            updateFavoriteButton();
         }
 
-        fetch("https://deepakchauhanxai.xyz/testing/data/images.json?v=" + Date.now())
-            .then(res => res.json())
-            .then(data => {
-                const list = data.images || [];
-                const found = list.find(img => img.id === postId);
+        // ⭐ Favorite system (same storage key: dkFavorites)
+        function getFavorites() {
+            try {
+                return JSON.parse(localStorage.getItem("dkFavorites") || "[]");
+            } catch {
+                return [];
+            }
+        }
 
-                if (!found) {
-                    document.body.innerHTML = "<h2 style='text-align:center;margin-top:40px;'>Post Not Found</h2>";
-                    return;
-                }
+        function isFavorite(id) {
+            return getFavorites().some(f => f.id === id);
+        }
 
-                currentPost = found;
-                renderPost();
+        function updateFavoriteButton() {
+            const favBtn = document.getElementById("favBtn");
+            if (!favBtn || !currentPost) return;
 
-                // Show card, hide loader
+            const span = favBtn.querySelector("span");
+            const icon = favBtn.querySelector("i");
+            
+            if (isFavorite(currentPost.id)) {
+                favBtn.classList.add("gold");
+                icon.className = "fas fa-heart";
+                span.textContent = "Remove Favorite";
+            } else {
+                favBtn.classList.remove("gold");
+                icon.className = "far fa-heart";
+                span.textContent = "Add to Favorites";
+            }
+        }
+
+        function toggleFavorite() {
+            if (!currentPost) return;
+
+            let favs = getFavorites();
+            const idx = favs.findIndex(f => f.id === currentPost.id);
+
+            if (idx > -1) {
+                favs.splice(idx, 1);
+            } else {
+                favs.push(currentPost);
+            }
+
+            localStorage.setItem("dkFavorites", JSON.stringify(favs));
+            updateFavoriteButton();
+            
+            // Animation effect
+            const favBtn = document.getElementById("favBtn");
+            favBtn.style.transform = "scale(1.1)";
+            setTimeout(() => {
+                favBtn.style.transform = "scale(1)";
+            }, 200);
+        }
+
+        // ⭐ Download
+        function downloadImage(url) {
+            try {
+                const link = document.createElement("a");
+                link.href = url;
+                link.download = `dk-community-${currentPost.id}.jpg`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                // Download animation
+                const downloadBtn = document.getElementById("downloadBtn");
+                downloadBtn.innerHTML = '<i class="fas fa-check"></i><span>Downloaded!</span>';
                 setTimeout(() => {
-                    const loader = document.getElementById("loader");
-                    const card   = document.getElementById("postCard");
-                    if (loader) loader.style.display = "none";
-                    if (card)   card.style.display = "block";
-                }, 300);
-
-                // Buttons
-                document.getElementById("favBtn").onclick = toggleFavorite;
-                document.getElementById("downloadBtn").onclick = () => downloadImage(currentPost.url);
-                document.getElementById("shareBtn").onclick = sharePost;
-            })
-            .catch(() => {
-                document.body.innerHTML = "<h2 style='text-align:center;margin-top:40px;'>Error Loading Post</h2>";
-            });
-    })();
-
-    // ⭐ NEW: Real-time language sync
-    window.addEventListener("languageChanged", syncLanguage);
-    
-    // Storage changes (dusre tab se) bhi suno
-    window.addEventListener("storage", (e) => {
-        if (e.key === "selectedLanguage") {
-            syncLanguage();
+                    downloadBtn.innerHTML = '<i class="fas fa-download"></i><span>Download</span>';
+                }, 2000);
+            } catch (e) {
+                alert("Download failed. Please try again.");
+            }
         }
-    });
 
-    // Optional: Har 2 second pe check karo for language changes
-    setInterval(syncLanguage, 2000);
-</script>
+        // ⭐ Share - IMPROVED: Language include karega
+        function sharePost() {
+            if (!currentPost) return;
+            const title = currentPost.title[currentLang] || currentPost.title["en"] || "DK Community";
+            const text  = currentPost.description[currentLang] || currentPost.description["en"] || "";
+            
+            // Current language ke saath share URL banaye
+            const url = new URL(window.location);
+            url.searchParams.set('lang', currentLang);
+            const shareUrl = url.toString();
+
+            if (navigator.share) {
+                navigator.share({ 
+                    title: `DK Community: ${title}`,
+                    text: text,
+                    url: shareUrl 
+                }).catch(() => {});
+            } else {
+                navigator.clipboard.writeText(shareUrl).then(() => {
+                    // Share success animation
+                    const shareBtn = document.getElementById("shareBtn");
+                    const originalHTML = shareBtn.innerHTML;
+                    shareBtn.innerHTML = '<i class="fas fa-check"></i><span>Copied!</span>';
+                    setTimeout(() => {
+                        shareBtn.innerHTML = originalHTML;
+                    }, 2000);
+                }).catch(() => {
+                    prompt("Copy this link:", shareUrl);
+                });
+            }
+        }
+
+        // ⭐ MAIN LOAD - IMPROVED
+        (function(){
+            // Pehle language set karo
+            currentLang = detectLang();
+            updateLangLabel();
+
+            const params = new URLSearchParams(window.location.search);
+            const idParam = params.get("id");
+            const postId = parseInt(idParam, 10);
+
+            if (!postId) {
+                document.body.innerHTML = `
+                    <div style="display:flex; justify-content:center; align-items:center; height:100vh; flex-direction:column; gap:20px;">
+                        <h2 style="color:white; text-align:center;">Invalid Post ID</h2>
+                        <a href="index.html" style="color:#3b82f6; text-decoration:none;">← Back to Home</a>
+                    </div>`;
+                return;
+            }
+
+            // Demo data agar JSON fetch fail ho jaye
+            const demoData = {
+                images: [
+                    {
+                        id: 1,
+                        url: "https://deepakchauhanxai.xyz/images/dk-community.jpg",
+                        category: "motivational",
+                        title: {
+                            en: "Your Success Journey Starts Today",
+                            hi: "आपकी सफलता की यात्रा आज शुरू होती है"
+                        },
+                        description: {
+                            en: "Embrace the challenges, learn from failures, and keep moving forward. Every step you take brings you closer to your dreams. Remember, the only limit is the one you set in your mind. Break free and achieve greatness!",
+                            hi: "चुनौतियों को गले लगाएं, असफलताओं से सीखें और आगे बढ़ते रहें। आपके द्वारा उठाया गया हर कदम आपको अपने सपनों के करीब ले जाता है। याद रखें, एकमात्र सीमा वह है जो आप अपने मन में निर्धारित करते हैं। मुक्त हो जाओ और महानता प्राप्त करो!"
+                        }
+                    }
+                ]
+            };
+
+            // Try to fetch from your JSON, fallback to demo data
+            fetch("https://deepakchauhanxai.xyz/testing/data/images.json?v=" + Date.now())
+                .then(res => {
+                    if (!res.ok) throw new Error('Network response was not ok');
+                    return res.json();
+                })
+                .then(data => {
+                    const list = data.images || demoData.images;
+                    const found = list.find(img => img.id === postId);
+
+                    if (!found) {
+                        document.body.innerHTML = `
+                            <div style="display:flex; justify-content:center; align-items:center; height:100vh; flex-direction:column; gap:20px;">
+                                <h2 style="color:white; text-align:center;">Post Not Found</h2>
+                                <a href="index.html" style="color:#3b82f6; text-decoration:none;">← Back to Home</a>
+                            </div>`;
+                        return;
+                    }
+
+                    currentPost = found;
+                    renderPost();
+
+                    // Show card, hide loader
+                    setTimeout(() => {
+                        const loader = document.getElementById("loader");
+                        const card   = document.getElementById("postCard");
+                        if (loader) loader.style.display = "none";
+                        if (card)   card.style.display = "block";
+                    }, 500);
+
+                    // Buttons event listeners
+                    document.getElementById("favBtn").onclick = toggleFavorite;
+                    document.getElementById("downloadBtn").onclick = () => downloadImage(currentPost.url);
+                    document.getElementById("shareBtn").onclick = sharePost;
+                })
+                .catch(() => {
+                    // Use demo data if fetch fails
+                    const list = demoData.images;
+                    const found = list.find(img => img.id === postId);
+                    
+                    if (found) {
+                        currentPost = found;
+                        renderPost();
                         
+                        setTimeout(() => {
+                            const loader = document.getElementById("loader");
+                            const card   = document.getElementById("postCard");
+                            if (loader) loader.style.display = "none";
+                            if (card)   card.style.display = "block";
+                        }, 500);
+
+                        document.getElementById("favBtn").onclick = toggleFavorite;
+                        document.getElementById("downloadBtn").onclick = () => downloadImage(currentPost.url);
+                        document.getElementById("shareBtn").onclick = sharePost;
+                    } else {
+                        document.body.innerHTML = `
+                            <div style="display:flex; justify-content:center; align-items:center; height:100vh; flex-direction:column; gap:20px;">
+                                <h2 style="color:white; text-align:center;">Error Loading Post</h2>
+                                <a href="index.html" style="color:#3b82f6; text-decoration:none;">← Back to Home</a>
+                            </div>`;
+                    }
+                });
+        })();
+
+        // ⭐ Real-time language sync
+        window.addEventListener("languageChanged", syncLanguage);
+        
+        // Storage changes (dusre tab se) bhi suno
+        window.addEventListener("storage", (e) => {
+            if (e.key === "selectedLanguage") {
+                syncLanguage();
+            }
+        });
+
+        // Optional: Har 2 second pe check karo for language changes
+        setInterval(syncLanguage, 2000);
+    </script>
 </body>
 </html>
