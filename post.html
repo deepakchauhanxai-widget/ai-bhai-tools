@@ -359,20 +359,28 @@
     </div>
     -->
 </div>
-    <script src="https://deepakchauhanxai.xyz/testing/scripts/language.js"></script>
+        
 <script>
     let currentPost = null;
+    let currentLang = "en";
 
-    // ⭐ Current language from localStorage
-    function getCurrentLang() {
+    // ⭐ Get language from localStorage or browser
+    function detectLang() {
         const saved = localStorage.getItem("selectedLanguage");
-        return saved || "en";
+        if (saved) return saved;
+
+        const browserLang = (navigator.language || "en").slice(0, 2);
+        const supported = ["en","hi","ur","mr","es","fr","de","ja","zh","ar","pt","ru","bn","ta","te","kn","gu","pa"];
+        return supported.includes(browserLang) ? browserLang : "en";
+    }
+
+    function getCurrentLang() {
+        return currentLang;
     }
 
     function updateLangLabel() {
-        const lang = getCurrentLang().toUpperCase();
         const el = document.getElementById("langLabel");
-        if (el) el.textContent = "Language: " + lang;
+        if (el) el.textContent = "Language: " + getCurrentLang().toUpperCase();
         document.documentElement.lang = getCurrentLang();
     }
 
@@ -403,7 +411,6 @@
         document.getElementById("meta-og-desc").content = desc.slice(0, 150);
         document.getElementById("meta-og-image").content = imgUrl;
 
-        // ⭐ Favorite button state sync
         updateFavoriteButton();
     }
 
@@ -485,6 +492,8 @@
 
     // ⭐ MAIN LOAD
     (function(){
+        currentLang = detectLang();  // ← yahi se language fix hogi
+
         const params = new URLSearchParams(window.location.search);
         const idParam = params.get("id");
         const postId = parseInt(idParam, 10);
@@ -528,11 +537,17 @@
             });
     })();
 
-    // ⭐ Language change support (if your language.js dispatches this event)
-    window.addEventListener("languageChanged", () => {
-        renderPost();
-    });
+    // ⭐ Optional: agar kisi aur script ne baad me selectedLanguage change ki
+    // to har 1s me check karke language update kar denge
+    let lastLang = detectLang();
+    setInterval(() => {
+        const now = detectLang();
+        if (now !== lastLang) {
+            lastLang = now;
+            currentLang = now;
+            renderPost();
+        }
+    }, 1000);
 </script>
-
 </body>
 </html>
