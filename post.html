@@ -555,12 +555,20 @@
         // ⭐ Apply category specific styling
         applyCategoryStyle(category);
 
-        // ⭐ SEO meta update
-        document.getElementById("meta-title").content = title;
-        document.getElementById("meta-description").content = desc.slice(0, 150);
-        document.getElementById("meta-og-title").content = title;
-        document.getElementById("meta-og-desc").content = desc.slice(0, 150);
-        document.getElementById("meta-og-image").content = imgUrl;
+        // ⭐ SEO meta update (NEW — AI Bhai SEO Boost)
+const seoCategory = formatCategory(category);  
+const fullTitle = `${title} | ${seoCategory} – DK Community`;  
+
+// Browser tab title
+document.title = fullTitle;
+
+// Meta tags
+document.getElementById("meta-title").content = fullTitle;
+document.getElementById("meta-description").content = desc.slice(0, 150);
+
+document.getElementById("meta-og-title").content = fullTitle;
+document.getElementById("meta-og-desc").content = desc.slice(0, 150);
+document.getElementById("meta-og-image").content = imgUrl;
 
         updateFavoriteButton();
     }
