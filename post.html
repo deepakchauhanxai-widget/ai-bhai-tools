@@ -5,25 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DK Community – Post</title>
 
-    <!-- 🔥 Dynamic Meta for SEO -->
-    <meta id="meta-title" name="title" content="">
-    <meta id="meta-description" name="description" content="">
-    <meta id="meta-og-title" property="og:title" content="">
-    <meta id="meta-og-desc" property="og:description" content="">
+    <!-- 🔥 DYNAMIC META TAGS FOR SEO -->
+    <meta id="meta-title" name="title" content="DK Community - Motivational Stories & Shayari">
+    <meta id="meta-description" name="description" content="Daily motivation, success stories and inspirational shayari in Hindi and English">
+    <meta id="meta-keywords" name="keywords" content="motivation, shayari, success stories, hindi quotes, inspiration">
+    
+    <!-- Open Graph Meta -->
+    <meta id="meta-og-title" property="og:title" content="DK Community - Motivational Stories & Shayari">
+    <meta id="meta-og-desc" property="og:description" content="Daily motivation, success stories and inspirational shayari">
     <meta id="meta-og-image" property="og:image" content="">
     <meta property="og:type" content="article">
-
+    <meta property="og:url" content="">
+    <meta property="og:site_name" content="DK Community × AI Bhai">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta id="twitter-title" name="twitter:title" content="DK Community - Motivational Stories & Shayari">
+    <meta id="twitter-desc" name="twitter:description" content="Daily motivation, success stories and inspirational shayari">
+    <meta id="twitter-image" name="twitter:image" content="">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" id="canonical-url" href="">
+    
+    <!-- Favicon -->
     <link rel="icon" href="https://deepakchauhanxai.xyz/images/dk-community.jpg">
+    <link rel="apple-touch-icon" href="https://deepakchauhanxai.xyz/images/dk-community.jpg">
+    
+    <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
+    
+    <!-- Preload Important Resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" as="style">
+    <link rel="preconnect" href="https://deepakchauhanxai.xyz">
 
     <style>
-        * { box-sizing: border-box; }
-
-        body {
+        * { 
+            box-sizing: border-box; 
             margin: 0;
             padding: 0;
+        }
+
+        body {
             font-family: 'Poppins', sans-serif;
             background: radial-gradient(circle at top, #e0f2fe, #f9fafb);
+            line-height: 1.6;
+            color: #333;
         }
 
         .page-wrap {
@@ -37,26 +63,28 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 14px;
+            padding: 12px 16px;
             border-radius: 14px;
-            background: rgba(255,255,255,0.9);
+            background: rgba(255,255,255,0.95);
             box-shadow: 0 8px 24px rgba(15,23,42,0.12);
-            margin-bottom: 18px;
+            margin-bottom: 20px;
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.8);
         }
 
         .dk-brand {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .dk-avatar {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: 14px;
             overflow: hidden;
             border: 2px solid #3b82f6;
+            background: #3b82f6;
         }
 
         .dk-avatar img {
@@ -71,7 +99,7 @@
         }
 
         .dk-text .title {
-            font-size: 17px;
+            font-size: 18px;
             font-weight: 600;
             color: #111827;
         }
@@ -84,6 +112,9 @@
         .lang-indicator {
             font-size: 12px;
             color: #4b5563;
+            background: #f3f4f6;
+            padding: 4px 8px;
+            border-radius: 6px;
         }
 
         /* 🔹 Card */
@@ -93,6 +124,7 @@
             box-shadow: 0 12px 32px rgba(15,23,42,0.18);
             overflow: hidden;
             animation: fadeIn 0.35s ease-in-out;
+            margin-bottom: 20px;
         }
 
         @keyframes fadeIn {
@@ -110,20 +142,22 @@
             max-height: 420px;
             object-fit: contain;
             background: #020617;
+            display: block;
         }
 
         .post-chip {
             position: absolute;
             left: 12px;
             bottom: 10px;
-            padding: 5px 10px;
-            background: rgba(15,23,42,0.82);
+            padding: 6px 12px;
+            background: rgba(15,23,42,0.85);
             color: #e5e7eb;
             border-radius: 999px;
             font-size: 11px;
             display: inline-flex;
             align-items: center;
             gap: 6px;
+            backdrop-filter: blur(10px);
         }
 
         .post-chip span {
@@ -131,42 +165,45 @@
         }
 
         .post-content {
-            padding: 18px 18px 20px;
+            padding: 20px;
         }
 
         .post-title {
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 600;
-            margin: 0 0 8px;
+            margin: 0 0 12px;
             color: #111827;
+            line-height: 1.3;
         }
 
         .post-desc {
-            font-size: 15px;
+            font-size: 16px;
             line-height: 1.7;
             color: #374151;
             white-space: pre-line;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
 
         .meta-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 12px;
+            font-size: 13px;
             color: #9ca3af;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f3f4f6;
         }
 
         .control-row {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
 
         .btn {
-            padding: 8px 14px;
+            padding: 8px 16px;
             border-radius: 999px;
             border: none;
             cursor: pointer;
@@ -176,7 +213,8 @@
             gap: 6px;
             background: #e5e7eb;
             color: #111827;
-            transition: 0.2s ease;
+            transition: all 0.2s ease;
+            font-weight: 500;
         }
 
         .btn.primary {
@@ -208,7 +246,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 10px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #f3f4f6;
         }
 
         .back-link {
@@ -217,7 +257,8 @@
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
+            font-weight: 500;
         }
 
         .back-link:hover {
@@ -228,9 +269,10 @@
         .voice-controls {
             background: #f8fafc;
             border-radius: 12px;
-            padding: 12px;
-            margin: 15px 0;
+            padding: 16px;
+            margin: 20px 0;
             display: none;
+            border: 1px solid #e5e7eb;
         }
 
         .voice-controls.active {
@@ -246,38 +288,41 @@
         .voice-controls-row {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             flex-wrap: wrap;
         }
 
         .voice-btn {
-            padding: 6px 12px;
+            padding: 8px 16px;
             border: none;
             border-radius: 20px;
             background: #3b82f6;
             color: white;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 13px;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
+            transition: all 0.2s ease;
         }
 
         .voice-btn:disabled {
             background: #9ca3af;
             cursor: not-allowed;
+            transform: none;
         }
 
         .voice-slider {
             flex: 1;
-            min-width: 120px;
+            min-width: 140px;
         }
 
         .voice-slider label {
-            font-size: 11px;
+            font-size: 12px;
             color: #6b7280;
             display: block;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
+            font-weight: 500;
         }
 
         .voice-progress {
@@ -285,7 +330,7 @@
             height: 4px;
             background: #e5e7eb;
             border-radius: 2px;
-            margin-top: 8px;
+            margin-top: 12px;
             overflow: hidden;
         }
 
@@ -314,7 +359,7 @@
         .skeleton-wrap {
             background: #ffffff;
             border-radius: 18px;
-            padding: 16px;
+            padding: 20px;
             box-shadow: 0 10px 28px rgba(15,23,42,0.16);
         }
 
@@ -333,13 +378,13 @@
             width: 100%;
             height: 240px;
             border-radius: 14px;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
         }
 
         .skeleton-line {
             height: 14px;
             border-radius: 999px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .skeleton-line.short {
@@ -354,36 +399,100 @@
             width: 85%;
         }
 
+        /* 🔹 Breadcrumb for SEO */
+        .breadcrumb {
+            font-size: 13px;
+            color: #6b7280;
+            margin-bottom: 15px;
+            padding: 8px 0;
+        }
+
+        .breadcrumb a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* 🔹 SEO Footer */
+        .seo-footer {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 30px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .seo-footer h3 {
+            font-size: 16px;
+            color: #111827;
+            margin-bottom: 12px;
+        }
+
+        .seo-footer p {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
         @media (max-width: 640px) {
             .dk-header {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 6px;
+                gap: 8px;
             }
             .post-title {
-                font-size: 19px;
+                font-size: 20px;
             }
             .post-desc {
-                font-size: 14px;
+                font-size: 15px;
             }
             .voice-controls-row {
                 flex-direction: column;
                 align-items: stretch;
             }
+            .control-row {
+                justify-content: center;
+            }
+            .btn {
+                flex: 1;
+                min-width: 120px;
+                justify-content: center;
+            }
+        }
+
+        /* 🔹 Print Styles for SEO */
+        @media print {
+            .dk-header, .control-row, .voice-controls, .seo-footer {
+                display: none !important;
+            }
+            .post-card {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
         }
     </style>
 </head>
-<body>
+<body itemscope itemtype="https://schema.org/WebPage">
 <div class="page-wrap">
 
+    <!-- 🔹 Breadcrumb for SEO -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a> &gt; 
+        <a href="categories.html">Posts</a> &gt; 
+        <span id="breadcrumb-current">Current Post</span>
+    </nav>
+
     <!-- 🔹 DK Community Header -->
-    <header class="dk-header">
+    <header class="dk-header" role="banner">
         <div class="dk-brand">
             <div class="dk-avatar">
-                <img src="https://deepakchauhanxai.xyz/images/dk-community.jpg" alt="DK Community">
+                <img src="https://deepakchauhanxai.xyz/images/dk-community.jpg" alt="DK Community Logo" itemprop="image">
             </div>
             <div class="dk-text">
-                <span class="title">DK Community × AI Bhai</span>
+                <span class="title" itemprop="name">DK Community × AI Bhai</span>
                 <span class="subtitle">Human + AI Real Stories & Suvichar</span>
             </div>
         </div>
@@ -400,79 +509,88 @@
         <div class="skeleton skeleton-line short"></div>
     </div>
 
-    <!-- 🔹 Real Card -->
-    <article id="postCard" class="post-card" style="display:none;">
-        <div class="post-img-wrap">
-            <img id="postImg" class="post-img" src="" alt="">
-            <div class="post-chip">
-                <span>⚡</span>
-                <span id="postCategory">Motivation</span>
-            </div>
-        </div>
-        <div class="post-content">
-            <div class="meta-row">
-                <span id="metaCategory">#motivational</span>
-                <span id="metaId">ID: -</span>
-            </div>
-
-            <h1 id="postTitle" class="post-title"></h1>
-            <p id="postDesc" class="post-desc"></p>
-
-            <!-- 🔥 Voice Controls -->
-            <div id="voiceControls" class="voice-controls">
-                <div class="voice-controls-row">
-                    <button id="playBtn" class="voice-btn">
-                        ▶️ Play
-                    </button>
-                    <button id="pauseBtn" class="voice-btn" disabled>
-                        ⏸️ Pause
-                    </button>
-                    <button id="stopBtn" class="voice-btn" disabled>
-                        ⏹️ Stop
-                    </button>
-                    
-                    <div class="voice-slider">
-                        <label>Speed: <span id="speedValue">1.0</span>x</label>
-                        <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1">
-                    </div>
-                    
-                    <div class="voice-slider">
-                        <label>Pitch: <span id="pitchValue">1.0</span></label>
-                        <input type="range" id="pitchSlider" min="0.5" max="2" step="0.1" value="1">
-                    </div>
-                </div>
-                <div class="voice-progress">
-                    <div id="voiceProgress" class="voice-progress-bar"></div>
+    <!-- 🔹 Main Content Card -->
+    <main itemprop="mainEntity" itemscope itemtype="https://schema.org/Article">
+        <article id="postCard" class="post-card" style="display:none;" itemscope itemtype="https://schema.org/Article">
+            <div class="post-img-wrap">
+                <img id="postImg" class="post-img" src="" alt="" itemprop="image">
+                <div class="post-chip">
+                    <span>⚡</span>
+                    <span id="postCategory" itemprop="articleSection">Motivation</span>
                 </div>
             </div>
+            <div class="post-content">
+                <div class="meta-row">
+                    <span id="metaCategory" itemprop="keywords">#motivational</span>
+                    <span id="metaId">ID: <span itemprop="identifier">-</span></span>
+                </div>
 
-            <!-- 🔹 Controls: Favorite, Download, Share, Voice -->
-            <div class="control-row">
-                <button id="favBtn" class="btn">
-                    ❤️ <span>Add to Favorites</span>
-                </button>
+                <h1 id="postTitle" class="post-title" itemprop="headline"></h1>
+                <p id="postDesc" class="post-desc" itemprop="description"></p>
 
-                <button id="downloadBtn" class="btn">
-                    ⬇️ <span>Download</span>
-                </button>
+                <!-- 🔥 Voice Controls -->
+                <div id="voiceControls" class="voice-controls">
+                    <div class="voice-controls-row">
+                        <button id="playBtn" class="voice-btn">
+                            ▶️ Play
+                        </button>
+                        <button id="pauseBtn" class="voice-btn" disabled>
+                            ⏸️ Pause
+                        </button>
+                        <button id="stopBtn" class="voice-btn" disabled>
+                            ⏹️ Stop
+                        </button>
+                        
+                        <div class="voice-slider">
+                            <label>Speed: <span id="speedValue">1.0</span>x</label>
+                            <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1">
+                        </div>
+                        
+                        <div class="voice-slider">
+                            <label>Pitch: <span id="pitchValue">1.0</span></label>
+                            <input type="range" id="pitchSlider" min="0.5" max="2" step="0.1" value="1">
+                        </div>
+                    </div>
+                    <div class="voice-progress">
+                        <div id="voiceProgress" class="voice-progress-bar"></div>
+                    </div>
+                </div>
 
-                <button id="voiceBtn" class="btn success">
-                    🔊 <span>Read Aloud</span>
-                </button>
+                <!-- 🔹 Controls: Favorite, Download, Share, Voice -->
+                <div class="control-row">
+                    <button id="favBtn" class="btn">
+                        ❤️ <span>Add to Favorites</span>
+                    </button>
 
-                <button id="shareBtn" class="btn primary">
-                    🔗 <span>Share</span>
-                </button>
+                    <button id="downloadBtn" class="btn">
+                        ⬇️ <span>Download</span>
+                    </button>
+
+                    <button id="voiceBtn" class="btn success">
+                        🔊 <span>Read Aloud</span>
+                    </button>
+
+                    <button id="shareBtn" class="btn primary">
+                        🔗 <span>Share</span>
+                    </button>
+                </div>
+
+                <div class="bottom-row">
+                    <a href="index.html" class="back-link" itemprop="url">
+                        ⬅ Back to DK Community
+                    </a>
+                    <span style="font-size: 11px; color:#9ca3af;" itemprop="publisher">Deepak Chauhan × AI Bhai</span>
+                </div>
             </div>
+        </article>
+    </main>
 
-            <div class="bottom-row">
-                <a href="index.html" class="back-link">
-                    ⬅ Back to DK Community
-                </a>
-                <span style="font-size: 11px; color:#9ca3af;">Deepak Chauhan × AI Bhai</span>
-            </div>
-        </div>
-    </article>
+    <!-- 🔹 SEO Footer -->
+    <footer class="seo-footer" role="contentinfo">
+        <h3>DK Community - Motivational Content</h3>
+        <p>Discover daily motivation, inspirational shayari, success stories, and psychology facts in multiple languages. 
+           Join our community for positive vibes and personal growth content.</p>
+    </footer>
 </div>
 
 <script>
@@ -555,22 +673,102 @@
         // ⭐ Apply category specific styling
         applyCategoryStyle(category);
 
-        // ⭐ SEO meta update (NEW — AI Bhai SEO Boost)
-const seoCategory = formatCategory(category);  
-const fullTitle = `${title} | ${seoCategory} – DK Community`;  
-
-// Browser tab title
-document.title = fullTitle;
-
-// Meta tags
-document.getElementById("meta-title").content = fullTitle;
-document.getElementById("meta-description").content = desc.slice(0, 150);
-
-document.getElementById("meta-og-title").content = fullTitle;
-document.getElementById("meta-og-desc").content = desc.slice(0, 150);
-document.getElementById("meta-og-image").content = imgUrl;
+        // ⭐ SEO meta update
+        updateSEOMetaTags(title, desc, imgUrl);
+        
+        // ⭐ Update breadcrumb
+        updateBreadcrumb(title, category);
+        
+        // ⭐ Add Structured Data
+        addStructuredData(title, desc, imgUrl, category);
 
         updateFavoriteButton();
+    }
+
+    // ⭐ Update SEO Meta Tags
+    function updateSEOMetaTags(title, description, imageUrl) {
+        // Basic Meta
+        document.getElementById("meta-title").content = title;
+        document.getElementById("meta-description").content = description.slice(0, 160);
+        document.getElementById("meta-keywords").content = generateKeywords(title, description);
+        
+        // Open Graph
+        document.getElementById("meta-og-title").content = title;
+        document.getElementById("meta-og-desc").content = description.slice(0, 150);
+        document.getElementById("meta-og-image").content = imageUrl;
+        document.querySelector('meta[property="og:url"]').content = window.location.href;
+        
+        // Twitter Card
+        document.getElementById("twitter-title").content = title;
+        document.getElementById("twitter-desc").content = description.slice(0, 150);
+        document.getElementById("twitter-image").content = imageUrl;
+        
+        // Canonical URL
+        document.getElementById("canonical-url").href = window.location.href;
+        
+        // Update Page Title
+        document.title = title + " - DK Community";
+    }
+
+    // ⭐ Generate Keywords from Content
+    function generateKeywords(title, description) {
+        const words = (title + ' ' + description).toLowerCase().split(/\s+/);
+        const commonWords = new Set(['the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by']);
+        const uniqueWords = [...new Set(words.filter(word => 
+            word.length > 3 && !commonWords.has(word)
+        ))];
+        return uniqueWords.slice(0, 10).join(', ');
+    }
+
+    // ⭐ Update Breadcrumb
+    function updateBreadcrumb(title, category) {
+        const breadcrumb = document.getElementById("breadcrumb-current");
+        if (breadcrumb) {
+            breadcrumb.textContent = title.length > 30 ? title.substring(0, 30) + "..." : title;
+        }
+    }
+
+    // ⭐ Add Structured Data for SEO
+    function addStructuredData(title, description, imageUrl, category) {
+        // Remove existing structured data
+        const existingScript = document.querySelector('script[type="application/ld+json"]');
+        if (existingScript) {
+            existingScript.remove();
+        }
+
+        const structuredData = {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": title,
+            "description": description.slice(0, 200),
+            "image": imageUrl,
+            "datePublished": new Date().toISOString(),
+            "dateModified": new Date().toISOString(),
+            "author": {
+                "@type": "Organization",
+                "name": "DK Community × AI Bhai"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "DK Community",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://deepakchauhanxai.xyz/images/dk-community.jpg"
+                }
+            },
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": window.location.href
+            },
+            "articleSection": category,
+            "keywords": generateKeywords(title, description)
+        };
+
+        // Add new structured data
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.textContent = JSON.stringify(structuredData);
+        document.head.appendChild(script);
     }
 
     // ⭐ Format category name for display
@@ -600,7 +798,7 @@ document.getElementById("meta-og-image").content = imgUrl;
         postCard.classList.add('category-' + category);
     }
 
-    // ⭐ VOICE SYSTEM FUNCTIONS - SIMPLE VERSION
+    // ⭐ VOICE SYSTEM FUNCTIONS
     function initVoiceSystem() {
         // Voice controls event listeners
         document.getElementById('playBtn').addEventListener('click', playSpeech);
@@ -657,7 +855,7 @@ document.getElementById("meta-og-image").content = imgUrl;
         
         currentUtterance = new SpeechSynthesisUtterance(text);
         
-        // Simple voice settings - browser default use karega
+        // Voice settings
         currentUtterance.rate = speechRate;
         currentUtterance.pitch = speechPitch;
         currentUtterance.volume = 1;
@@ -767,7 +965,7 @@ document.getElementById("meta-og-image").content = imgUrl;
         return langMap[lang] || 'en-US';
     }
 
-    // ⭐ Favorite system (same storage key: dkFavorites)
+    // ⭐ Favorite system
     function getFavorites() {
         try {
             return JSON.parse(localStorage.getItem("dkFavorites") || "[]");
@@ -815,7 +1013,7 @@ document.getElementById("meta-og-image").content = imgUrl;
         try {
             const link = document.createElement("a");
             link.href = url;
-            link.download = url.split("/").pop() || "dk-community-image.jpg";
+            link.download = `dk-community-${currentPost.id}-${Date.now()}.jpg`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
@@ -836,7 +1034,11 @@ document.getElementById("meta-og-image").content = imgUrl;
         const shareUrl = url.toString();
 
         if (navigator.share) {
-            navigator.share({ title, text, url: shareUrl }).catch(() => {});
+            navigator.share({ 
+                title: title, 
+                text: text.slice(0, 100), 
+                url: shareUrl 
+            }).catch(() => {});
         } else {
             navigator.clipboard.writeText(shareUrl).then(() => {
                 alert("Link copied to clipboard!");
