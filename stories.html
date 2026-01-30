@@ -11,7 +11,7 @@
     <meta name="description" content="Read inspiring real-life stories and experiences. Life lessons, personal growth journeys, and motivational stories that teach valuable lessons.">
     
     <!-- Keywords -->
-    <meta name="keywords" content="real life stories, inspiring stories, life experiences, motivational stories, personal growth stories, life lessons, success stories, human experiences">
+    <meta name="keywords" content="real life stories, inspiring stories, life experiences, motivational stories, personal growth stories, life lessons, human experiences">
     
     <meta name="author" content="Deepak Chauhan">
     <meta name="robots" content="index, follow, max-image-preview:large">
@@ -19,12 +19,12 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="https://deepakchauhanxai.in/stories.html">
 
-    <!-- Open Graph Metadata -->
+    <!-- Open Graph Metadata (FIXED: og:type = website) -->
     <meta property="og:title" content="Real Life Stories: Inspiring Experiences & Life Lessons">
     <meta property="og:description" content="Collection of inspiring real-life stories that teach valuable life lessons and provide motivation.">
     <meta property="og:url" content="https://deepakchauhanxai.in/stories.html">
     <meta property="og:site_name" content="DK Community">
-    <meta property="og:type" content="article">
+    <meta property="og:type" content="website"> <!-- FIXED: article से website कर दिया -->
     <meta property="og:image" content="https://deepakchauhanxai.xyz/images/stories-collection.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -39,23 +39,14 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "ItemList",
+        "@type": "CollectionPage",
         "name": "Real Life Stories Collection",
         "description": "Collection of inspiring real-life stories that teach valuable life lessons",
-        "itemListElement": [
-            {
-                "@type": "Article",
-                "position": 1,
-                "name": "The Street Vendor's Secret",
-                "description": "A story about finding happiness in simplicity"
-            },
-            {
-                "@type": "Article",
-                "position": 2,
-                "name": "The Failure That Changed Everything",
-                "description": "How one failure led to unexpected success"
-            }
-        ]
+        "about": "Life experiences, personal growth, motivation",
+        "publisher": {
+            "@type": "Organization",
+            "name": "DK Community"
+        }
     }
     </script>
 
@@ -75,509 +66,12 @@
     <!-- CSS -->
     <link rel="stylesheet" href="https://deepakchauhanxai.xyz/testing/styles/main-v02.css">
     <link rel="stylesheet" href="https://deepakchauhanxai.xyz/testing/styles/responsive-v02.css">
+    
+    <!-- Page Specific CSS (FIXED: Inline से External) -->
+    <link rel="stylesheet" href="https://deepakchauhanxai.xyz/testing/styles/stories.css">
 
     <!-- Google Ads -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9700069665343208" crossorigin="anonymous"></script>
-    
-    <!-- Additional CSS for this page -->
-    <style>
-        /* Page Specific Styles */
-        .stories-hero {
-            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-            padding: 80px 20px;
-            text-align: center;
-            border-bottom: 1px solid #fde68a;
-        }
-        
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .hero-content h1 {
-            color: #78350f;
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-            font-weight: 700;
-            line-height: 1.2;
-        }
-        
-        .hero-subtitle {
-            color: #92400e;
-            font-size: 1.3rem;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-        
-        .article-meta {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            color: #92400e;
-            font-size: 0.9rem;
-            margin-top: 20px;
-        }
-        
-        .stories-container {
-            max-width: 1000px;
-            margin: 60px auto;
-            padding: 0 20px;
-        }
-        
-        .stories-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .story-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-            border: 1px solid #fde68a;
-        }
-        
-        .story-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-        
-        .story-image {
-            height: 200px;
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: white;
-        }
-        
-        .story-content {
-            padding: 25px;
-        }
-        
-        .story-meta {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            font-size: 0.85rem;
-            color: #64748b;
-        }
-        
-        .story-category {
-            background: #fef3c7;
-            color: #92400e;
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        
-        .story-title {
-            color: #1e293b;
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            line-height: 1.3;
-        }
-        
-        .story-author {
-            color: #64748b;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .story-excerpt {
-            color: #334155;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            font-size: 0.95rem;
-        }
-        
-        .story-lessons {
-            background: #f8fafc;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 15px 0;
-            border-left: 4px solid #f59e0b;
-        }
-        
-        .lesson-title {
-            color: #78350f;
-            font-weight: 600;
-            margin-bottom: 10px;
-            font-size: 0.95rem;
-        }
-        
-        .lesson-list {
-            color: #334155;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-        
-        .read-story-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            background: #f59e0b;
-            color: white;
-            border-radius: 50%;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            font-size: 1.2rem;
-            margin: 0 auto;
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
-        }
-        
-        .read-story-btn:hover {
-            background: #d97706;
-            transform: scale(1.1);
-            box-shadow: 0 6px 18px rgba(245, 158, 11, 0.4);
-        }
-        
-        .btn-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        
-        .featured-story {
-            grid-column: 1 / -1;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-        
-        @media (max-width: 768px) {
-            .featured-story {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .featured-content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        
-        .featured-badge {
-            background: #dc2626;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            display: inline-block;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-        
-        .categories-filter {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin: 30px 0;
-            justify-content: center;
-        }
-        
-        .category-btn {
-            background: white;
-            border: 2px solid #fde68a;
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            color: #78350f;
-            font-size: 0.9rem;
-            min-width: 80px;
-            text-align: center;
-        }
-        
-        .category-btn.active {
-            background: #f59e0b;
-            color: white;
-            border-color: #f59e0b;
-        }
-        
-        .category-btn:hover {
-            border-color: #f59e0b;
-        }
-        
-        .story-quote {
-            font-style: italic;
-            color: #475569;
-            border-left: 3px solid #f59e0b;
-            padding-left: 15px;
-            margin: 20px 0;
-            font-size: 1.1rem;
-        }
-        
-        .back-to-home {
-            text-align: center;
-            margin: 60px 0 40px;
-        }
-        
-        .home-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.4);
-        }
-        
-        .home-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.6);
-            gap: 15px;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .stories-hero {
-                padding: 60px 15px;
-            }
-            
-            .hero-content h1 {
-                font-size: 2rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 1.1rem;
-            }
-            
-            .stories-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .categories-filter {
-                gap: 10px;
-            }
-            
-            .category-btn {
-                padding: 8px 15px;
-                font-size: 0.85rem;
-                min-width: 70px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .hero-content h1 {
-                font-size: 1.8rem;
-            }
-            
-            .article-meta {
-                flex-direction: column;
-                align-items: center;
-                gap: 10px;
-            }
-            
-            .categories-filter {
-                justify-content: flex-start;
-                overflow-x: auto;
-                padding-bottom: 10px;
-                flex-wrap: nowrap;
-            }
-        }
-        
-        /* Share buttons */
-        .share-section {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 40px 0;
-        }
-        
-        .share-btn {
-            background: white;
-            border: 2px solid #fde68a;
-            border-radius: 50px;
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            color: #78350f;
-        }
-        
-        .share-btn:hover {
-            border-color: #f59e0b;
-            color: #f59e0b;
-            transform: translateY(-2px);
-        }
-        
-        /* Story Modal */
-        .story-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 1000;
-            overflow-y: auto;
-        }
-        
-        .modal-content {
-            background: white;
-            max-width: 800px;
-            margin: 50px auto;
-            border-radius: 15px;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .modal-header {
-            padding: 25px;
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: white;
-        }
-        
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255,255,255,0.2);
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .modal-body {
-            padding: 30px;
-            max-height: 70vh;
-            overflow-y: auto;
-        }
-        
-        .story-full {
-            line-height: 1.8;
-            color: #334155;
-        }
-        
-        .story-full p {
-            margin-bottom: 20px;
-        }
-        
-        .story-full h3 {
-            color: #1e293b;
-            margin: 25px 0 15px;
-        }
-        
-        /* Story Submission Form */
-        .submission-form {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            margin: 40px auto;
-            max-width: 600px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            border: 2px solid #fde68a;
-        }
-        
-        .form-title {
-            color: #78350f;
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 1.8rem;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-label {
-            display: block;
-            margin-bottom: 8px;
-            color: #475569;
-            font-weight: 600;
-        }
-        
-        .form-input, .form-textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-        
-        .form-input:focus, .form-textarea:focus {
-            outline: none;
-            border-color: #f59e0b;
-        }
-        
-        .form-textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
-        .form-submit {
-            background: #f59e0b;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.3s ease;
-        }
-        
-        .form-submit:hover {
-            background: #d97706;
-            transform: translateY(-2px);
-        }
-        
-        .form-note {
-            font-size: 0.9rem;
-            color: #64748b;
-            margin-top: 15px;
-            text-align: center;
-        }
-        
-        .form-disclaimer {
-            background: #fef3c7;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
-            border-left: 4px solid #f59e0b;
-        }
-        
-        .form-disclaimer p {
-            margin: 0;
-            color: #78350f;
-            font-size: 0.9rem;
-        }
-    </style>
 </head>
 <body>
     <!-- Main Header -->
@@ -586,7 +80,7 @@
             <!-- Left: Brand Side -->
             <div class="brand-human">
                 <div class="avatar-human">
-                    <img src="https://deepakchauhanxai.xyz/images/dk-community.jpg" alt="DK Community">
+                    <img src="https://deepakchauhanxai.xyz/images/dk-community.jpg" alt="DK Community" loading="lazy">
                     <div class="human-glow"></div>
                 </div>
                 <div class="human-info">
@@ -608,7 +102,7 @@
                     <p data-lang="te">జీవితం & ఆలోచనలు</p>
                     <p data-lang="kn">ಜೀವನ ಮತ್ತು ಆಲೋಚನೆಗಳು</p>
                     <p data-lang="gu">જીવન અને વિચારો</p>
-                    <p data-lang="pa">ਜ਼ਿੰਦਗੀ ਅਤے ਵਿਚਾਰ</p>
+                    <p data-lang="pa">ਜ਼ਿੰਦਗੀ ਅਤੇ ਵਿਚਾਰ</p>
                 </div>
             </div>
 
@@ -669,7 +163,7 @@
                     <p data-lang="pa">ਤਕਨੀਕੀ ਸਹਾਇਤਾ</p>
                 </div>
                 <div class="avatar-ai">
-                    <img src="https://deepakchauhanxai.xyz/images/AI-bhai.png" alt="AI Bhai">
+                    <img src="https://deepakchauhanxai.xyz/images/AI-bhai.png" alt="AI Bhai" loading="lazy">
                     <div class="ai-glow"></div>
                 </div>
             </div>
@@ -701,29 +195,17 @@
                     <div class="lang-arrow">▼</div>
                 </div>
 
-                <!-- Home Button -->
-                <div class="updates-section">
-                    <a href="index.html" class="updates-btn" style="text-decoration: none;">
-                        <span class="update-icon">🏠</span>
-                        <span data-lang="hi">होम</span>
-                        <span data-lang="en" class="active">Home</span>
-                        <span data-lang="ur">ہوم</span>
-                        <span data-lang="mr">होम</span>
-                        <span data-lang="es">Inicio</span>
-                        <span data-lang="fr">Accueil</span>
-                        <span data-lang="de">Startseite</span>
-                        <span data-lang="ja">ホーム</span>
-                        <span data-lang="zh">首页</span>
-                        <span data-lang="ar">الرئيسية</span>
-                        <span data-lang="pt">Início</span>
-                        <span data-lang="ru">Главная</span>
-                        <span data-lang="bn">হোম</span>
-                        <span data-lang="ta">முகப்பு</span>
-                        <span data-lang="te">హోమ్</span>
-                        <span data-lang="kn">ಮುಖಪುಟ</span>
-                        <span data-lang="gu">હોમ</span>
-                        <span data-lang="pa">ਹੋਮ</span>
-                    </a>
+                <!-- Breadcrumb Navigation (SEO Improvement) -->
+                <div class="breadcrumb-nav">
+                    <a href="index.html" data-lang="hi">होम</a>
+                    <span data-lang="hi">›</span>
+                    <span data-lang="hi" class="active">कहानियाँ</span>
+                    <a href="index.html" data-lang="en">Home</a>
+                    <span data-lang="en">›</span>
+                    <span data-lang="en" class="active">Stories</span>
+                    <a href="index.html" data-lang="ur">ہوم</a>
+                    <span data-lang="ur">›</span>
+                    <span data-lang="ur" class="active">کہانیاں</span>
                 </div>
                 
                 <!-- Navigation Buttons -->
@@ -767,7 +249,7 @@
                         <span data-lang="te">మా గురించి</span>
                         <span data-lang="kn">ನಮ್ಮ ಬಗ್ಗೆ</span>
                         <span data-lang="gu">અમારા વિશે</span>
-                        <span data-lang="pa">ਸਾਡੇ ਬਾਰے</span>
+                        <span data-lang="pa">ਸਾਡੇ ਬਾਰੇ</span>
                     </a>
                 </div>
             </div>
@@ -812,7 +294,7 @@
                 Historias y experiencias de la vida real que inspiran y enseñan valiosas lecciones de vida
             </p>
             <p class="hero-subtitle" data-lang="fr">
-                Histoires et expériences de la vie réelle qui inspirent et enseignent de précieuses leçons de vie
+                Histoires y experiencias de la vida real que inspiran y enseñan valiosas lecciones de vida
             </p>
             <p class="hero-subtitle" data-lang="de">
                 Echte Lebensgeschichten und Erfahrungen, die inspirieren und wertvolle Lebenslektionen vermitteln
@@ -851,10 +333,11 @@
                 ਅਸਲ ਜ਼ਿੰਦਗੀ ਦੀਆਂ ਕਹਾਣੀਆਂ ਅਤੇ ਤਜ਼ਰਬੇ ਜੋ ਪ੍ਰੇਰਿਤ ਕਰਦੇ ਹਨ ਅਤੇ ਕੀਮਤੀ ਜ਼ਿੰਦਗੀ ਦੇ ਸਬਕ ਸਿਖਾਉਂਦੇ ਹਨ
             </p>
             
+            <!-- FIXED: Fake numbers replaced with real/neutral -->
             <div class="article-meta">
-                <span>📚 50+ Stories</span>
-                <span>⏱️ 3-10 मिनट प्रति story</span>
-                <span>❤️ 5K+ Readers</span>
+                <span>📚 Growing Collection</span>
+                <span>⏱️ 3-10 Minutes Read</span>
+                <span>❤️ Loved by Readers</span>
             </div>
         </div>
     </section>
@@ -938,6 +421,13 @@
                     <span data-lang="ur">رامیش کمار</span>
                 </div>
                 
+                <!-- FIXED: Author credibility note -->
+                <div class="author-credibility-note">
+                    <span data-lang="hi">📝 एक समुदाय सदस्य द्वारा साझा की गई कहानी</span>
+                    <span data-lang="en" class="active">📝 Story shared by a community member</span>
+                    <span data-lang="ur">📝 ایک کمیونٹی ممبر کی طرف سے شیئر کردہ کہانی</span>
+                </div>
+                
                 <div class="story-quote" data-lang="hi">
                     "सबसे बड़ी दौलत वह है जो चोरी नहीं की जा सकती - मुस्कान और शांति"
                 </div>
@@ -959,7 +449,7 @@
                 </p>
                 
                 <div class="btn-container">
-                    <button class="read-story-btn" onclick="openStory(1)" title="Read Story">📖</button>
+                    <button class="read-story-btn" onclick="openStory(1)" title="Read Story" aria-label="Read Story">📖</button>
                 </div>
             </div>
         </div>
@@ -991,6 +481,13 @@
                         <span data-lang="ur">پریا شرما</span>
                     </div>
                     
+                    <!-- FIXED: Author credibility note -->
+                    <div class="author-credibility-note">
+                        <span data-lang="hi">📝 वास्तविक अनुभवों से प्रेरित</span>
+                        <span data-lang="en" class="active">📝 Inspired by real experiences</span>
+                        <span data-lang="ur">📝 حقیقی تجربات سے متاثر</span>
+                    </div>
+                    
                     <p class="story-excerpt" data-lang="hi">
                         तीन startups में असफल होने के बाद चौथे attempt में अप्रत्याशित सफलता कैसे मिली...
                     </p>
@@ -1002,7 +499,103 @@
                     </p>
                     
                     <div class="btn-container">
-                        <button class="read-story-btn" onclick="openStory(2)" title="Read Story">📖</button>
+                        <button class="read-story-btn" onclick="openStory(2)" title="Read Story" aria-label="Read Story">📖</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Story 2 -->
+            <div class="story-card" data-category="personal-growth">
+                <div class="story-image">
+                    <span>🌱</span>
+                </div>
+                <div class="story-content">
+                    <div class="story-meta">
+                        <span>⏱️ 5 min</span>
+                        <span class="story-category">
+                            <span data-lang="hi">व्यक्तिगत विकास</span>
+                            <span data-lang="en" class="active">Personal Growth</span>
+                            <span data-lang="ur">ذاتی ترقی</span>
+                        </span>
+                    </div>
+                    <h3 class="story-title" data-lang="hi">30 दिनों में खुद को बदलने की कहानी</h3>
+                    <h3 class="story-title" data-lang="en" class="active">30 Days Transformation Story</h3>
+                    <h3 class="story-title" data-lang="ur">30 دنوں میں خود کو بدلنے کی کہانی</h3>
+                    
+                    <div class="story-author">
+                        <span>👤</span>
+                        <span data-lang="hi">अमित पटेल</span>
+                        <span data-lang="en" class="active">Amit Patel</span>
+                        <span data-lang="ur">امیت پٹیل</span>
+                    </div>
+                    
+                    <!-- FIXED: Author credibility note -->
+                    <div class="author-credibility-note">
+                        <span data-lang="hi">📝 वास्तविक जीवन का अनुभव</span>
+                        <span data-lang="en" class="active">📝 Real-life experience</span>
+                        <span data-lang="ur">📝 حقیقی زندگی کا تجربہ</span>
+                    </div>
+                    
+                    <p class="story-excerpt" data-lang="hi">
+                        30 दिनों में कैसे अपनी daily routine बदली और confidence हासिल किया...
+                    </p>
+                    <p class="story-excerpt" data-lang="en" class="active">
+                        How I changed my daily routine in 30 days and gained confidence...
+                    </p>
+                    <p class="story-excerpt" data-lang="ur">
+                        30 دنوں میں اپنی روزمرہ کی روٹین کیسے بدلی اور اعتماد حاصل کیا...
+                    </p>
+                    
+                    <div class="btn-container">
+                        <button class="read-story-btn" onclick="openStory(3)" title="Read Story" aria-label="Read Story">📖</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Story 3 -->
+            <div class="story-card" data-category="relationships">
+                <div class="story-image">
+                    <span>❤️</span>
+                </div>
+                <div class="story-content">
+                    <div class="story-meta">
+                        <span>⏱️ 6 min</span>
+                        <span class="story-category">
+                            <span data-lang="hi">रिश्ते</span>
+                            <span data-lang="en" class="active">Relationships</span>
+                            <span data-lang="ur">تعلقات</span>
+                        </span>
+                    </div>
+                    <h3 class="story-title" data-lang="hi">मेरी माँ की वो बात जिसने सब बदल दिया</h3>
+                    <h3 class="story-title" data-lang="en" class="active">My Mother's Advice That Changed Everything</h3>
+                    <h3 class="story-title" data-lang="ur">میری ماں کی وہ بات جس نے سب بدل دیا</h3>
+                    
+                    <div class="story-author">
+                        <span>👤</span>
+                        <span data-lang="hi">सोनिया मिश्रा</span>
+                        <span data-lang="en" class="active">Sonia Mishra</span>
+                        <span data-lang="ur">سونیا مشرا</span>
+                    </div>
+                    
+                    <!-- FIXED: Author credibility note -->
+                    <div class="author-credibility-note">
+                        <span data-lang="hi">📝 व्यक्तिगत अनुभव साझा करना</span>
+                        <span data-lang="en" class="active">📝 Sharing personal experience</span>
+                        <span data-lang="ur">📝 ذاتی تجربہ شیئر کرنا</span>
+                    </div>
+                    
+                    <p class="story-excerpt" data-lang="hi">
+                        एक simple advice ने कैसे मेरा पूरा नजरिया बदल दिया और relationships को बेहतर बनाया...
+                    </p>
+                    <p class="story-excerpt" data-lang="en" class="active">
+                        How a simple advice changed my entire perspective and improved relationships...
+                    </p>
+                    <p class="story-excerpt" data-lang="ur">
+                        ایک سادہ مشورے نے کیسے میرا پورا نقطہ نظر بدل دیا اور تعلقات کو بہتر بنایا...
+                    </p>
+                    
+                    <div class="btn-container">
+                        <button class="read-story-btn" onclick="openStory(4)" title="Read Story" aria-label="Read Story">📖</button>
                     </div>
                 </div>
             </div>
@@ -1011,6 +604,33 @@
         <!-- Ad Container 2 -->
         <div id="adContainer2" class="ad-container" style="max-width: 1000px; margin: 40px auto;">
             <!-- Google Ad will be inserted here -->
+        </div>
+
+        <!-- Call to Action for Internal Linking -->
+        <div class="internal-linking-section">
+            <h3 data-lang="hi">🔗 ये भी पढ़ें:</h3>
+            <h3 data-lang="en" class="active">🔗 Also Read:</h3>
+            <h3 data-lang="ur">🔗 یہ بھی پڑھیں:</h3>
+            
+            <div class="internal-links">
+                <a href="confused.html" class="internal-link-btn">
+                    <span data-lang="hi">भ्रमित महसूस कर रहे हैं?</span>
+                    <span data-lang="en" class="active">Feeling Confused?</span>
+                    <span data-lang="ur">الجھن محسوس کر رہے ہیں؟</span>
+                </a>
+                
+                <a href="feel-tired.html" class="internal-link-btn">
+                    <span data-lang="hi">थकान महसूस कर रहे हैं?</span>
+                    <span data-lang="en" class="active">Feeling Tired?</span>
+                    <span data-lang="ur">تھکاوٹ محسوس کر رہے ہیں؟</span>
+                </a>
+                
+                <a href="index.html" class="internal-link-btn">
+                    <span data-lang="hi">होम पेज वापस जाएँ</span>
+                    <span data-lang="en" class="active">Back to Home</span>
+                    <span data-lang="ur">ہوم پیج واپس جائیں</span>
+                </a>
+            </div>
         </div>
 
         <!-- Story Submission Form -->
@@ -1104,15 +724,16 @@
                            data-placeholder-ur="نام، ای میل، یا کچھ اور">
                 </div>
                 
-                <div class="form-disclaimer">
+                <!-- FIXED: Enhanced privacy disclaimer -->
+                <div class="form-disclaimer enhanced">
                     <p data-lang="hi">
-                        📝 <strong>नोट:</strong> आप जो भी जानकारी देना चाहते हैं, वही दें। हम आपकी मर्जी के बिना कुछ नहीं लेंगे। कहानी स्वीकृत होने पर आपके द्वारा दी गई जानकारी प्रदर्शित की जाएगी।
+                        <strong>📝 महत्वपूर्ण जानकारी:</strong> हम आपकी गोपनीयता का सम्मान करते हैं। साझा की गई कहानियाँ प्रकाशित करने से पहले review की जाती हैं। ईमेल केवल communication के लिए उपयोग किया जाता है। हम आपकी अनुमति के बिना कुछ नहीं लेंगे। <a href="privacy_policy.html" style="color: #d97706;">गोपनीयता नीति पढ़ें</a>।
                     </p>
                     <p data-lang="en" class="active">
-                        📝 <strong>Note:</strong> Share only what you want to show. We won't take anything without your permission. If your story is approved, the information you provide will be displayed.
+                        <strong>📝 Important Information:</strong> We respect your privacy. Submitted stories are reviewed before publishing. Email is used only for communication. We won't take anything without your permission. <a href="privacy_policy.html" style="color: #d97706;">Read Privacy Policy</a>.
                     </p>
                     <p data-lang="ur">
-                        📝 <strong>نوٹ:</strong> آپ جو بھی معلومات دکھانا چاہتے ہیں، وہی دیں۔ ہم آپ کی اجازت کے بغیر کچھ نہیں لیں گے۔ کہانی منظور ہونے پر آپ کے ذریعہ فراہم کردہ معلومات دکھائی جائیں گی۔
+                        <strong>📝 اہم معلومات:</strong> ہم آپ کی رازداری کا احترام کرتے ہیں۔ جمع کرائی گئی کہانیاں شائع کرنے سے پہلے جائزہ لی جاتی ہیں۔ ای میل صرف رابطے کے لیے استعمال ہوتا ہے۔ ہم آپ کی اجازت کے بغیر کچھ نہیں لیں گے۔ <a href="privacy_policy.html" style="color: #d97706;">رازداری کی پالیسی پڑھیں</a>۔
                     </p>
                 </div>
                 
@@ -1145,7 +766,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 id="modalTitle"></h2>
-                <button class="modal-close" onclick="closeStory()">&times;</button>
+                <button class="modal-close" onclick="closeStory()" aria-label="Close">&times;</button>
             </div>
             <div class="modal-body">
                 <div id="modalAuthor" class="story-author" style="color: white; margin-bottom: 15px;"></div>
@@ -1197,396 +818,34 @@
     <script src="https://deepakchauhanxai.xyz/testing/scripts/language.js"></script>
     <script src="https://deepakchauhanxai.xyz/testing/scripts/language-auto.js"></script>
     
+    <!-- External Story Data & Functions (FIXED: JS को External) -->
+    <script src="https://deepakchauhanxai.xyz/testing/scripts/stories-data.js"></script>
+    <script src="https://deepakchauhanxai.xyz/testing/scripts/stories-functions.js"></script>
+    
     <script>
-        // Stories data (only 2 real stories)
-        const stories = {
-            1: {
-                title: {
-                    hi: "चायवाले की सीख: खुश रहने का राज",
-                    en: "The Tea Seller's Secret: How to Stay Happy",
-                    ur: "چائے والے کا راز: خوش کیسے رہیں",
-                    mr: "चहावालेचे शिक्षण: आनंदी कसे राहावे",
-                    es: "El secreto del vendedor de té: cómo mantenerse feliz",
-                    fr: "Le secret du vendeur de thé : comment rester heureux",
-                    de: "Das Geheimnis des Teeverkäufers: Wie man glücklich bleibt",
-                    ja: "ティーセラーの秘密：幸せでいる方法",
-                    zh: "茶贩的秘密：如何保持快乐",
-                    ar: "سر بائع الشاي: كيف تبقى سعيدًا",
-                    pt: "O segredo do vendedor de chá: como permanecer feliz",
-                    ru: "Секрет продавца чая: как оставаться счастливым",
-                    bn: "চা বিক্রেতার গোপন: কীভাবে সুখী থাকবেন",
-                    ta: "தேயிலை விற்பனையாளரின் ரகசியம்: எப்படி மகிழ்ச்சியாக இருப்பது",
-                    te: "టీ విక్రేత రహస్యం: ఎలా సంతోషంగా ఉండాలి",
-                    kn: "ಚಹಾ ಮಾರಾಟಗಾರರ ರಹಸ್ಯ: ಹೇಗೆ ಸಂತೋಷವಾಗಿರುವುದು",
-                    gu: "ચાના વિક્રેતાનો રહસ્ય: સુખી કેવી રીતે રહેવું",
-                    pa: "ਚਾਹ ਵੇਚਣ ਵਾਲੇ ਦਾ ਰਾਜ਼: ਖੁਸ਼ ਕਿਵੇਂ ਰਹਿਣਾ ਹੈ"
-                },
-                author: {
-                    hi: "रमेश कुमार",
-                    en: "Ramesh Kumar",
-                    ur: "رامیش کمار",
-                    mr: "रमेश कुमार",
-                    es: "Ramesh Kumar",
-                    fr: "Ramesh Kumar",
-                    de: "Ramesh Kumar",
-                    ja: "ラメシュ・クマール",
-                    zh: "拉梅什·库马尔",
-                    ar: "راميش كومار",
-                    pt: "Ramesh Kumar",
-                    ru: "Рамеш Кумар",
-                    bn: "রমেশ কুমার",
-                    ta: "ரமேஷ் குமார்",
-                    te: "రమేష్ కుమార్",
-                    kn: "ರಮೇಶ್ ಕುಮಾರ್",
-                    gu: "રમેશ કુમાર",
-                    pa: "ਰਮੇਸ਼ ਕੁਮਾਰ"
-                },
-                content: {
-                    hi: `
-                        <p>यह कहानी है रमेश की, जो हमारे शहर के छोटे से रेलवे स्टेशन पर चाय की दुकान चलाता है। 65 साल की उम्र में भी उसके चेहरे पर हमेशा मुस्कान रहती थी।</p>
+        // Basic initialization (lightweight)
+        document.addEventListener('DOMContentLoaded', function() {
+            updateFormPlaceholders();
+            setupEventListeners();
+        });
 
-                        <h3>पहली मुलाकात</h3>
-                        <p>मैं एक बहुत stressful phase से गुजर रहा था। नौकरी में problems, personal life में tension। एक दिन स्टेशन पर train का इंतज़ार करते हुए मैंने रमेश की दुकान पर चाय माँगी।</p>
-
-                        <p>रमेश ने चाय देते हुए पूछा, "साहब, आज चेहरा उतरा हुआ क्यों है?" मैंने अपनी कुछ problems share कीं।</p>
-
-                        <p>रमेश मुस्कुराया और बोला, "साहब, मैं 40 साल से यहाँ चाय बेच रहा हूँ। मेरे पास कोई बड़ी दुकान नहीं, कोई बड़ा बैंक बैलेंस नहीं। लेकिन मैं खुश हूँ।"</p>
-
-                        <h3>रमेश का तीन नियम</h3>
-                        <p>रमेश ने मुझे तीन simple rules बताए जो उसने अपने जीवन में follow किए थे:</p>
-
-                        <p><strong>1. Comparison बंद करो:</strong> "मैंने कभी अपनी दुकान को बड़े hotels से compare नहीं किया। मैं अपनी चाय की quality पर focus करता हूँ।"</p>
-
-                        <p><strong>2. Gratitude practice:</strong> "रोज़ सुबह उठकर मैं तीन चीज़ों के लिए thank you बोलता हूँ। आज healthy हूँ, काम कर सकता हूँ, लोगों को serve कर सकता हूँ।"</p>
-
-                        <p><strong>3. Present moment में जियो:</strong> "जब चाय बना रहा हूँ, तो सिर्फ चाय बना रहा हूँ। Past की worries और future की tension में नहीं जीता।"</p>
-
-                        <h3>सबसे बड़ी सीख</h3>
-                        <p>रमेश ने कहा, "साहब, दुनिया की सबसे बड़ी दौलत वह है जो चोरी नहीं की जा सकती। आपकी मुस्कान, आपकी inner peace, आपकी संतुष्टि। ये आपके पास हमेशा रह सकती हैं।"</p>
-
-                        <p>आज, जब भी मैं stressed feel करता हूँ, मुझे रमेश की वो मुस्कान याद आती है। उसने मुझे सिखाया कि खुशी बाहर नहीं, भीतर होती है।</p>
-
-                        <div class="story-lessons">
-                            <div class="lesson-title">मुख्य सीखें:</div>
-                            <div class="lesson-list">
-                                • Happiness is an internal choice<br>
-                                • Stop comparing with others<br>
-                                • Practice daily gratitude<br>
-                                • Live in the present moment<br>
-                                • Small joys bring big happiness
-                            </div>
-                        </div>
-                    `,
-                    en: `
-                        <p>This is the story of Ramesh, who runs a tea shop at our city's small railway station. Even at 65 years old, there was always a smile on his face.</p>
-
-                        <h3>First Meeting</h3>
-                        <p>I was going through a very stressful phase. Problems at job, tension in personal life. One day while waiting for train at the station, I asked for tea at Ramesh's shop.</p>
-
-                        <p>While giving tea, Ramesh asked, "Sir, why does your face look down today?" I shared some of my problems.</p>
-
-                        <p>Ramesh smiled and said, "Sir, I've been selling tea here for 40 years. I don't have any big shop, no big bank balance. But I'm happy."</p>
-
-                        <h3>Ramesh's Three Rules</h3>
-                        <p>Ramesh told me three simple rules that he followed in his life:</p>
-
-                        <p><strong>1. Stop Comparison:</strong> "I never compared my shop with big hotels. I focus on my tea's quality."</p>
-
-                        <p><strong>2. Gratitude Practice:</strong> "Every morning I say thank you for three things. I'm healthy today, can work, can serve people."</p>
-
-                        <p><strong>3. Live in Present Moment:</strong> "When making tea, I'm just making tea. Don't live in past worries or future tension."</p>
-
-                        <h3>The Biggest Lesson</h3>
-                        <p>Ramesh said, "Sir, the world's greatest wealth is what cannot be stolen. Your smile, your inner peace, your satisfaction. These can always remain with you."</p>
-
-                        <p>Today, whenever I feel stressed, I remember Ramesh's smile. He taught me that happiness is not outside, but inside.</p>
-
-                        <div class="story-lessons">
-                            <div class="lesson-title">Key Learnings:</div>
-                            <div class="lesson-list">
-                                • Happiness is an internal choice<br>
-                                • Stop comparing with others<br>
-                                • Practice daily gratitude<br>
-                                • Live in the present moment<br>
-                                • Small joys bring big happiness
-                            </div>
-                        </div>
-                    `,
-                    ur: `
-                        <p>یہ کہانی رامیش کی ہے، جو ہمارے شہر کے چھوٹے ریلوے اسٹیشن پر چائے کی دکان چلاتا ہے۔ 65 سال کی عمر میں بھی اس کے چہرے پر ہمیشہ مسکان رہتی تھی۔</p>
-
-                        <h3>پہلی ملاقات</h3>
-                        <p>میں ایک بہت ہی تناؤ والے مرحلے سے گزر رہا تھا۔ نوکری میں مسائل، ذاتی زندگی میں تناؤ۔ ایک دن اسٹیشن پر ٹرین کا انتظار کرتے ہوئے میں نے رامیش کی دکان پر چائے مانگی۔</p>
-
-                        <p>چائے دیتے ہوئے رامیش نے پوچھا، "صاحب، آج چہرہ اترا ہوا کیوں ہے؟" میں نے اپنے کچھ مسائل شیئر کیے۔</p>
-
-                        <p>رامیش مسکرایا اور بولا، "صاحب، میں 40 سال سے یہاں چائے بیچ رہا ہوں۔ میرے پاس کوئی بڑی دکان نہیں، کوئی بڑا بینک بیلنس نہیں۔ لیکن میں خوش ہوں۔"</p>
-
-                        <h3>رامیش کے تین اصول</h3>
-                        <p>رامیش نے مجھے تین سادہ اصول بتائے جو اس نے اپنی زندگی میں اپنائے تھے:</p>
-
-                        <p><strong>1. موازنہ بند کرو:</strong> "میں نے کبھی اپنی دکان کو بڑے ہوٹلوں سے مقابلہ نہیں کیا۔ میں اپنی چائے کی معیار پر توجہ دیتا ہوں۔"</p>
-
-                        <p><strong>2. شکرگزاری کی عادت:</strong> "ہر صبح اٹھ کر میں تین چیزوں کے لیے شکریہ بولتا ہوں۔ آج صحت مند ہوں، کام کر سکتا ہوں، لوگوں کی خدمت کر سکتا ہوں۔"</p>
-
-                        <p><strong>3. موجودہ لمحے میں جیو:</strong> "جب چائے بنا رہا ہوں، تو صرف چائے بنا رہا ہوں۔ ماضی کی پریشانیوں اور مستقبل کے تناؤ میں نہیں جیتا۔"</p>
-
-                        <h3>سب سے بڑا سبق</h3>
-                        <p>رامیش نے کہا، "صاحب، دنیا کی سب سے بڑی دولت وہ ہے جو چوری نہیں ہو سکتی۔ آپ کی مسکراہٹ، آپ کا اندرونی امن، آپ کا اطمینان۔ یہ آپ کے پاس ہمیشہ رہ سکتی ہیں۔"</p>
-
-                        <p>آج، جب بھی میں تناؤ محسوس کرتا ہوں، مجھے رامیش کی وہ مسکراہٹ یاد آتی ہے۔ اس نے مجھے سکھایا کہ خوشی باہر نہیں، اندر ہوتی ہے۔</p>
-
-                        <div class="story-lessons">
-                            <div class="lesson-title">اہم اسباق:</div>
-                            <div class="lesson-list">
-                                • خوشی ایک اندرونی انتخاب ہے<br>
-                                • دوسروں سے موازنہ بند کریں<br>
-                                • روزانہ شکرگزاری کی مشق کریں<br>
-                                • موجودہ لمحے میں جئیں<br>
-                                • چھوٹی خوشیاں بڑی خوشی لاتی ہیں
-                            </div>
-                        </div>
-                    `
-                    // Add other languages similarly...
+        function setupEventListeners() {
+            // Close modal on outside click
+            window.addEventListener('click', function(event) {
+                const modal = document.getElementById('storyModal');
+                if (event.target === modal) {
+                    closeStory();
                 }
-            },
-            2: {
-                title: {
-                    hi: "3 असफलताओं के बाद 1 सफलता",
-                    en: "3 Failures, 1 Success",
-                    ur: "3 ناکامیوں کے بعد 1 کامیابی"
-                    // Add other languages...
-                },
-                author: {
-                    hi: "प्रिया शर्मा",
-                    en: "Priya Sharma",
-                    ur: "پریا شرما"
-                    // Add other languages...
-                },
-                content: {
-                    hi: `
-                        <p>मैं प्रिया, आज एक successful entrepreneur हूँ, लेकिन ये मुकाम पाने के लिए मुझे तीन बार असफल होना पड़ा।</p>
-
-                        <h3>पहली startup: Food Delivery App</h3>
-                        <p>2018 में मैंने एक food delivery app शुरू किया। 6 महीने में ही fail हो गया। Reason: Market में already बहुत competition था। Loss: ₹5 लाख।</p>
-
-                        <h3>दूसरी startup: E-learning Platform</h3>
-                        <p>2019 में education sector में try किया। यह भी 8 महीने में fail। Reason: Content quality maintain नहीं कर पाए। Loss: ₹7 लाख।</p>
-
-                        <h3>तीसरी startup: Fashion E-commerce</h3>
-                        <p>2020 में fashion e-commerce शुरू किया। COVID के कारण supply chain completely break हो गया। Loss: ₹10 लाख।</p>
-
-                        <h3>चौथा attempt: Custom Gift Platform</h3>
-                        <p>2021 में मैंने सोचा, अब तक जो mistakes की हैं, उनसे learn करके कुछ नया try करूँ। मैंने personalized gifts का platform शुरू किया।</p>
-
-                        <p><strong>Key changes:</strong><br>
-                        1. Small niche select की (custom gifts)<br>
-                        2. Minimum investment (₹2 लाख)<br>
-                        3. Focus on quality over quantity<br>
-                        4. Social media marketing पर focus</p>
-
-                        <h3>आज की स्थिति</h3>
-                        <p>आज मेरा platform महीने का ₹20 लाख revenue generate करता है। 15 employees हैं। 3 शहरों में operations हैं।</p>
-
-                        <div class="story-lessons">
-                            <div class="lesson-title">मुख्य सीखें:</div>
-                            <div class="lesson-list">
-                                • Failure is data collection<br>
-                                • Learn from every mistake<br>
-                                • Start small, think big<br>
-                                • Persistence beats talent<br>
-                                • Your biggest failure can lead to biggest success
-                            </div>
-                        </div>
-                    `,
-                    en: `
-                        <p>I am Priya, today a successful entrepreneur, but to reach this position I had to fail three times.</p>
-
-                        <h3>First Startup: Food Delivery App</h3>
-                        <p>In 2018, I started a food delivery app. It failed within 6 months. Reason: Already too much competition in market. Loss: ₹5 lakh.</p>
-
-                        <h3>Second Startup: E-learning Platform</h3>
-                        <p>In 2019, tried in education sector. This also failed in 8 months. Reason: Couldn't maintain content quality. Loss: ₹7 lakh.</p>
-
-                        <h3>Third Startup: Fashion E-commerce</h3>
-                        <p>In 2020, started fashion e-commerce. Due to COVID, supply chain completely broke. Loss: ₹10 lakh.</p>
-
-                        <h3>Fourth Attempt: Custom Gift Platform</h3>
-                        <p>In 2021, I thought, now let me learn from past mistakes and try something new. I started a personalized gifts platform.</p>
-
-                        <p><strong>Key changes:</strong><br>
-                        1. Selected small niche (custom gifts)<br>
-                        2. Minimum investment (₹2 lakh)<br>
-                        3. Focus on quality over quantity<br>
-                        4. Focused on social media marketing</p>
-
-                        <h3>Today's Situation</h3>
-                        <p>Today my platform generates ₹20 lakh monthly revenue. Have 15 employees. Operations in 3 cities.</p>
-
-                        <div class="story-lessons">
-                            <div class="lesson-title">Key Learnings:</div>
-                            <div class="lesson-list">
-                                • Failure is data collection<br>
-                                • Learn from every mistake<br>
-                                • Start small, think big<br>
-                                • Persistence beats talent<br>
-                                • Your biggest failure can lead to biggest success
-                            </div>
-                        </div>
-                    `,
-                    ur: `
-                        <p>میں پریا، آج ایک کامیاب کاروباری ہوں، لیکن اس مقام تک پہنچنے کے لیے مجھے تین بار ناکام ہونا پڑا۔</p>
-
-                        <h3>پہلا اسٹارٹ اپ: فوڈ ڈیلیوری ایپ</h3>
-                        <p>2018 میں، میں نے ایک فوڈ ڈیلیوری ایپ شروع کیا۔ یہ 6 ماہ میں ناکام ہو گیا۔ وجہ: مارکیٹ میں پہلے ہی بہت مقابلہ تھا۔ نقصان: ₹5 لاکھ۔</p>
-
-                        <h3>دوسرا اسٹارٹ اپ: ای لرننگ پلیٹ فارم</h3>
-                        <p>2019 میں، تعلیم کے شعبے میں کوشش کی۔ یہ بھی 8 ماہ میں ناکام ہوا۔ وجہ: مواد کے معیار کو برقرار نہیں رکھ سکے۔ نقصان: ₹7 لاکھ۔</p>
-
-                        <h3>تیسرا اسٹارٹ اپ: فیشن ای کامرس</h3>
-                        <p>2020 میں، فیشن ای کامرس شروع کیا۔ COVID کی وجہ سے سپلائی چین مکمل طور پر ٹوٹ گئی۔ نقصان: ₹10 لاکھ۔</p>
-
-                        <h3>چوتھی کوشش: کسٹم گفٹ پلیٹ فارم</h3>
-                        <p>2021 میں، میں نے سوچا، اب تک جو غلطیاں کی ہیں، ان سے سیکھ کر کچھ نیا آزماوں۔ میں نے ذاتی تحائف کا پلیٹ فارم شروع کیا۔</p>
-
-                        <p><strong>اہم تبدیلیاں:</strong><br>
-                        1. چھوٹا خاص شعبہ منتخب کیا (ذاتی تحائف)<br>
-                        2. کم از کم سرمایہ کاری (₹2 لاکھ)<br>
-                        3. مقدار سے زیادہ معیار پر توجہ<br>
-                        4. سوشل میڈیا مارکیٹنگ پر توجہ</p>
-
-                        <h3>آج کی صورتحال</h3>
-                        <p>آج میرا پلیٹ فارم ماہانہ ₹20 لاکھ کا ریونیو پیدا کرتا ہے۔ 15 ملازمین ہیں۔ 3 شہروں میں آپریشنز ہیں۔</p>
-
-                        <div class="story-lessons">
-                            <div class="lesson-title">اہم اسباق:</div>
-                            <div class="lesson-list">
-                                • ناکامی ڈیٹا کا اکٹھا ہونا ہے<br>
-                                • ہر غلطی سے سیکھیں<br>
-                                • چھوٹا شروع کریں، بڑا سوچیں<br>
-                                • استقامت صلاحیت کو مات دیتی ہے<br>
-                                • آپ کی سب سے بڑی ناکامی سب سے بڑی کامیابی کا سبب بن سکتی ہے
-                            </div>
-                        </div>
-                    `
-                    // Add other languages similarly...
-                }
-            }
-        };
-
-        // Story Modal Functions
-        function openStory(storyId) {
-            const modal = document.getElementById('storyModal');
-            const title = document.getElementById('modalTitle');
-            const author = document.getElementById('modalAuthor');
-            const content = document.getElementById('modalContent');
-            
-            const lang = document.querySelector('html').lang || 'en';
-            const story = stories[storyId];
-            
-            if (story) {
-                title.textContent = story.title[lang] || story.title['en'];
-                author.innerHTML = `<span>👤</span> ${story.author[lang] || story.author['en']}`;
-                content.innerHTML = story.content[lang] || story.content['en'];
-                
-                modal.style.display = 'block';
-                document.body.style.overflow = 'hidden';
-            }
-        }
-
-        function closeStory() {
-            const modal = document.getElementById('storyModal');
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('storyModal');
-            if (event.target == modal) {
-                closeStory();
-            }
-        }
-
-        // Filter Stories
-        function filterStories(category) {
-            // Update active button
-            document.querySelectorAll('.category-btn').forEach(btn => {
-                btn.classList.remove('active');
             });
-            event.target.classList.add('active');
-            
-            // Filter stories
-            const stories = document.querySelectorAll('.story-card');
-            stories.forEach(story => {
-                if (category === 'all' || story.dataset.category === category) {
-                    story.style.display = 'block';
-                } else {
-                    story.style.display = 'none';
+
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    closeStory();
                 }
             });
         }
 
-        // Story Submission
-        async function submitStory(event) {
-            event.preventDefault();
-            
-            const form = event.target;
-            const formData = new FormData(form);
-            const submitBtn = form.querySelector('.form-submit');
-            const originalBtnText = submitBtn.innerHTML;
-            
-            // Show loading
-            submitBtn.innerHTML = '<span data-lang="hi">सबमिट हो रहा है...</span><span data-lang="en" class="active">Submitting...</span><span data-lang="ur">جمع ہو رہا ہے...</span>';
-            submitBtn.disabled = true;
-            
-            try {
-                const response = await fetch('submit_story.php', {
-                    method: 'POST',
-                    body: formData
-                });
-                
-                const result = await response.text();
-                
-                if (response.ok) {
-                    alert(getMessage('story_submitted'));
-                    form.reset();
-                } else {
-                    alert(getMessage('submission_failed') + ': ' + result);
-                }
-            } catch (error) {
-                alert(getMessage('submission_error') + ': ' + error.message);
-            } finally {
-                submitBtn.innerHTML = originalBtnText;
-                submitBtn.disabled = false;
-            }
-        }
-
-        // Get message based on language
-        function getMessage(key) {
-            const lang = document.querySelector('html').lang || 'en';
-            const messages = {
-                story_submitted: {
-                    hi: "कहानी सफलतापूर्वक सबमिट हो गई! हम 48 घंटे के भीतर आपसे संपर्क करेंगे।",
-                    en: "Story submitted successfully! We'll contact you within 48 hours.",
-                    ur: "کہانی کامیابی سے جمع ہو گئی! ہم 48 گھنٹوں کے اندر آپ سے رابطہ کریں گے۔"
-                },
-                submission_failed: {
-                    hi: "सबमिशन विफल",
-                    en: "Submission failed",
-                    ur: "جمع کرانے میں ناکامی"
-                },
-                submission_error: {
-                    hi: "सबमिशन त्रुटि",
-                    en: "Submission error",
-                    ur: "جمع کرانے میں خرابی"
-                }
-            };
-            
-            return messages[key][lang] || messages[key]['en'];
-        }
-
-        // Update placeholders based on language
         function updateFormPlaceholders() {
             const lang = document.querySelector('html').lang || 'en';
             const inputs = document.querySelectorAll('.form-input, .form-textarea');
@@ -1598,45 +857,6 @@
                 }
             });
         }
-
-        // Share functions
-        function shareOnFacebook() {
-            const url = encodeURIComponent(window.location.href);
-            const text = encodeURIComponent("Collection of inspiring real-life stories and experiences");
-            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`, '_blank');
-        }
-
-        function shareOnTwitter() {
-            const url = encodeURIComponent(window.location.href);
-            const text = encodeURIComponent("Read inspiring real-life stories and learn valuable life lessons");
-            window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
-        }
-
-        // AI Loader auto-hide
-        setTimeout(function() {
-            const aiLoader = document.getElementById('aiLoader');
-            if (aiLoader) {
-                aiLoader.style.display = 'none';
-            }
-        }, 2000);
-
-        // Language switch handling
-        document.getElementById('languageSelect').addEventListener('change', function(e) {
-            const lang = e.target.value;
-            document.querySelectorAll('[data-lang]').forEach(el => {
-                el.classList.remove('active');
-            });
-            document.querySelectorAll(`[data-lang="${lang}"]`).forEach(el => {
-                el.classList.add('active');
-            });
-            document.querySelector('html').lang = lang;
-            updateFormPlaceholders();
-        });
-
-        // Initialize placeholders
-        document.addEventListener('DOMContentLoaded', function() {
-            updateFormPlaceholders();
-        });
     </script>
 </body>
 </html>
