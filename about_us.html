@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <title>About Us - DK Community</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="DK Community के बारे में - Deepak Chauhan × AI Bhai द्वारा बनाई गई प्रेरणादायक डिजिटल कम्युनिटी।">
+    <meta name="description" content="DK Community के बारे में - Special Support Buttons और हमारी कार्यप्रणाली।">
+    <meta name="author" content="Deepak Chauhan">
+    <meta name="publisher" content="DK Community Network">
     <style>
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -86,6 +88,97 @@
         strong {
             font-weight: 600;
         }
+        
+        /* New Buttons Section Styles */
+        .buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        
+        .button-item {
+            background: white;
+            border-radius: 10px;
+            padding: 18px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+        
+        .button-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        
+        .button-icon {
+            background-color: #3b82f6;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .button-name {
+            color: #1f2937;
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+        
+        .process-steps {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .step {
+            display: flex;
+            margin-bottom: 15px;
+            align-items: flex-start;
+        }
+        
+        .step-number {
+            background-color: #10b981;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            flex-shrink: 0;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        .source-note {
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 14px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .ad-note {
+            background: #fef3c7;
+            border: 1px solid #fbbf24;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
@@ -95,7 +188,7 @@
             <p class="meta">
                 प्लेटफॉर्म: <strong>DK Community</strong><br>
                 संचालक: <strong>Deepak Chauhan × AI Bhai</strong><br>
-                अंतिम अपडेट: <strong>24 नवंबर 2025</strong>
+                अंतिम अपडेट: <strong>03 फरवरी 2026</strong>
             </p>
 
             <h2 class="section-title">1. DK Community क्या है?</h2>
@@ -113,7 +206,89 @@
                 को सरल और भावनात्मक भाषा में आप तक पहुँचाते हैं।
             </p>
 
-            <h2 class="section-title">2. Deepak Chauhan × AI Bhai</h2>
+            <!-- NEW: SPECIAL SUPPORT BUTTONS SECTION -->
+            <h2 class="section-title">2. Special Support Buttons – कैसे बनते हैं और क्यों ज़रूरी हैं?</h2>
+            
+            <p>DK Community पर हमने तीन खास <strong>Support Buttons</strong> design किए हैं, जो users को उनकी current emotional state के हिसाब से guidance provide करते हैं:</p>
+            
+            <div class="buttons-grid">
+                <div class="button-item">
+                    <div class="button-icon">①</div>
+                    <h3 class="button-name">मैं Confused हूँ</h3>
+                    <p>जब user life decisions, career choices या personal dilemmas में उलझन महसूस कर रहा हो।</p>
+                    <p><strong>Content:</strong> Clarity exercises, decision-making frameworks, perspective articles.</p>
+                </div>
+                
+                <div class="button-item">
+                    <div class="button-icon">②</div>
+                    <h3 class="button-name">मैं थका हुआ महसूस कर रहा हूँ</h3>
+                    <p>Mental exhaustion, burnout, या emotional fatigue के समय के लिए।</p>
+                    <p><strong>Content:</strong> Relaxation techniques, self-care tips, motivational recovery stories.</p>
+                </div>
+                
+                <div class="button-item">
+                    <div class="button-icon">③</div>
+                    <h3 class="button-name">मैं आगे बढ़ना चाहता हूँ</h3>
+                    <p>Growth mindset, goal achievement, और personal development की चाह रखने वालों के लिए।</p>
+                    <p><strong>Content:</strong> Success strategies, habit formation, productivity systems.</p>
+                </div>
+            </div>
+            
+            <h3 class="section-title">Buttons बनाने की Process</h3>
+            
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <strong>User Research</strong><br>
+                        पहले हमने यह analyze किया कि users किन emotional states में हमारी website visit करते हैं।
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <strong>Content Categorization</strong><br>
+                        हमारे existing content को emotional needs के आधार पर categorize किया।
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <strong>Button Design</strong><br>
+                        Simple, clear और visually appealing buttons design किए जो instantly समझ में आएँ।
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <strong>Content Creation</strong><br>
+                        हर button के लिए specialized content create किया जो genuine help provide करे।
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <strong>Testing & Optimization</strong><br>
+                        Users के feedback के आधार पर buttons और content को continuously improve किया।
+                    </div>
+                </div>
+            </div>
+            
+            <div class="source-note">
+                <p><strong>Content Source:</strong> इन buttons के लिए specialized content हमारी official website <strong>deepakchauhanxai.xyz</strong> से लिया जाता है, जो DK Community Network का ही part है।</p>
+                <p>दोनों websites same vision और management के तहत operate होती हैं।</p>
+            </div>
+            
+            <div class="highlight">
+                <p><strong>Why These Buttons Work:</strong> ये buttons users को instant emotional validation देते हैं और उन्हें relevant content तक पहुँचाते हैं, जिससे engagement और user satisfaction दोनों बढ़ते हैं।</p>
+            </div>
+            <!-- END OF BUTTONS SECTION -->
+
+            <h2 class="section-title">3. Deepak Chauhan × AI Bhai</h2>
             <p>
                 इस प्लेटफॉर्म के पीछे मुख्य इंसान हैं <strong>Deepak Chauhan</strong>  
                 और उनके डिजिटल साथी हैं <strong>AI Bhai</strong>।
@@ -128,7 +303,7 @@
                 एक ऑनलाइन मास्टर, जो सही तरीके से इस्तेमाल करने पर ज़िंदगी बदल सकता है।”</strong>
             </div>
 
-            <h2 class="section-title">3. हमारा विज़न (Vision)</h2>
+            <h2 class="section-title">4. हमारा विज़न (Vision)</h2>
             <p>हमारा सपना है कि:</p>
             <ul>
                 <li>ज़्यादा से ज़्यादा लोग रोज़ थोड़ा-थोड़ा सीखें</li>
@@ -138,10 +313,10 @@
             </ul>
             <p>
                 DK Community इसी सोच के साथ बनाया गया है –  
-                <strong>“ज्ञान + प्रेरणा + टेक्नोलॉजी = बेहतर जीवन।”</strong>
+                <strong>"ज्ञान + प्रेरणा + टेक्नोलॉजी = बेहतर जीवन।"</strong>
             </p>
 
-            <h2 class="section-title">4. हमारा Working Style (कैसे काम करते हैं?)</h2>
+            <h2 class="section-title">5. हमारा Working Style (कैसे काम करते हैं?)</h2>
             <p>
                 DK Community पर कंटेंट सिर्फ कॉपी–पेस्ट नहीं होता, बल्कि पूरी तरह से मेहनत से तैयार किया जाता है:
             </p>
@@ -157,10 +332,10 @@
                 बल्कि हर पोस्ट के ज़रिए user को कुछ नया सोचने पर मजबूर करना है।
             </p>
 
-            <h2 class="section-title">5. New Update Button – रोज़ का नया अपडेट</h2>
+            <h2 class="section-title">6. New Update Button – रोज़ का नया अपडेट</h2>
             <p>
                 DK Community पर रोज़ के बदलाव और नई learning को आसान बनाने के लिए  
-                हमने एक खास <strong>“New Update”</strong> बटन जोड़ा है।
+                हमने एक खास <strong>"New Update"</strong> बटन जोड़ा है।
             </p>
             <p>
                 यह बटन लगभग <strong>24 नवंबर 2025</strong> से सक्रिय है और इसका उद्देश्य है:
@@ -172,10 +347,14 @@
             </ul>
             <p class="highlight">
                 अगर आप रोज़ सीखना और motivate होना चाहते हैं,  
-                तो “New Update” बटन आपके लिए रोज़ की नई शुरुआत जैसा है।
+                तो "New Update" बटन आपके लिए रोज़ की नई शुरुआत जैसा है।
             </p>
 
-            <h2 class="section-title">6. AI Bhai की भूमिका</h2>
+            <div class="ad-note">
+                <p><strong>AdSense Compliance Note:</strong> DK Community पर सभी buttons और content Google AdSense policies के पूरी तरह compliant हैं। हम किसी भी तरह की misleading claims, clickbait, या inappropriate content का use नहीं करते।</p>
+            </div>
+
+            <h2 class="section-title">7. AI Bhai की भूमिका</h2>
             <p>
                 AI Bhai इस प्लेटफॉर्म पर:
             </p>
@@ -193,7 +372,7 @@
                 तो हर एक आम इंसान भी extraordinary बन सकता है।”</strong>
             </div>
 
-            <h2 class="section-title">7. किसके लिए है DK Community?</h2>
+            <h2 class="section-title">8. किसके लिए है DK Community?</h2>
             <p>ये प्लेटफॉर्म खास तौर पर इन लोगों के लिए है:</p>
             <ul>
                 <li>जो रोज़ थोड़ी-थोड़ी motivation चाहते हैं</li>
@@ -203,7 +382,7 @@
                 <li>जो AI और digital दुनिया से जुड़कर सीखना चाहते हैं</li>
             </ul>
 
-            <h2 class="section-title">8. हमारा वादा</h2>
+            <h2 class="section-title">9. हमारा वादा</h2>
             <p>
                 हम कोशिश करते हैं कि:
             </p>
@@ -214,7 +393,7 @@
                 <li>हमेशा learning, positivity और growth पर फोकस रहे</li>
             </ul>
 
-            <h2 class="section-title">9. हमसे जुड़ें / Contact</h2>
+            <h2 class="section-title">10. हमसे जुड़ें / Contact</h2>
             <p>
                 अगर आप हमसे जुड़ना चाहते हैं, सुझाव देना चाहते हैं  
                 या किसी भी तरह की समस्या share करना चाहते हैं, तो:
@@ -222,7 +401,7 @@
             <p>
                 📧 Email: <a href="mailto:deepakchauhanxai@gmail.com">deepakchauhanxai@gmail.com</a><br>
                 👤 Founder: <strong>Deepak Chauhan × AI Bhai</strong><br>
-                🌐 Website: <a href="https://deepakchauhanxai.in" target="_blank">deepakchauhanxai.in</a>
+                🌐 Primary Website: <a href="https://deepakchauhanxai.in" target="_blank">deepakchauhanxai.in</a><br>
             </p>
 
             <p class="footer-note">
