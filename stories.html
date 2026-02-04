@@ -189,6 +189,20 @@
             color: #4B5563;
         }
         
+        .story-stats {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .story-likes, .story-comments {
+            font-size: 12px;
+            color: #9CA3AF;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
         .story-date {
             font-size: 12px;
             color: #9CA3AF;
@@ -403,23 +417,31 @@
             display: flex;
             gap: 10px;
             margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #E5E7EB;
         }
         
         .action-btn {
-            padding: 8px 16px;
-            border-radius: 6px;
+            padding: 10px 20px;
+            border-radius: 8px;
             border: none;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
+            font-size: 14px;
         }
         
         .like-btn {
             background: #FEE2E2;
             color: #DC2626;
+        }
+        
+        .like-btn.liked {
+            background: #DC2626;
+            color: white;
         }
         
         .share-btn-story {
@@ -434,6 +456,7 @@
         
         .action-btn:hover {
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
         
         .pagination {
@@ -460,6 +483,94 @@
             border-color: #7C3AED;
         }
         
+        /* Comments Section */
+        .comments-section {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #E5E7EB;
+        }
+        
+        .comments-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #1F2937;
+        }
+        
+        .comment-form {
+            margin-bottom: 30px;
+        }
+        
+        .comment-input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .comment-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #E5E7EB;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        
+        .comment-submit-btn {
+            background: #7C3AED;
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .comments-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .comment-item {
+            padding: 15px;
+            background: #F9FAFB;
+            border-radius: 8px;
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .comment-author {
+            font-weight: 600;
+            color: #4B5563;
+        }
+        
+        .comment-date {
+            font-size: 12px;
+            color: #9CA3AF;
+        }
+        
+        .comment-text {
+            color: #374151;
+            line-height: 1.6;
+        }
+        
+        .no-comments {
+            text-align: center;
+            padding: 20px;
+            color: #6B7280;
+            font-style: italic;
+        }
+        
+        .loading-comments {
+            text-align: center;
+            padding: 20px;
+            color: #7C3AED;
+        }
+        
         @media (max-width: 768px) {
             .stories-container {
                 grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -479,6 +590,14 @@
             
             .story-form {
                 padding: 20px;
+            }
+            
+            .comment-input-group {
+                flex-direction: column;
+            }
+            
+            .comment-submit-btn {
+                padding: 12px;
             }
         }
     </style>
@@ -758,8 +877,8 @@
                     <div id="modalContent" class="story-content-full"></div>
                     
                     <div class="story-actions">
-                        <button class="action-btn like-btn" onclick="likeStory()">
-                            <span>❤️</span>
+                        <button id="likeBtn" class="action-btn like-btn" onclick="likeStory()">
+                            <span id="likeIcon">❤️</span>
                             <span class="lang-placeholder" data-key="like_story">Like</span>
                             <span id="likeCount">0</span>
                         </button>
@@ -771,6 +890,30 @@
                             <span>💾</span>
                             <span class="lang-placeholder" data-key="save_story">Save</span>
                         </button>
+                    </div>
+                    
+                    <!-- Comments Section -->
+                    <div class="comments-section">
+                        <h3 class="comments-title lang-placeholder" data-key="comments">Comments</h3>
+                        
+                        <div class="comment-form">
+                            <div class="comment-input-group">
+                                <input type="text" id="commentName" class="comment-input" 
+                                       placeholder="Your name (optional)" maxlength="50">
+                                <input type="text" id="commentText" class="comment-input" 
+                                       placeholder="Add a comment..." maxlength="500">
+                                <button onclick="submitComment()" class="comment-submit-btn">
+                                    <span class="lang-placeholder" data-key="post_comment">Post</span>
+                                </button>
+                            </div>
+                            <small class="lang-placeholder" data-key="comment_note">Comments will be visible after approval</small>
+                        </div>
+                        
+                        <div id="commentsContainer">
+                            <div class="loading-comments">
+                                <span class="lang-placeholder" data-key="loading_comments">Loading comments...</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -836,9 +979,12 @@
 
     <!-- Scripts -->
     <script>
-        // Stories JSON URL
-      const STORIES_JSON_URL = "https://deepakchauhanxai.xyz/get_stories.php";
-      const SUBMIT_STORY_URL = "https://deepakchauhanxai.xyz/submit_story.php";
+        // API URLs
+        const STORIES_JSON_URL = "https://deepakchauhanxai.xyz/testing/stories.json";
+        const SUBMIT_STORY_URL = "https://deepakchauhanxai.xyz/submit_story.php";
+        const LIKE_API_URL = "https://deepakchauhanxai.xyz/api/like_story.php";
+        const COMMENTS_API_URL = "https://deepakchauhanxai.xyz/api/get_comments.php";
+        const SUBMIT_COMMENT_URL = "https://deepakchauhanxai.xyz/api/submit_comment.php";
         
         // Global variables
         let currentStories = [];
@@ -847,6 +993,7 @@
         const storiesPerPage = 9;
         let currentCategory = 'all';
         let currentStoryId = null;
+        let currentLanguage = 'en';
 
         // Initialize stories page
         document.addEventListener('DOMContentLoaded', async function() {
@@ -858,12 +1005,32 @@
             
             // Setup form submission
             setupStoryForm();
+            
+            // Initialize language
+            initLanguage();
         });
+
+        // Initialize language
+        function initLanguage() {
+            // Set current language from language manager or default
+            if (window.languageManager && window.languageManager.getCurrentLanguage) {
+                currentLanguage = window.languageManager.getCurrentLanguage();
+            }
+            
+            // Listen for language changes
+            document.getElementById('languageSelect')?.addEventListener('change', function() {
+                currentLanguage = this.value;
+                displayStories();
+                if (currentStoryId) {
+                    updateModalContent();
+                }
+            });
+        }
 
         // Load stories from JSON
         async function loadStories() {
             try {
-                const response = await fetch(STORIES_JSON_URL);
+                const response = await fetch(STORIES_JSON_URL + '?t=' + Date.now());
                 if (!response.ok) {
                     throw new Error('Failed to load stories');
                 }
@@ -914,39 +1081,26 @@
             const endIndex = startIndex + storiesPerPage;
             const pageStories = filteredStories.slice(startIndex, endIndex);
             
-            // Get current language
-            const currentLang = window.languageManager?.getCurrentLanguage() || 'en';
-            
             pageStories.forEach(story => {
-                const storyElement = createStoryElement(story, currentLang);
+                const storyElement = createStoryElement(story);
                 container.appendChild(storyElement);
             });
         }
 
         // Create story element
-        function createStoryElement(story, lang) {
+        function createStoryElement(story) {
             const div = document.createElement('div');
             div.className = 'story-card';
             div.setAttribute('data-id', story.id);
             div.setAttribute('data-category', story.category);
             
-            // Get translated content
-            const title = story.title[lang] || story.title.en || story.title;
-            const excerpt = story.excerpt[lang] || story.excerpt.en || story.excerpt;
+            // Get translated content for current language
+            const title = getTranslatedText(story.title);
+            const excerpt = getTranslatedText(story.excerpt);
             const category = story.category;
             
             // Create category translation
-            const categoryTranslations = {
-                'success': window.languageManager?.translate('success_stories') || 'Success',
-                'struggle': window.languageManager?.translate('struggle_stories') || 'Struggle',
-                'love': window.languageManager?.translate('love_stories') || 'Love',
-                'career': window.languageManager?.translate('career_stories') || 'Career',
-                'health': window.languageManager?.translate('health_stories') || 'Health',
-                'family': window.languageManager?.translate('family_stories') || 'Family',
-                'inspiration': window.languageManager?.translate('inspirational_stories') || 'Inspirational'
-            };
-            
-            const categoryText = categoryTranslations[category] || category;
+            const categoryText = translateCategory(category);
             
             div.innerHTML = `
                 <div class="story-image">
@@ -963,7 +1117,11 @@
                                  alt="${story.author.name}" class="author-avatar">
                             <span class="author-name">${story.author.name}</span>
                         </div>
-                        <div class="story-date">${formatDate(story.date)}</div>
+                        <div class="story-stats">
+                            <span class="story-likes">❤️ ${story.likes || 0}</span>
+                            <span class="story-comments">💬 ${story.comments_count || 0}</span>
+                            <span class="story-date">${formatDate(story.date)}</span>
+                        </div>
                     </div>
                 </div>
             `;
@@ -972,6 +1130,48 @@
             div.addEventListener('click', () => openStoryModal(story.id));
             
             return div;
+        }
+
+        // Get translated text based on current language
+        function getTranslatedText(textObj) {
+            if (typeof textObj === 'string') return textObj;
+            
+            // Try current language
+            if (textObj[currentLanguage]) {
+                return textObj[currentLanguage];
+            }
+            
+            // Try English as fallback
+            if (textObj.en) {
+                return textObj.en;
+            }
+            
+            // Return first available text
+            const firstKey = Object.keys(textObj)[0];
+            return textObj[firstKey] || 'No translation available';
+        }
+
+        // Translate category
+        function translateCategory(category) {
+            const categoryTranslations = {
+                'success': getTranslation('success_stories') || 'Success',
+                'struggle': getTranslation('struggle_stories') || 'Struggle',
+                'love': getTranslation('love_stories') || 'Love',
+                'career': getTranslation('career_stories') || 'Career',
+                'health': getTranslation('health_stories') || 'Health',
+                'family': getTranslation('family_stories') || 'Family',
+                'inspiration': getTranslation('inspirational_stories') || 'Inspirational'
+            };
+            
+            return categoryTranslations[category] || category;
+        }
+
+        // Get translation from language manager
+        function getTranslation(key) {
+            if (window.languageManager && window.languageManager.translate) {
+                return window.languageManager.translate(key);
+            }
+            return null;
         }
 
         // Setup pagination
@@ -1060,35 +1260,44 @@
         }
 
         // Open story modal
-        function openStoryModal(storyId) {
+        async function openStoryModal(storyId) {
             const story = currentStories.find(s => s.id === storyId);
             if (!story) return;
             
             currentStoryId = storyId;
             
-            // Get current language
-            const currentLang = window.languageManager?.getCurrentLanguage() || 'en';
-            
             // Set modal content
-            document.getElementById('modalTitle').textContent = 
-                story.title[currentLang] || story.title.en || story.title;
+            updateModalContent(story);
             
+            // Load comments
+            await loadComments(storyId);
+            
+            // Check if user already liked this story
+            checkIfLiked(storyId);
+            
+            // Show modal
+            document.getElementById('storyModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+            // Update view count (simulate)
+            updateViewCount(storyId);
+        }
+
+        // Update modal content
+        function updateModalContent(story = null) {
+            if (!story) {
+                story = currentStories.find(s => s.id === currentStoryId);
+                if (!story) return;
+            }
+            
+            // Get translated content
+            const title = getTranslatedText(story.title);
+            const content = getTranslatedText(story.content);
+            
+            document.getElementById('modalTitle').textContent = title;
             document.getElementById('modalAuthorName').textContent = story.author.name;
             document.getElementById('modalDate').textContent = formatDate(story.date);
-            
-            // Set category
-            const categoryTranslations = {
-                'success': window.languageManager?.translate('success_stories') || 'Success',
-                'struggle': window.languageManager?.translate('struggle_stories') || 'Struggle',
-                'love': window.languageManager?.translate('love_stories') || 'Love',
-                'career': window.languageManager?.translate('career_stories') || 'Career',
-                'health': window.languageManager?.translate('health_stories') || 'Health',
-                'family': window.languageManager?.translate('family_stories') || 'Family',
-                'inspiration': window.languageManager?.translate('inspirational_stories') || 'Inspirational'
-            };
-            
-            document.getElementById('modalCategory').textContent = 
-                categoryTranslations[story.category] || story.category;
+            document.getElementById('modalCategory').textContent = translateCategory(story.category);
             
             // Set author avatar
             const authorAvatar = document.getElementById('modalAuthorAvatar');
@@ -1105,21 +1314,207 @@
             }
             
             // Set story content
-            document.getElementById('modalContent').innerHTML = 
-                story.content[currentLang] || story.content.en || story.content;
+            document.getElementById('modalContent').innerHTML = content.replace(/\n/g, '<br><br>');
             
             // Set like count
             document.getElementById('likeCount').textContent = story.likes || 0;
+        }
+
+        // Check if user already liked the story
+        function checkIfLiked(storyId) {
+            const likedStories = JSON.parse(localStorage.getItem('dk_liked_stories') || '{}');
+            const likeBtn = document.getElementById('likeBtn');
             
-            // Show modal
-            document.getElementById('storyModal').style.display = 'block';
-            document.body.style.overflow = 'hidden';
+            if (likedStories[storyId]) {
+                likeBtn.classList.add('liked');
+                document.getElementById('likeIcon').textContent = '❤️';
+            } else {
+                likeBtn.classList.remove('liked');
+                document.getElementById('likeIcon').textContent = '🤍';
+            }
+        }
+
+        // Load comments for a story
+        async function loadComments(storyId) {
+            const commentsContainer = document.getElementById('commentsContainer');
+            commentsContainer.innerHTML = '<div class="loading-comments">Loading comments...</div>';
+            
+            try {
+                const response = await fetch(`${COMMENTS_API_URL}?story_id=${storyId}`);
+                const result = await response.json();
+                
+                if (result.success && result.comments.length > 0) {
+                    let commentsHTML = '';
+                    result.comments.forEach(comment => {
+                        commentsHTML += `
+                            <div class="comment-item">
+                                <div class="comment-header">
+                                    <span class="comment-author">${comment.user_name || 'Anonymous'}</span>
+                                    <span class="comment-date">${comment.time_ago || formatDate(comment.date)}</span>
+                                </div>
+                                <div class="comment-text">${comment.comment}</div>
+                            </div>
+                        `;
+                    });
+                    
+                    commentsContainer.innerHTML = commentsHTML;
+                } else {
+                    commentsContainer.innerHTML = `
+                        <div class="no-comments">
+                            <span class="lang-placeholder" data-key="no_comments">No comments yet. Be the first to comment!</span>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error loading comments:', error);
+                commentsContainer.innerHTML = `
+                    <div class="no-comments">
+                        <span>Error loading comments</span>
+                    </div>
+                `;
+            }
+        }
+
+        // Submit comment
+        async function submitComment() {
+            const commentText = document.getElementById('commentText').value.trim();
+            const commentName = document.getElementById('commentName').value.trim();
+            
+            if (!commentText) {
+                alert('Please enter a comment');
+                return;
+            }
+            
+            if (!currentStoryId) {
+                alert('No story selected');
+                return;
+            }
+            
+            const userId = getUserId();
+            
+            try {
+                const response = await fetch(SUBMIT_COMMENT_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        story_id: currentStoryId,
+                        user_id: userId,
+                        name: commentName || 'Anonymous',
+                        comment: commentText
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Clear input
+                    document.getElementById('commentText').value = '';
+                    document.getElementById('commentName').value = '';
+                    
+                    // Reload comments
+                    await loadComments(currentStoryId);
+                    
+                    // Show success message
+                    alert('Comment submitted successfully!');
+                } else {
+                    alert('Error submitting comment: ' + result.message);
+                }
+            } catch (error) {
+                console.error('Error submitting comment:', error);
+                alert('Error submitting comment. Please try again.');
+            }
+        }
+
+        // Like a story (User can like only once)
+        async function likeStory() {
+            if (!currentStoryId) return;
+            
+            const userId = getUserId();
+            const likedStories = JSON.parse(localStorage.getItem('dk_liked_stories') || '{}');
+            
+            // Check if already liked
+            if (likedStories[currentStoryId]) {
+                alert('You have already liked this story!');
+                return;
+            }
+            
+            try {
+                const response = await fetch(LIKE_API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        story_id: currentStoryId,
+                        user_id: userId,
+                        action: 'like'
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Update local storage
+                    likedStories[currentStoryId] = true;
+                    localStorage.setItem('dk_liked_stories', JSON.stringify(likedStories));
+                    
+                    // Update UI
+                    const likeBtn = document.getElementById('likeBtn');
+                    likeBtn.classList.add('liked');
+                    document.getElementById('likeIcon').textContent = '❤️';
+                    
+                    // Update like count
+                    const likeCountEl = document.getElementById('likeCount');
+                    const currentLikes = parseInt(likeCountEl.textContent);
+                    likeCountEl.textContent = currentLikes + 1;
+                    
+                    // Update story in array
+                    const storyIndex = currentStories.findIndex(s => s.id === currentStoryId);
+                    if (storyIndex !== -1) {
+                        currentStories[storyIndex].likes = (currentStories[storyIndex].likes || 0) + 1;
+                    }
+                    
+                    // Update displayed stories
+                    displayStories();
+                } else {
+                    alert(result.message || 'Failed to like story');
+                }
+            } catch (error) {
+                console.error('Error liking story:', error);
+                alert('Error liking story. Please try again.');
+            }
+        }
+
+        // Generate unique user ID
+        function getUserId() {
+            let userId = localStorage.getItem('dk_user_id');
+            if (!userId) {
+                userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                localStorage.setItem('dk_user_id', userId);
+            }
+            return userId;
+        }
+
+        // Update view count (simulated)
+        function updateViewCount(storyId) {
+            const viewedStories = JSON.parse(localStorage.getItem('dk_viewed_stories') || '{}');
+            
+            if (!viewedStories[storyId]) {
+                viewedStories[storyId] = Date.now();
+                localStorage.setItem('dk_viewed_stories', JSON.stringify(viewedStories));
+                
+                // In a real app, you would send this to your server
+                console.log('Story viewed:', storyId);
+            }
         }
 
         // Close story modal
         function closeStoryModal() {
             document.getElementById('storyModal').style.display = 'none';
             document.body.style.overflow = 'auto';
+            currentStoryId = null;
         }
 
         // Open story form
@@ -1150,7 +1545,7 @@
                     
                     // Add timestamp
                     data.timestamp = new Date().toISOString();
-                    data.status = 'pending'; // Needs approval
+                    data.status = 'pending';
                     
                     // Send to PHP script
                     const response = await fetch(SUBMIT_STORY_URL, {
@@ -1167,9 +1562,6 @@
                         alert('Thank you for sharing your story! It will be reviewed by our team before publishing.');
                         form.reset();
                         document.getElementById('storyFormContainer').style.display = 'none';
-                        
-                        // Reload stories to show the new one (if approved immediately)
-                        await loadStories();
                     } else {
                         alert('Error submitting story: ' + (result.message || 'Please try again.'));
                     }
@@ -1184,56 +1576,27 @@
             });
         }
 
-        // Like story
-        function likeStory() {
-            if (!currentStoryId) return;
-            
-            // Get current likes from localStorage
-            const likedStories = JSON.parse(localStorage.getItem('likedStories') || '{}');
-            const story = currentStories.find(s => s.id === currentStoryId);
-            
-            if (!story) return;
-            
-            // Toggle like
-            if (likedStories[currentStoryId]) {
-                // Unlike
-                delete likedStories[currentStoryId];
-                story.likes = (story.likes || 0) - 1;
-            } else {
-                // Like
-                likedStories[currentStoryId] = true;
-                story.likes = (story.likes || 0) + 1;
-            }
-            
-            // Update display
-            document.getElementById('likeCount').textContent = story.likes || 0;
-            
-            // Save to localStorage
-            localStorage.setItem('likedStories', JSON.stringify(likedStories));
-            
-            // Update JSON file (in real implementation, this would be server-side)
-            // For now, just update the local display
-        }
-
         // Share current story
         function shareCurrentStory() {
             const story = currentStories.find(s => s.id === currentStoryId);
             if (!story) return;
             
-            const currentLang = window.languageManager?.getCurrentLanguage() || 'en';
-            const title = story.title[currentLang] || story.title.en || story.title;
-            const url = window.location.href + '?story=' + story.id;
+            const title = getTranslatedText(story.title);
+            const url = window.location.href.split('?')[0] + '?story=' + currentStoryId;
             
             if (navigator.share) {
                 navigator.share({
                     title: title,
-                    text: story.excerpt[currentLang] || story.excerpt.en || story.excerpt,
+                    text: getTranslatedText(story.excerpt),
                     url: url
-                });
+                }).catch(console.error);
             } else {
                 // Fallback: copy to clipboard
-                navigator.clipboard.writeText(url + '\n\n' + title).then(() => {
+                navigator.clipboard.writeText(`${title}\n\n${url}`).then(() => {
                     alert('Story link copied to clipboard!');
+                }).catch(err => {
+                    // Alternative fallback
+                    prompt('Copy this link:', url);
                 });
             }
         }
@@ -1246,7 +1609,7 @@
             if (!story) return;
             
             // Get saved stories from localStorage
-            const savedStories = JSON.parse(localStorage.getItem('savedStories') || '{}');
+            const savedStories = JSON.parse(localStorage.getItem('dk_saved_stories') || '{}');
             
             if (savedStories[currentStoryId]) {
                 // Remove from saved
@@ -1256,25 +1619,45 @@
                 // Add to saved
                 savedStories[currentStoryId] = {
                     id: story.id,
-                    title: story.title,
+                    title: getTranslatedText(story.title),
                     date: story.date,
-                    category: story.category
+                    category: story.category,
+                    saved_at: new Date().toISOString()
                 };
                 alert('Story saved! You can find it in your saved stories.');
             }
             
             // Save to localStorage
-            localStorage.setItem('savedStories', JSON.stringify(savedStories));
+            localStorage.setItem('dk_saved_stories', JSON.stringify(savedStories));
         }
 
         // Format date
         function formatDate(dateString) {
-            const date = new Date(dateString);
-            return date.toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric'
-            });
+            try {
+                const date = new Date(dateString);
+                const now = new Date();
+                const diffMs = now - date;
+                const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+                
+                if (diffDays === 0) {
+                    return 'Today';
+                } else if (diffDays === 1) {
+                    return 'Yesterday';
+                } else if (diffDays < 7) {
+                    return `${diffDays} days ago`;
+                } else if (diffDays < 30) {
+                    const weeks = Math.floor(diffDays / 7);
+                    return `${weeks} week${weeks > 1 ? 's' : ''} ago`;
+                } else {
+                    return date.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric'
+                    });
+                }
+            } catch (e) {
+                return dateString;
+            }
         }
 
         // Close modal when clicking outside
@@ -1291,10 +1674,21 @@
             }
         });
 
-        // Initialize language manager
+        // Initialize language manager if exists
         if (typeof initLanguageManager === 'function') {
             initLanguageManager();
         }
+
+        // Listen for language changes
+        document.addEventListener('languageChanged', function(e) {
+            if (e.detail && e.detail.language) {
+                currentLanguage = e.detail.language;
+                displayStories();
+                if (currentStoryId) {
+                    updateModalContent();
+                }
+            }
+        });
     </script>
     
     <!-- External JavaScript Files -->
