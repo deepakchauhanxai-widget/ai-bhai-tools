@@ -571,6 +571,26 @@
             color: #7C3AED;
         }
         
+        /* Modal footer */
+        .modal-footer {
+            padding: 20px;
+            background: #F9FAFB;
+            border-top: 1px solid #E5E7EB;
+            text-align: center;
+        }
+        
+        .story-language {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: #EDE9FE;
+            color: #7C3AED;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
         @media (max-width: 768px) {
             .stories-container {
                 grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -598,6 +618,32 @@
             
             .comment-submit-btn {
                 padding: 12px;
+            }
+            
+            .story-actions {
+                flex-wrap: wrap;
+            }
+            
+            .action-btn {
+                flex: 1;
+                min-width: 120px;
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .stories-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .categories-filter {
+                overflow-x: auto;
+                padding-bottom: 10px;
+                justify-content: flex-start;
+            }
+            
+            .category-filter-btn {
+                white-space: nowrap;
             }
         }
     </style>
@@ -916,6 +962,11 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal-footer">
+                    <span class="story-language">
+                        🌐 <span id="modalLanguage">English</span>
+                    </span>
+                </div>
             </div>
         </div>
 
@@ -979,8 +1030,10 @@
 
     <!-- Scripts -->
     <script>
+        // ==================== CONFIGURATION ====================
         // API URLs
         const STORIES_JSON_URL = "https://deepakchauhanxai.xyz/testing/stories.json";
+        const TRANSLATIONS_URL = "https://deepakchauhanxai.xyz/testing/stories-translations.json";
         const SUBMIT_STORY_URL = "https://deepakchauhanxai.xyz/submit_story.php";
         const LIKE_API_URL = "https://deepakchauhanxai.xyz/api/like_story.php";
         const COMMENTS_API_URL = "https://deepakchauhanxai.xyz/api/get_comments.php";
@@ -994,9 +1047,17 @@
         let currentCategory = 'all';
         let currentStoryId = null;
         let currentLanguage = 'en';
+        let storyTranslations = {};
+        let languageNames = {};
 
-        // Initialize stories page
+        // ==================== INITIALIZATION ====================
         document.addEventListener('DOMContentLoaded', async function() {
+            // Load translations first
+            await loadTranslations();
+            
+            // Initialize language
+            initLanguage();
+            
             // Load stories
             await loadStories();
             
@@ -1005,29 +1066,125 @@
             
             // Setup form submission
             setupStoryForm();
-            
-            // Initialize language
-            initLanguage();
         });
 
-        // Initialize language
+        // ==================== TRANSLATIONS ====================
+        async function loadTranslations() {
+            try {
+                const response = await fetch(TRANSLATIONS_URL + '?t=' + Date.now());
+                const data = await response.json();
+                storyTranslations = data.translations || {};
+                languageNames = data.languages || {};
+                console.log('Translations loaded successfully');
+            } catch (error) {
+                console.error('Error loading translations:', error);
+                // Fallback to English
+                storyTranslations = {};
+            }
+        }
+
+        function getTranslation(key, language = null) {
+            const lang = language || currentLanguage || 'en';
+            
+            if (!storyTranslations || !storyTranslations[key]) {
+                return key; // Return key as fallback
+            }
+            
+            const translation = storyTranslations[key][lang];
+            
+            // If translation for current language not found, use English
+            if (!translation && lang !== 'en') {
+                return storyTranslations[key]['en'] || key;
+            }
+            
+            return translation || key;
+        }
+
+        function translateCategory(category) {
+            const categoryMap = {
+                'success': 'success_stories',
+                'struggle': 'struggle_stories',
+                'love': 'love_stories',
+                'career': 'career_stories',
+                'health': 'health_stories',
+                'family': 'family_stories',
+                'inspiration': 'inspirational_stories'
+            };
+            
+            const key = categoryMap[category] || category;
+            return getTranslation(key) || category;
+        }
+
+        function updateAllTranslations() {
+            // Update all elements with data-key attribute
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.getAttribute('data-key');
+                const translation = getTranslation(key);
+                
+                // Handle placeholders like {count}
+                if (element.id === 'totalStories') {
+                    const count = element.textContent;
+                    element.textContent = translation.replace('{count}', count);
+                } else {
+                    element.textContent = translation;
+                }
+                
+                // Update placeholder attributes
+                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                    const placeholderKey = element.getAttribute('data-placeholder-key');
+                    if (placeholderKey) {
+                        element.placeholder = getTranslation(placeholderKey);
+                    }
+                }
+            });
+            
+            // Update category filter buttons
+            document.querySelectorAll('.category-filter-btn').forEach(button => {
+                const textElement = button.querySelector('span');
+                if (textElement && textElement.getAttribute('data-key')) {
+                    const key = textElement.getAttribute('data-key');
+                    textElement.textContent = getTranslation(key);
+                }
+            });
+            
+            // Update story cards
+            displayStories();
+            
+            // Update modal if open
+            if (currentStoryId) {
+                updateModalContent();
+            }
+        }
+
         function initLanguage() {
-            // Set current language from language manager or default
-            if (window.languageManager && window.languageManager.getCurrentLanguage) {
-                currentLanguage = window.languageManager.getCurrentLanguage();
+            // Set current language from URL parameter or localStorage or default
+            const urlParams = new URLSearchParams(window.location.search);
+            const langParam = urlParams.get('lang');
+            
+            if (langParam && languageNames[langParam]) {
+                currentLanguage = langParam;
+            } else {
+                currentLanguage = localStorage.getItem('dk_language') || 'en';
+            }
+            
+            // Update language selector
+            const languageSelect = document.getElementById('languageSelect');
+            if (languageSelect) {
+                languageSelect.value = currentLanguage;
             }
             
             // Listen for language changes
-            document.getElementById('languageSelect')?.addEventListener('change', function() {
+            languageSelect.addEventListener('change', function() {
                 currentLanguage = this.value;
-                displayStories();
-                if (currentStoryId) {
-                    updateModalContent();
-                }
+                localStorage.setItem('dk_language', currentLanguage);
+                updateAllTranslations();
             });
+            
+            // Update translations immediately
+            updateAllTranslations();
         }
 
-        // Load stories from JSON
+        // ==================== STORIES MANAGEMENT ====================
         async function loadStories() {
             try {
                 const response = await fetch(STORIES_JSON_URL + '?t=' + Date.now());
@@ -1040,7 +1197,13 @@
                 filteredStories = [...currentStories];
                 
                 // Update total stories count
-                document.getElementById('totalStories').textContent = currentStories.length;
+                const totalStoriesEl = document.getElementById('totalStories');
+                if (totalStoriesEl) {
+                    totalStoriesEl.textContent = currentStories.length;
+                    // Update the translation with count
+                    const translation = getTranslation('stories_count');
+                    totalStoriesEl.textContent = translation.replace('{count}', currentStories.length);
+                }
                 
                 // Display stories
                 displayStories();
@@ -1049,30 +1212,40 @@
                 setupPagination();
                 
                 // Hide loading message
-                document.querySelector('.loading-stories').style.display = 'none';
+                const loadingElement = document.querySelector('.loading-stories');
+                if (loadingElement) {
+                    loadingElement.style.display = 'none';
+                }
                 
             } catch (error) {
                 console.error('Error loading stories:', error);
-                document.querySelector('.loading-stories').innerHTML = 
-                    '<div class="lang-placeholder" data-key="error_loading">Error loading stories. Please try again later.</div>';
+                const loadingElement = document.querySelector('.loading-stories');
+                if (loadingElement) {
+                    loadingElement.innerHTML = 
+                        '<div>' + getTranslation('error_loading') + '</div>';
+                }
             }
         }
 
-        // Display stories
         function displayStories() {
             const container = document.getElementById('storiesContainer');
+            if (!container) return;
+            
             container.innerHTML = '';
             
             if (filteredStories.length === 0) {
                 container.innerHTML = `
                     <div class="no-stories">
-                        <div class="lang-placeholder" data-key="no_stories">No stories found in this category.</div>
+                        <div>${getTranslation('no_stories')}</div>
                         <button onclick="openStoryForm()" class="submit-btn" style="margin-top: 20px; max-width: 250px;">
-                            <span class="lang-placeholder" data-key="be_first">Be the first to share!</span>
+                            ${getTranslation('be_first')}
                         </button>
                     </div>
                 `;
-                document.getElementById('paginationContainer').innerHTML = '';
+                const paginationContainer = document.getElementById('paginationContainer');
+                if (paginationContainer) {
+                    paginationContainer.innerHTML = '';
+                }
                 return;
             }
             
@@ -1087,7 +1260,6 @@
             });
         }
 
-        // Create story element
         function createStoryElement(story) {
             const div = document.createElement('div');
             div.className = 'story-card';
@@ -1095,8 +1267,8 @@
             div.setAttribute('data-category', story.category);
             
             // Get translated content for current language
-            const title = getTranslatedText(story.title);
-            const excerpt = getTranslatedText(story.excerpt);
+            const title = getStoryText(story.title);
+            const excerpt = getStoryText(story.excerpt);
             const category = story.category;
             
             // Create category translation
@@ -1132,8 +1304,7 @@
             return div;
         }
 
-        // Get translated text based on current language
-        function getTranslatedText(textObj) {
+        function getStoryText(textObj) {
             if (typeof textObj === 'string') return textObj;
             
             // Try current language
@@ -1151,32 +1322,10 @@
             return textObj[firstKey] || 'No translation available';
         }
 
-        // Translate category
-        function translateCategory(category) {
-            const categoryTranslations = {
-                'success': getTranslation('success_stories') || 'Success',
-                'struggle': getTranslation('struggle_stories') || 'Struggle',
-                'love': getTranslation('love_stories') || 'Love',
-                'career': getTranslation('career_stories') || 'Career',
-                'health': getTranslation('health_stories') || 'Health',
-                'family': getTranslation('family_stories') || 'Family',
-                'inspiration': getTranslation('inspirational_stories') || 'Inspirational'
-            };
-            
-            return categoryTranslations[category] || category;
-        }
-
-        // Get translation from language manager
-        function getTranslation(key) {
-            if (window.languageManager && window.languageManager.translate) {
-                return window.languageManager.translate(key);
-            }
-            return null;
-        }
-
-        // Setup pagination
         function setupPagination() {
             const container = document.getElementById('paginationContainer');
+            if (!container) return;
+            
             container.innerHTML = '';
             
             if (filteredStories.length <= storiesPerPage) {
@@ -1228,7 +1377,7 @@
             }
         }
 
-        // Setup event listeners
+        // ==================== EVENT LISTENERS ====================
         function setupEventListeners() {
             // Category filter buttons
             const filterButtons = document.querySelectorAll('.category-filter-btn');
@@ -1257,9 +1406,17 @@
                     setupPagination();
                 });
             });
+            
+            // Listen for Enter key in comment input
+            document.getElementById('commentText')?.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    submitComment();
+                }
+            });
         }
 
-        // Open story modal
+        // ==================== MODAL FUNCTIONS ====================
         async function openStoryModal(storyId) {
             const story = currentStories.find(s => s.id === storyId);
             if (!story) return;
@@ -1275,15 +1432,20 @@
             // Check if user already liked this story
             checkIfLiked(storyId);
             
+            // Update language display
+            const languageElement = document.getElementById('modalLanguage');
+            if (languageElement) {
+                languageElement.textContent = languageNames[story.language] || story.language.toUpperCase();
+            }
+            
             // Show modal
             document.getElementById('storyModal').style.display = 'block';
             document.body.style.overflow = 'hidden';
             
-            // Update view count (simulate)
+            // Update view count
             updateViewCount(storyId);
         }
 
-        // Update modal content
         function updateModalContent(story = null) {
             if (!story) {
                 story = currentStories.find(s => s.id === currentStoryId);
@@ -1291,8 +1453,8 @@
             }
             
             // Get translated content
-            const title = getTranslatedText(story.title);
-            const content = getTranslatedText(story.content);
+            const title = getStoryText(story.title);
+            const content = getStoryText(story.content);
             
             document.getElementById('modalTitle').textContent = title;
             document.getElementById('modalAuthorName').textContent = story.author.name;
@@ -1314,30 +1476,59 @@
             }
             
             // Set story content
-            document.getElementById('modalContent').innerHTML = content.replace(/\n/g, '<br><br>');
+            const modalContent = document.getElementById('modalContent');
+            if (modalContent) {
+                modalContent.innerHTML = content.replace(/\n/g, '<br><br>');
+            }
             
             // Set like count
-            document.getElementById('likeCount').textContent = story.likes || 0;
+            const likeCountEl = document.getElementById('likeCount');
+            if (likeCountEl) {
+                likeCountEl.textContent = story.likes || 0;
+            }
         }
 
-        // Check if user already liked the story
         function checkIfLiked(storyId) {
             const likedStories = JSON.parse(localStorage.getItem('dk_liked_stories') || '{}');
             const likeBtn = document.getElementById('likeBtn');
             
-            if (likedStories[storyId]) {
-                likeBtn.classList.add('liked');
-                document.getElementById('likeIcon').textContent = '❤️';
-            } else {
-                likeBtn.classList.remove('liked');
-                document.getElementById('likeIcon').textContent = '🤍';
+            if (likeBtn) {
+                if (likedStories[storyId]) {
+                    likeBtn.classList.add('liked');
+                    document.getElementById('likeIcon').textContent = '❤️';
+                } else {
+                    likeBtn.classList.remove('liked');
+                    document.getElementById('likeIcon').textContent = '🤍';
+                }
             }
         }
 
-        // Load comments for a story
+        function closeStoryModal() {
+            document.getElementById('storyModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            currentStoryId = null;
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('storyModal')?.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeStoryModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeStoryModal();
+            }
+        });
+
+        // ==================== COMMENTS SYSTEM ====================
         async function loadComments(storyId) {
             const commentsContainer = document.getElementById('commentsContainer');
-            commentsContainer.innerHTML = '<div class="loading-comments">Loading comments...</div>';
+            if (!commentsContainer) return;
+            
+            commentsContainer.innerHTML = '<div class="loading-comments">' + getTranslation('loading_comments') + '</div>';
             
             try {
                 const response = await fetch(`${COMMENTS_API_URL}?story_id=${storyId}`);
@@ -1361,7 +1552,7 @@
                 } else {
                     commentsContainer.innerHTML = `
                         <div class="no-comments">
-                            <span class="lang-placeholder" data-key="no_comments">No comments yet. Be the first to comment!</span>
+                            <span>${getTranslation('no_comments')}</span>
                         </div>
                     `;
                 }
@@ -1375,10 +1566,9 @@
             }
         }
 
-        // Submit comment
         async function submitComment() {
-            const commentText = document.getElementById('commentText').value.trim();
-            const commentName = document.getElementById('commentName').value.trim();
+            const commentText = document.getElementById('commentText')?.value.trim();
+            const commentName = document.getElementById('commentName')?.value.trim();
             
             if (!commentText) {
                 alert('Please enter a comment');
@@ -1427,7 +1617,7 @@
             }
         }
 
-        // Like a story (User can like only once)
+        // ==================== LIKE SYSTEM ====================
         async function likeStory() {
             if (!currentStoryId) return;
             
@@ -1487,7 +1677,7 @@
             }
         }
 
-        // Generate unique user ID
+        // ==================== UTILITY FUNCTIONS ====================
         function getUserId() {
             let userId = localStorage.getItem('dk_user_id');
             if (!userId) {
@@ -1497,7 +1687,6 @@
             return userId;
         }
 
-        // Update view count (simulated)
         function updateViewCount(storyId) {
             const viewedStories = JSON.parse(localStorage.getItem('dk_viewed_stories') || '{}');
             
@@ -1510,21 +1699,41 @@
             }
         }
 
-        // Close story modal
-        function closeStoryModal() {
-            document.getElementById('storyModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-            currentStoryId = null;
+        function formatDate(dateString) {
+            try {
+                const date = new Date(dateString);
+                const now = new Date();
+                const diffMs = now - date;
+                const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+                
+                if (diffDays === 0) {
+                    return 'Today';
+                } else if (diffDays === 1) {
+                    return 'Yesterday';
+                } else if (diffDays < 7) {
+                    return `${diffDays} days ago`;
+                } else if (diffDays < 30) {
+                    const weeks = Math.floor(diffDays / 7);
+                    return `${weeks} week${weeks > 1 ? 's' : ''} ago`;
+                } else {
+                    return date.toLocaleDateString(currentLanguage, {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric'
+                    });
+                }
+            } catch (e) {
+                return dateString;
+            }
         }
 
-        // Open story form
+        // ==================== STORY SUBMISSION ====================
         function openStoryForm() {
             const formContainer = document.getElementById('storyFormContainer');
             formContainer.style.display = 'block';
             formContainer.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Setup story form submission
         function setupStoryForm() {
             const form = document.getElementById('storySubmissionForm');
             if (!form) return;
@@ -1562,6 +1771,9 @@
                         alert('Thank you for sharing your story! It will be reviewed by our team before publishing.');
                         form.reset();
                         document.getElementById('storyFormContainer').style.display = 'none';
+                        
+                        // Refresh stories
+                        await loadStories();
                     } else {
                         alert('Error submitting story: ' + (result.message || 'Please try again.'));
                     }
@@ -1576,18 +1788,18 @@
             });
         }
 
-        // Share current story
+        // ==================== SHARE & SAVE ====================
         function shareCurrentStory() {
             const story = currentStories.find(s => s.id === currentStoryId);
             if (!story) return;
             
-            const title = getTranslatedText(story.title);
+            const title = getStoryText(story.title);
             const url = window.location.href.split('?')[0] + '?story=' + currentStoryId;
             
             if (navigator.share) {
                 navigator.share({
                     title: title,
-                    text: getTranslatedText(story.excerpt),
+                    text: getStoryText(story.excerpt),
                     url: url
                 }).catch(console.error);
             } else {
@@ -1601,7 +1813,6 @@
             }
         }
 
-        // Save story
         function saveStory() {
             if (!currentStoryId) return;
             
@@ -1619,152 +1830,30 @@
                 // Add to saved
                 savedStories[currentStoryId] = {
                     id: story.id,
-                    title: getTranslatedText(story.title),
+                    title: getStoryText(story.title),
                     date: story.date,
                     category: story.category,
                     saved_at: new Date().toISOString()
                 };
-                alert('Story saved! You can find it in your saved stories.');
+                alert('Story saved!');
             }
             
             // Save to localStorage
             localStorage.setItem('dk_saved_stories', JSON.stringify(savedStories));
         }
 
-        // Format date
-        function formatDate(dateString) {
-            try {
-                const date = new Date(dateString);
-                const now = new Date();
-                const diffMs = now - date;
-                const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-                
-                if (diffDays === 0) {
-                    return 'Today';
-                } else if (diffDays === 1) {
-                    return 'Yesterday';
-                } else if (diffDays < 7) {
-                    return `${diffDays} days ago`;
-                } else if (diffDays < 30) {
-                    const weeks = Math.floor(diffDays / 7);
-                    return `${weeks} week${weeks > 1 ? 's' : ''} ago`;
-                } else {
-                    return date.toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'short',
-                        day: 'numeric'
-                    });
-                }
-            } catch (e) {
-                return dateString;
-            }
-        }
-
-        // Close modal when clicking outside
-        document.getElementById('storyModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeStoryModal();
-            }
-        });
-
-        // Close modal with Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeStoryModal();
-            }
-        });
-
-        // Initialize language manager if exists
-        if (typeof initLanguageManager === 'function') {
-            initLanguageManager();
-        }
-
-        // Listen for language changes
+        // ==================== LANGUAGE CHANGE EVENT ====================
+        // Listen for language changes from external scripts
         document.addEventListener('languageChanged', function(e) {
             if (e.detail && e.detail.language) {
                 currentLanguage = e.detail.language;
-                displayStories();
-                if (currentStoryId) {
-                    updateModalContent();
+                const languageSelect = document.getElementById('languageSelect');
+                if (languageSelect) {
+                    languageSelect.value = currentLanguage;
                 }
+                updateAllTranslations();
             }
         });
-
-        // Load translations
-async function loadTranslations() {
-    try {
-        const response = await fetch('https://deepakchauhanxai.xyz/testing/data/stories-translations.json');
-        const translations = await response.json();
-        window.storyTranslations = translations.translations;
-        console.log('Translations loaded successfully');
-    } catch (error) {
-        console.error('Error loading translations:', error);
-    }
-}
-
-// Get translation for a key
-function getStoryTranslation(key, language = null) {
-    const lang = language || currentLanguage || 'en';
-    
-    if (!window.storyTranslations || !window.storyTranslations[key]) {
-        return key; // Return key as fallback
-    }
-    
-    const translation = window.storyTranslations[key][lang];
-    
-    // If translation for current language not found, use English
-    if (!translation && lang !== 'en') {
-        return window.storyTranslations[key]['en'] || key;
-    }
-    
-    return translation || key;
-}
-
-// Initialize translations
-document.addEventListener('DOMContentLoaded', function() {
-    loadTranslations();
-    
-    // Update language selector change
-    document.getElementById('languageSelect').addEventListener('change', function() {
-        currentLanguage = this.value;
-        updateAllTranslations();
-    });
-});
-
-// Update all translations on the page
-function updateAllTranslations() {
-    // Update all elements with data-key attribute
-    document.querySelectorAll('[data-key]').forEach(element => {
-        const key = element.getAttribute('data-key');
-        const translation = getStoryTranslation(key);
-        
-        // Handle placeholders like {count}
-        if (element.id === 'totalStories') {
-            const count = element.textContent;
-            element.textContent = translation.replace('{count}', count);
-        } else {
-            element.textContent = translation;
-        }
-    });
-    
-    // Update category filter buttons
-    document.querySelectorAll('.category-filter-btn').forEach(button => {
-        const category = button.getAttribute('data-category');
-        const textElement = button.querySelector('span');
-        if (textElement && textElement.getAttribute('data-key')) {
-            const key = textElement.getAttribute('data-key');
-            textElement.textContent = getStoryTranslation(key);
-        }
-    });
-    
-    // Update story cards
-    displayStories();
-    
-    // Update modal if open
-    if (currentStoryId) {
-        updateModalContent();
-    }
-}
     </script>
     
     <!-- External JavaScript Files -->
